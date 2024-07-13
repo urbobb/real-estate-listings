@@ -14,31 +14,33 @@ const Navbar = ({ isTopOfPage }: Props) => {
   hover:border-1 border-black rounded-lg`;
 
   return (
-    <nav
-      className={`${navbarBackground} ${flexBetween} navbar text-slate-500 my-5 mx-10`}>
+    <nav>
       <div
-        className={`${flexBetween} ${logoHover} logo h-10 px-5 text-lg font-extrabold tracking-widest`}>
-        <a href="/">Real Estate</a>
-      </div>
+        className={`${navbarBackground} ${flexBetween} navbar text-slate-500 my-5 w-5/6 h-10 mx-auto`}>
+        <div
+          className={`${flexBetween} ${logoHover} logo h-10 px-5 text-lg font-extrabold tracking-widest`}>
+          <a href="/">Real Estate</a>
+        </div>
 
-      <ul className="nav-links flex space-x-1">
-        <li className={`${styleLinks}`}>
-          <a className=" " href="/listings">
-            Listings
-          </a>
-        </li>
-        <li className={`${styleLinks}`}>
-          <a href="/about">About</a>
-        </li>
-        <li className={`${styleLinks}`}>
-          <a href="/contact">Contact</a>
-        </li>
-        <li
-          className={`${styleLinks} border-2 border-slate-300 
+        <ul className="nav-links flex space-x-1">
+          <li className={`${styleLinks}`}>
+            <a className=" " href="/listings">
+              Listings
+            </a>
+          </li>
+          <li className={`${styleLinks}`}>
+            <a href="/about">About</a>
+          </li>
+          <li className={`${styleLinks}`}>
+            <a href="/contact">Contact</a>
+          </li>
+          <li
+            className={`${styleLinks} border-2 border-slate-300 
                     rounded-lg`}>
-          <a href="/profile">Profile</a>
-        </li>
-      </ul>
+            <a href="/profile">Profile</a>
+          </li>
+        </ul>
+      </div>
     </nav>
   );
 };
