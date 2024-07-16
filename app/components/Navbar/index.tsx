@@ -1,20 +1,15 @@
 "use client";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useMediaQuery from "@/app/hooks/userMediaQuery";
 import Links from "./Links";
 
-type Props = {
-  isTopOfPage?: boolean;
-};
+type Props = {};
 
-const Navbar = ({ isTopOfPage }: Props) => {
+const Navbar = (props: Props) => {
   const [isMenuToggled, setIsMenuToggled] = useState<boolean>(false);
-  const navbarBackground = isTopOfPage ? "" : "bg-[#FFD8D8]";
   const flexBetween = `flex justify-between items-center`;
   const isAboveMediumScreens = useMediaQuery("(min-width: 1060px)");
-  const styleLinks = `border-2 hover:border-slate-50 rounded-md p-1.5 
-          tracking-widest text-primary-100 transition duration-500 
-          hover:text-gray-20 hover:bg-blue-50`;
+
   const logoHover = `duration-400 hover:cursor-crosshair hover:bg-[#5ADDEF] hover:text-white 
   hover:border-1 border-black rounded-lg`;
   const hamburgerStyle = `transition duration-500 mt-1 block h-[3px] w-[25px] bg-white border-2 border-slate-50`;
@@ -26,7 +21,7 @@ const Navbar = ({ isTopOfPage }: Props) => {
   return (
     <nav>
       <div
-        className={`${navbarBackground} ${flexBetween} navbar fixed top-0 z-40 py-6 w-full text-slate-500`}>
+        className={`${flexBetween} navbar fixed top-0 z-40 py-6 w-full text-slate-500`}>
         {/* Parent container of navbar links */}
         <div className={`${flexBetween} mx-auto w-9/12`}>
           {/* Navbar links */}
