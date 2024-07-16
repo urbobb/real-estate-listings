@@ -43,10 +43,7 @@ export default function Pyramid() {
   }, [api]);
 
   return (
-    <a.mesh
-      geometry={nodes?.Pyramid?.geometry}
-      position={[-0.8, 1.33, 0.25]}
-      {...spring}>
+    <a.mesh geometry={nodes?.Pyramid?.geometry} position={[-0.8, 1.33, 0.25]}>
       <meshMatcapMaterial matcap={matcap} />
     </a.mesh>
   );

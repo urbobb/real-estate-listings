@@ -17,7 +17,7 @@ interface CustomGLTF extends GLTF {
 }
 
 export default function Icon() {
-  const { nodes, materials } = useGLTF(
+  const { nodes } = useGLTF(
     "/models/level-react-draco.glb"
   ) as unknown as CustomGLTF;
 
@@ -27,6 +27,8 @@ export default function Icon() {
     position: [-0.79, 1.3, 0.62],
     config: { mass: 2, tension: 200 },
   }));
+  console.log("Springs: ", springs);
+
   useEffect(() => {
     let timeout: string | number | NodeJS.Timeout | undefined;
     let floating = false;
@@ -43,7 +45,7 @@ export default function Icon() {
   }, [api]);
 
   return (
-    <a.mesh geometry={nodes.React.geometry} {...springs}>
+    <a.mesh geometry={nodes.React.geometry}>
       <meshMatcapMaterial matcap={matcap} />
     </a.mesh>
   );

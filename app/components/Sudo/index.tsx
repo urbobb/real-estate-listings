@@ -54,7 +54,6 @@ export default function Sudo() {
         geometry={nodes?.SudoHead?.geometry}
         material={nodes?.SudoHead?.material}
         position={[0.68, 0.33, -0.67]}
-        {...spring}
       />
     </>
   );
