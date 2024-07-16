@@ -21,7 +21,7 @@ const Navbar = (props: Props) => {
   return (
     <nav>
       <div
-        className={`${flexBetween} navbar fixed top-0 z-40 py-6 w-full text-slate-500`}>
+        className={`${flexBetween} navbar fixed top-0 z-40 py-6 w-full bg-[#FFD8D8] text-slate-500`}>
         {/* Parent container of navbar links */}
         <div className={`${flexBetween} mx-auto w-9/12`}>
           {/* Navbar links */}
