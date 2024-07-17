@@ -18,8 +18,8 @@
 
 body {
   background: #ffd8d8;
-  min-width: 100%;
-  margin: auto;
+  height: 100% !important;
+  width: 100%;
 }
 
 @layer utilities {
