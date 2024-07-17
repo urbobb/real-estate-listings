@@ -9,7 +9,6 @@ const Navbar = (props: Props) => {
   const [isMenuToggled, setIsMenuToggled] = useState<boolean>(false);
   const flexBetween = `flex justify-between items-center`;
   const isAboveMediumScreens = useMediaQuery("(min-width: 1060px)");
-
   const logoHover = `duration-400 hover:cursor-crosshair hover:bg-[#5ADDEF] hover:text-white 
   hover:border-1 border-black rounded-lg`;
   const hamburgerStyle = `transition duration-500 mt-1 block h-[3px] w-[25px] bg-white border-2 border-slate-50`;
@@ -60,33 +59,13 @@ const Navbar = (props: Props) => {
             )}
 
             {!isAboveMediumScreens && isMenuToggled && (
-              <div className="fixed right-0 bottom-0 z-30 h-full w-[300px] bg-[#FFD8D8] drop-shadow-xl">
+              <div className="fixed right-0 bottom-0 z-30 h-full w-full bg-[#FFD8D8] drop-shadow-xl">
                 {/* MENU ITEMS */}
-                <div className="ml-[33%] mt-[8rem] flex flex-col gap-10 text-2xl">
-                  <a
-                    className="p-1.5 tracking-widest transition duration-500 
-                          hover:text-gray-20 hover:bg-blue-50"
-                    href="/listings">
-                    Listings
-                  </a>
-                  <a
-                    className="p-1.5 tracking-widest transition duration-500 
-                          hover:text-gray-20 hover:bg-blue-50"
-                    href="/about">
-                    About
-                  </a>
-                  <a
-                    className="p-1.5 tracking-widest transition duration-500 
-                          hover:text-gray-20 hover:bg-blue-50"
-                    href="#contact">
-                    Contact
-                  </a>
-                  <a
-                    className="p-1.5 tracking-widest transition duration-500 
-                          hover:text-gray-20 hover:bg-blue-50"
-                    href="/profile">
-                    Profile
-                  </a>
+                <div className="mx-[33%] mt-[8rem] flex flex-col gap-10 text-2xl">
+                  <Links name="Listings" />
+                  <Links name="About" />
+                  <Links name="Contact" />
+                  <Links name="Profile" />
                 </div>
               </div>
             )}
