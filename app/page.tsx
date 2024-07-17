@@ -1,10 +1,7 @@
 "use client";
 import React from "react";
-import * as THREE from "three";
-import { useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import { PresentationControls } from "@react-three/drei";
-import Camera from "./components/Camera";
 import Image from "next/image";
 import JPMorgan from "@/app/assets/sponsors/JPMorganChase_Logo.png";
 import XLogo from "@/app/assets/sponsors/X_Logo.png";
@@ -38,18 +35,18 @@ export default function Home() {
   });
 
   return (
-    <main className="w-full bg-[#FFD8D8] md:h-[calc(100vh-176px)] mx-auto">
-      <section id="home" className="gap-16 py-10 md:h-full md:pb-0">
+    <main className="md:mt-10 md:p-24 pt-24 my-auto">
+      <section
+        id="home"
+        className="md:h-full mx-auto md:py-10 pb-10 items-center justify-center">
         {/* MAIN HEADER AND ANIMATION */}
-        <div className="md:flex flex-wrap justify-between items-center py-28 w-5/6 md:h-full mx-auto ">
+        <div className="md:flex justify-between items-center mx-auto mt-5 w-9/12 md:h-full ">
           {/* INTRODUCTIONS */}
-          <div className="flex basis-2/5 z-20">
-            <div className="flex-row ">
-              <div className="heading pb-10">
-                <h1 className="text-2xl font-extrabold">
-                  Welcome to Home Finder
-                </h1>
-              </div>
+          <div className="md:basis-2/5 z-20 my-auto">
+            <div className="heading">
+              <h1 className="md:pb-10 pb-5 text-2xl font-extrabold">
+                Welcome to Home Finder
+              </h1>
               <div className="intro">
                 <p className="text-lg">
                   Your perfect home awaits. Explore our curated listings and
@@ -62,7 +59,7 @@ export default function Home() {
           </div>
 
           {/* ANIMATIONS */}
-          <div className="md:flex justify-center items-center z-10 sm:mt-10 basis-3/5 mx-auto h-[500px] w-[500px]">
+          <div className="h-[350px] md:h-[500px] flex basis-3/5 justify-center md:z-10 md:ml-40 md:my-auto md:justify-end">
             <Canvas flat dpr={[1, 2]} camera={{ fov: 25, position: [0, 0, 8] }}>
               <color attach="background" args={["#FFD8D8"]} />
               <ambientLight />
@@ -83,9 +80,11 @@ export default function Home() {
               </PresentationControls>
             </Canvas>
           </div>
+        </div>
 
-          {/* SPONSORS */}
-          <div className="sponsor flex gap-20 items-center w-full sm:mt-10">
+        {/* SPONSORS */}
+        {isAboveMediumScreens && (
+          <div className="sponsor w-full py-10 h-[150px]">
             <div className="w-28">
               <Image src={JPMorgan} alt="JPMorgan" />
             </div>
@@ -99,39 +98,39 @@ export default function Home() {
               <Image src={XLogo} alt="X" />
             </div>
           </div>
-        </div>
+        )}
+      </section>
 
+      <section id="listings" className="mx-auto min-h-full w-5/6 py-20">
         {/* LISTINGS */}
-        {isAboveMediumScreens && (
-          <div className="h-screen w-5/6 mx-auto pt-20">
-            <div className="mb-16">
-              <h1 className="text-2xl font-bold">Listings</h1>
+        <div className=" ">
+          <div className="md:my-5 md:w-3/5">
+            <h1 className="text-2xl font-bold">Listings</h1>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-[repeat(4,2fr)] gap-2 md:h-5/6 w-full items-center justify-center">
+            <div className="md:row-span-2 ">
+              <ListingsCard listingsImage={House1} id={1} />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-[repeat(4,2fr)] gap-2 md:h-5/6 w-full items-center justify-center">
-              <div className="md:row-span-2 ">
-                <ListingsCard listingsImage={House1} id={1} />
-              </div>
-              <div className="">
-                <ListingsCard listingsImage={House1} id={2} />
-              </div>
-              <div className="">
-                <ListingsCard listingsImage={House1} id={3} />
-              </div>
-              <div className="">
-                <ListingsCard listingsImage={House1} id={4} />
-              </div>
-              <div className="">
-                <ListingsCard listingsImage={House1} id={5} />
-              </div>
-              <div>
-                <ListingsCard listingsImage={House1} id={6} />
-              </div>
-              <div>
-                <ListingsCard listingsImage={House1} id={7} />
-              </div>
+            <div className="">
+              <ListingsCard listingsImage={House1} id={2} />
+            </div>
+            <div className="">
+              <ListingsCard listingsImage={House1} id={3} />
+            </div>
+            <div className="">
+              <ListingsCard listingsImage={House1} id={4} />
+            </div>
+            <div className="">
+              <ListingsCard listingsImage={House1} id={5} />
+            </div>
+            <div>
+              <ListingsCard listingsImage={House1} id={6} />
+            </div>
+            <div>
+              <ListingsCard listingsImage={House1} id={7} />
             </div>
           </div>
-        )}
+        </div>
       </section>
     </main>
   );
