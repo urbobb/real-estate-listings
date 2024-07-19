@@ -13,6 +13,29 @@ const Navbar = (props: Props) => {
   hover:border-1 border-black rounded-lg`;
   const hamburgerStyle = `transition duration-500 mt-1 block h-[3px] w-[25px] bg-white border-2 border-slate-50`;
 
+  useEffect(() => {
+    if (typeof window === "undefined") return; // Ensure window is defined
+
+    let prevScrollPos = window.scrollY;
+
+    window.onscroll = () => {
+      scrollFunction();
+    };
+
+    function scrollFunction() {
+      let currentScrollPos = window.scrollY;
+
+      if (prevScrollPos > currentScrollPos) {
+        (document.getElementById("navbar") as HTMLFormElement).style.top = "0";
+      } else {
+        (document.getElementById("navbar") as HTMLFormElement).style.top =
+          "-100px";
+      }
+
+      prevScrollPos = currentScrollPos;
+    }
+  });
+
   function mobileMenu() {
     document.querySelector(".hamburger")?.classList.toggle("active");
   }
@@ -20,13 +43,14 @@ const Navbar = (props: Props) => {
   return (
     <nav>
       <div
+        id="navbar"
         className={`${flexBetween} navbar fixed top-0 z-40 py-6 w-full bg-[#FFD8D8] text-slate-500`}>
         {/* Parent container of navbar links */}
-        <div className={`${flexBetween} mx-auto w-9/12`}>
+        <div className={`${flexBetween} mx-auto w-5/6`}>
           {/* Navbar links */}
           <div className={`${flexBetween} w-full gap-16`}>
             <span
-              className={`inline-flex ${logoHover} logo h-10 px-5 transition duration-500`}>
+              className={`inline-flex ${logoHover} logo h-10 px-5 min-w-max flex items-center justify-center transition duration-500`}>
               <a
                 href="/"
                 className="inline font-Open-Sans text-lg font-extrabold tracking-widest">
