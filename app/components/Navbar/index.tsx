@@ -12,27 +12,32 @@ const Navbar = (props: Props) => {
   const logoHover = `duration-400 hover:cursor-crosshair hover:bg-[#5ADDEF] hover:text-white 
   hover:border-1 border-black rounded-lg`;
   const hamburgerStyle = `transition duration-500 mt-1 block h-[3px] w-[25px] bg-white border-2 border-slate-50`;
-  let prevScrollPos = window.scrollY;
+
+  useEffect(() => {
+    if (typeof window === "undefined") return; // Ensure window is defined
+
+    let prevScrollPos = window.scrollY;
+
+    window.onscroll = () => {
+      scrollFunction();
+    };
+
+    function scrollFunction() {
+      let currentScrollPos = window.scrollY;
+
+      if (prevScrollPos > currentScrollPos) {
+        (document.getElementById("navbar") as HTMLFormElement).style.top = "0";
+      } else {
+        (document.getElementById("navbar") as HTMLFormElement).style.top =
+          "-100px";
+      }
+
+      prevScrollPos = currentScrollPos;
+    }
+  });
 
   function mobileMenu() {
     document.querySelector(".hamburger")?.classList.toggle("active");
-  }
-
-  window.onscroll = () => {
-    scrollFunction();
-  };
-
-  function scrollFunction() {
-    let currentScrollPos = window.pageYOffset;
-
-    if (prevScrollPos > currentScrollPos) {
-      (document.getElementById("navbar") as HTMLFormElement).style.top = "0";
-    } else {
-      (document.getElementById("navbar") as HTMLFormElement).style.top =
-        "-100px";
-    }
-
-    prevScrollPos = currentScrollPos;
   }
 
   return (
