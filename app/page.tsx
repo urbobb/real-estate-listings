@@ -44,11 +44,11 @@ export default function Home() {
           {/* INTRODUCTIONS */}
           <div className="md:basis-2/5 z-20 my-auto">
             <div className="heading">
-              <h1 className="md:pb-10 pb-5 text-2xl font-extrabold text-center">
+              <h1 className="md:pb-10 pb-5 text-2xl font-extrabold text-center md:text-start">
                 Welcome to Home Finder
               </h1>
               <div className="intro">
-                <p className="text-lg text-center">
+                <p className="text-lg text-center md:text-start">
                   Your perfect home awaits. Explore our curated listings and
                   find your dream property with ease. From cozy apartments to
                   luxury estates, Home Finder is your trusted partner in real
