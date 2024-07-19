@@ -107,11 +107,11 @@ export default function Home() {
         id="listings"
         className="mx-auto min-h-full md:w-full w-5/6 py-20">
         {/* LISTINGS */}
-        <div className=" ">
-          <div className="md:my-5 md:w-3/5">
+        <div className="md:w-11/12 mx-auto">
+          <div className="md:my-5 md:w-full">
             <h1 className="text-2xl font-bold">Listings</h1>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-[repeat(4,2fr)] gap-2 md:h-5/6 w-full items-center justify-center">
+          <div className="overflow-visible grid grid-cols-1 md:grid-cols-[repeat(4,2fr)] gap-2 md:h-5/6 w-full items-center justify-center">
             <div className="md:row-span-2 ">
               <ListingsCard listingsImage={House1} id={1} />
             </div>
