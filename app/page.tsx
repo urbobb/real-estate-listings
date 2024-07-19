@@ -38,17 +38,17 @@ export default function Home() {
     <main className="md:mt-10 md:p-24 pt-24 my-auto">
       <section
         id="home"
-        className="md:h-full mx-auto md:py-10 pb-10 items-center justify-center">
+        className="md:h-full w-full mx-auto md:py-10 pb-10 items-center justify-center">
         {/* MAIN HEADER AND ANIMATION */}
-        <div className="md:flex justify-between items-center mx-auto mt-5 w-9/12 md:h-full ">
+        <div className="md:flex mx-auto mt-5 md:w-11/12 w-9/12 md:h-full ">
           {/* INTRODUCTIONS */}
           <div className="md:basis-2/5 z-20 my-auto">
             <div className="heading">
-              <h1 className="md:pb-10 pb-5 text-2xl font-extrabold">
+              <h1 className="md:pb-10 pb-5 text-2xl font-extrabold text-center">
                 Welcome to Home Finder
               </h1>
               <div className="intro">
-                <p className="text-lg">
+                <p className="text-lg text-center">
                   Your perfect home awaits. Explore our curated listings and
                   find your dream property with ease. From cozy apartments to
                   luxury estates, Home Finder is your trusted partner in real
@@ -59,7 +59,7 @@ export default function Home() {
           </div>
 
           {/* ANIMATIONS */}
-          <div className="h-[350px] md:h-[500px] flex basis-3/5 justify-center md:z-10 md:ml-40 md:my-auto md:justify-end">
+          <div className="h-[350px] md:h-[500px] mt-12 flex basis-3/5 justify-center md:z-10 md:ml-40 md:my-auto md:justify-end">
             <Canvas flat dpr={[1, 2]} camera={{ fov: 25, position: [0, 0, 8] }}>
               <color attach="background" args={["#FFD8D8"]} />
               <ambientLight />
@@ -82,26 +82,30 @@ export default function Home() {
           </div>
         </div>
 
-        {/* SPONSORS */}
-        {isAboveMediumScreens && (
-          <div className="sponsor w-full py-10 h-[150px]">
-            <div className="w-28">
-              <Image src={JPMorgan} alt="JPMorgan" />
+        <div className="w-full">
+          {/* SPONSORS */}
+          {isAboveMediumScreens && (
+            <div className="sponsor md:w-11/12 w-full mx-auto py-10 h-[150px] flex justify-start items-center gap-16">
+              <div className="w-28">
+                <Image src={JPMorgan} alt="JPMorgan" />
+              </div>
+              <div className="w-28">
+                <Image src={CoinbaseLogo} alt="Coinabse" />
+              </div>
+              <div className="w-28">
+                <Image src={MetaLogo} alt="Meta" />
+              </div>
+              <div className="w-12">
+                <Image src={XLogo} alt="X" />
+              </div>
             </div>
-            <div className="w-28">
-              <Image src={CoinbaseLogo} alt="Coinabse" />
-            </div>
-            <div className="w-28">
-              <Image src={MetaLogo} alt="Meta" />
-            </div>
-            <div className="w-12">
-              <Image src={XLogo} alt="X" />
-            </div>
-          </div>
-        )}
+          )}
+        </div>
       </section>
 
-      <section id="listings" className="mx-auto min-h-full w-5/6 py-20">
+      <section
+        id="listings"
+        className="mx-auto min-h-full md:w-full w-5/6 py-20">
         {/* LISTINGS */}
         <div className=" ">
           <div className="md:my-5 md:w-3/5">
