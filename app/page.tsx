@@ -1,7 +1,10 @@
 "use client";
-import React from "react";
-import { Canvas } from "@react-three/fiber";
+import React, { useRef } from "react";
+import * as THREE from "three";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { PresentationControls } from "@react-three/drei";
+import useMediaQuery from "@/app/hooks/userMediaQuery";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import JPMorgan from "@/app/assets/sponsors/JPMorganChase_Logo.png";
 import XLogo from "@/app/assets/sponsors/X_Logo.png";
@@ -9,8 +12,26 @@ import CoinbaseLogo from "@/app/assets/sponsors/Coinbase_Logo.png";
 import MetaLogo from "@/app/assets/sponsors/Meta_Logo.png";
 import ListingsCard from "@/app/components/ListingsCard";
 import House1 from "@/app/assets/listings/House1.png";
-import useMediaQuery from "@/app/hooks/userMediaQuery";
-import dynamic from "next/dynamic";
+
+interface AutoRotatingGroupProps {
+  children: React.ReactNode;
+}
+
+function AutoRotatingGroup({ children }: AutoRotatingGroupProps) {
+  const groupRef = useRef<THREE.Group>(null);
+
+  useFrame((state, delta) => {
+    if (groupRef.current) {
+      groupRef.current.rotation.y += delta * 0.1; // Adjust the speed as needed
+    }
+  });
+
+  return (
+    <group ref={groupRef} position-y={-0.75} dispose={null}>
+      {children}
+    </group>
+  );
+}
 
 export default function Home() {
   const isAboveMediumScreens = useMediaQuery("(min-width:1060px)");
@@ -59,7 +80,7 @@ export default function Home() {
           </div>
 
           {/* ANIMATIONS */}
-          <div className="h-[350px] md:h-[500px] mt-12 flex basis-3/5 justify-center md:z-10 md:ml-40 md:my-auto md:justify-end">
+          <div className="h-[350px] md:h-[500px] mt-12 flex basis-3/5 justify-center items-center md:z-10 md:ml-40 md:my-auto md:justify-end">
             <Canvas flat dpr={[1, 2]} camera={{ fov: 25, position: [0, 0, 8] }}>
               <color attach="background" args={["#FFD8D8"]} />
               <ambientLight />
@@ -69,14 +90,14 @@ export default function Home() {
                 rotation={[0, -Math.PI / 4, 0]}
                 polar={[0, Math.PI / 4]}
                 azimuth={[-Math.PI / 4, Math.PI / 4]}>
-                <group position-y={-0.75} dispose={null}>
+                <AutoRotatingGroup>
                   <Level />
                   <Sudo />
                   <Camera />
                   <Cactus />
-                  <Icon />
+                  {/* <Icon /> */}
                   <Pyramid />
-                </group>
+                </AutoRotatingGroup>
               </PresentationControls>
             </Canvas>
           </div>
@@ -105,20 +126,23 @@ export default function Home() {
 
       <section
         id="listings"
-        className="mx-auto min-h-full md:w-full w-5/6 py-20">
+        className="mx-auto h-screen md:w-full w-5/6 py-20 mt-14 overflow-visible">
         {/* LISTINGS */}
-        <div className="md:w-11/12 mx-auto">
+        <div className="md:w-11/12 mx-auto overflow-visible">
+          {/* HEADING */}
           <div className="md:my-5 md:w-full">
             <h1 className="text-2xl font-bold">Listings</h1>
           </div>
-          <div className="overflow-visible grid grid-cols-1 md:grid-cols-[repeat(4,2fr)] gap-2 md:h-5/6 w-full items-center justify-center">
-            <div className="md:row-span-2 ">
+
+          {/* LIST */}
+          <div className="md:absolute w-[500%] left-0 right-0 flex overflow-x-auto space-x-4 p-4">
+            <div className="flex-shrink-0">
               <ListingsCard listingsImage={House1} id={1} />
             </div>
-            <div className="">
+            <div className="flex-shrink-0">
               <ListingsCard listingsImage={House1} id={2} />
             </div>
-            <div className="">
+            <div className="flex-shrink-0">
               <ListingsCard listingsImage={House1} id={3} />
             </div>
             <div className="">
