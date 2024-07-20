@@ -59,7 +59,7 @@ export default function Home() {
           </div>
 
           {/* ANIMATIONS */}
-          <div className="h-[350px] md:h-[500px] mt-12 flex basis-3/5 justify-center md:z-10 md:ml-40 md:my-auto md:justify-end">
+          <div className="h-[350px] md:h-[500px] mt-12 flex basis-3/5 justify-center items-center md:z-10 md:ml-40 md:my-auto md:justify-end">
             <Canvas flat dpr={[1, 2]} camera={{ fov: 25, position: [0, 0, 8] }}>
               <color attach="background" args={["#FFD8D8"]} />
               <ambientLight />
@@ -105,7 +105,7 @@ export default function Home() {
 
       <section
         id="listings"
-        className="mx-auto min-h-full md:w-full w-5/6 py-20">
+        className="mx-auto h-screen md:w-full w-5/6 py-20 mt-14">
         {/* LISTINGS */}
         <div className="md:w-11/12 mx-auto">
           <div className="md:my-5 md:w-full">
