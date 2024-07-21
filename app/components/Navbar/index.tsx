@@ -54,7 +54,7 @@ const Navbar = (props: Props) => {
               <a
                 href="/"
                 className="inline text-lg font-extrabold tracking-widest">
-                Real Estate
+                Home Finder
               </a>
             </span>
 
