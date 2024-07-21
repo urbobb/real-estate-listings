@@ -12,6 +12,7 @@ import CoinbaseLogo from "@/app/assets/sponsors/Coinbase_Logo.png";
 import MetaLogo from "@/app/assets/sponsors/Meta_Logo.png";
 import ListingsCard from "@/app/components/ListingsCard";
 import House1 from "@/app/assets/listings/House1.png";
+import Contact from "./components/Contact";
 
 interface AutoRotatingGroupProps {
   children: React.ReactNode;
@@ -170,6 +171,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* CONTACT */}
+      <Contact />
     </main>
   );
 }
