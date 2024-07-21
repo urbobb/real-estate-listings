@@ -17,10 +17,32 @@ body {
   width: 100%;
   transition: top 0.5s ease-in-out;
 }
+.houseList {
+  display: grid;
+  grid-row: 2;
+  grid-column: 3;
+  gap: 50px;
+}
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+.animate-slide {
+  animation: slide 1.5s infinite ease-in-out alternate; /* 2s duration, ease-in-out timing, alternate directions */
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(20px); /* Move 20px to the right */
+  }
+  100% {
+    transform: translateX(0); /* Back to the original position */
   }
 }
 
