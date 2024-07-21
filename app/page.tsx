@@ -12,6 +12,7 @@ import CoinbaseLogo from "@/app/assets/sponsors/Coinbase_Logo.png";
 import MetaLogo from "@/app/assets/sponsors/Meta_Logo.png";
 import ListingsCard from "@/app/components/ListingsCard";
 import House1 from "@/app/assets/listings/House1.png";
+import Contact from "./components/Contact";
 
 interface AutoRotatingGroupProps {
   children: React.ReactNode;
@@ -59,7 +60,7 @@ export default function Home() {
     <main className="md:mt-10 md:p-24 pt-24 my-auto">
       <section
         id="home"
-        className="md:h-full w-full mx-auto md:py-10 pb-10 items-center justify-center">
+        className="md:h-full w-full mx-auto md:py-10 items-center justify-center">
         {/* MAIN HEADER AND ANIMATION */}
         <div className="md:flex mx-auto mt-5 md:w-11/12 w-9/12 md:h-full ">
           {/* INTRODUCTIONS */}
@@ -126,7 +127,7 @@ export default function Home() {
 
       <section
         id="listings"
-        className="mx-auto min-h-max md:w-full w-5/6 py-20 mt-14">
+        className="mx-auto min-h-max md:w-full w-5/6 py-20">
         {/* LISTINGS */}
         <div className="md:w-11/12 mx-auto">
           {/* HEADING */}
@@ -170,6 +171,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* CONTACT */}
+      <Contact />
     </main>
   );
 }
