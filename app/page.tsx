@@ -126,36 +126,46 @@ export default function Home() {
 
       <section
         id="listings"
-        className="mx-auto h-screen md:w-full w-5/6 py-20 mt-14 overflow-visible">
+        className="mx-auto min-h-max md:w-full w-5/6 py-20 mt-14">
         {/* LISTINGS */}
-        <div className="md:w-11/12 mx-auto overflow-visible">
+        <div className="md:w-11/12 mx-auto">
           {/* HEADING */}
           <div className="md:my-5 md:w-full">
             <h1 className="text-2xl font-bold">Listings</h1>
           </div>
 
           {/* LIST */}
-          <div className="md:absolute w-[500%] left-0 right-0 flex overflow-x-auto space-x-4 p-4">
-            <div className="flex-shrink-0">
-              <ListingsCard listingsImage={House1} id={1} />
-            </div>
-            <div className="flex-shrink-0">
-              <ListingsCard listingsImage={House1} id={2} />
-            </div>
-            <div className="flex-shrink-0">
-              <ListingsCard listingsImage={House1} id={3} />
-            </div>
-            <div className="">
-              <ListingsCard listingsImage={House1} id={4} />
-            </div>
-            <div className="">
-              <ListingsCard listingsImage={House1} id={5} />
-            </div>
-            <div>
-              <ListingsCard listingsImage={House1} id={6} />
-            </div>
-            <div>
-              <ListingsCard listingsImage={House1} id={7} />
+          <div className="min-h-max">
+            <div className="houseList">
+              <div className="item1 row-span-2 h-[550px] ">
+                <ListingsCard listingsImage={House1} id={1} />
+              </div>
+              <div className="item2 h-[250px] ">
+                <ListingsCard listingsImage={House1} id={2} />
+              </div>
+              <div className="item3 h-[250px]">
+                <ListingsCard listingsImage={House1} id={3} />
+              </div>
+              <div className="item4 row-start-3 row-end-3 h-[250px]">
+                <ListingsCard listingsImage={House1} id={4} />
+              </div>
+              <div className="item5 row-start-4 row-end-4 h-[250px]">
+                <ListingsCard listingsImage={House1} id={5} />
+              </div>
+              <div className="item6 col-start-2 col-end-3 row-span-2">
+                <ListingsCard listingsImage={House1} id={6} />
+              </div>
+              <div className="item7">
+                <ListingsCard listingsImage={House1} id={7} />
+              </div>
+              <div className="item8 rounded-2xl border-2 border-solid border-stone-400">
+                <a
+                  className="h-full w-full mx-auto flex justify-center items-center gap-5"
+                  href="/listings">
+                  Click for more
+                  <i className="animate-slide fa-solid fa-arrow-right fa-2xl bg-black"></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>

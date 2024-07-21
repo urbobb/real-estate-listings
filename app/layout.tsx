@@ -24,6 +24,7 @@ export default function RootLayout({
         <StrictMode>{children}</StrictMode>
         <Footer />
       </body>
+      <script src="https://kit.fontawesome.com/44b694a7ec.js" async></script>
     </html>
   );
 }
