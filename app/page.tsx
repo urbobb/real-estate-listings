@@ -131,26 +131,26 @@ export default function Home() {
         {/* LISTINGS */}
         <div className="md:w-11/12 mx-auto">
           {/* HEADING */}
-          <div className="md:my-5 md:w-full">
+          <div className="md:w-full mb-10">
             <h1 className="text-2xl font-bold">Listings</h1>
           </div>
 
           {/* LIST */}
-          <div className="min-h-max">
-            <div className="houseList">
-              <div className="item1 row-span-2 h-[550px] ">
+          <div className="md:min-h-max">
+            <div className="houseList md:h-5/6 md:gap-[50px] gap-2">
+              <div className="item1 col-start-1 col-end-1 row-span-2">
                 <ListingsCard listingsImage={House1} id={1} />
               </div>
-              <div className="item2 h-[250px] ">
+              <div className="item2 md:h-[200px] ">
                 <ListingsCard listingsImage={House1} id={2} />
               </div>
-              <div className="item3 h-[250px]">
+              <div className="item3 md:h-[200px]">
                 <ListingsCard listingsImage={House1} id={3} />
               </div>
-              <div className="item4 row-start-3 row-end-3 h-[250px]">
+              <div className="item4 row-start-3 row-end-3 md:h-[200px]">
                 <ListingsCard listingsImage={House1} id={4} />
               </div>
-              <div className="item5 row-start-4 row-end-4 h-[250px]">
+              <div className="item5 row-start-4 row-end-4 md:h-[200px]">
                 <ListingsCard listingsImage={House1} id={5} />
               </div>
               <div className="item6 col-start-2 col-end-3 row-span-2">
@@ -159,13 +159,11 @@ export default function Home() {
               <div className="item7">
                 <ListingsCard listingsImage={House1} id={7} />
               </div>
-              <div className="item8 rounded-2xl border-2 border-solid border-stone-400">
-                <a
-                  className="h-full w-full mx-auto flex justify-center items-center gap-5"
-                  href="/listings">
+              <div className="item8 flex justify-center items-center md:flex-row flex-col md:gap-5 gap-4 rounded-2xl border-2 border-solid border-stone-400">
+                <a className="" href="/listings">
                   Click for more
-                  <i className="animate-slide fa-solid fa-arrow-right fa-2xl bg-black"></i>
                 </a>
+                <i className="animate-slide fa-solid fa-arrow-right fa-2xl bg-black -ml-4"></i>
               </div>
             </div>
           </div>
