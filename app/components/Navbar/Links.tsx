@@ -11,8 +11,8 @@ const Links = ({ name }: Props) => {
     <a
       href={`#${lowerCasePage}`}
       className="border-2 hover:border-slate-50 rounded-md p-1.5 md:w-full min-w-max
-          tracking-widest text-primary-100 transition duration-500 font-extrabold 
-          hover:text-black hover:bg-white flex justify-center items-center">
+          tracking-widest transition duration-500 font-extrabold hover:text-black
+          hover:bg-white flex justify-center items-center">
       {name}
     </a>
   );
