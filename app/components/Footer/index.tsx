@@ -4,8 +4,8 @@ type Props = {};
 
 const Footer = (props: Props) => {
   return (
-    <footer id="footer" className="w-full py-8 ">
-      <div className="mx-auto md:w-11/12 w-9/12 flex justify-between z-40">
+    <footer id="footer" className="w-full py-8">
+      <div className="mx-auto md:w-5/6 w-9/12 flex justify-between z-40">
         <div className="">
           <p className="md:text-lg">© Designed by Bob</p>
         </div>
