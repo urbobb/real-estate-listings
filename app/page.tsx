@@ -10,8 +10,7 @@ import JPMorgan from "@/app/assets/sponsors/JPMorganChase_Logo.png";
 import XLogo from "@/app/assets/sponsors/X_Logo.png";
 import CoinbaseLogo from "@/app/assets/sponsors/Coinbase_Logo.png";
 import MetaLogo from "@/app/assets/sponsors/Meta_Logo.png";
-import ListingsCard from "@/app/components/ListingsCard";
-import House1 from "@/app/assets/listings/House1.png";
+import HomePageList from "@/app/components/HomePageList";
 import Contact from "./components/Contact";
 
 interface AutoRotatingGroupProps {
@@ -136,37 +135,7 @@ export default function Home() {
           </div>
 
           {/* LIST */}
-          <div className="md:min-h-max">
-            <div className="houseList md:h-5/6 md:gap-[50px] gap-2">
-              <div className="item1 col-start-1 col-end-1 row-span-2">
-                <ListingsCard listingsImage={House1} id={1} />
-              </div>
-              <div className="item2 md:h-[200px] ">
-                <ListingsCard listingsImage={House1} id={2} />
-              </div>
-              <div className="item3 md:h-[200px]">
-                <ListingsCard listingsImage={House1} id={3} />
-              </div>
-              <div className="item4 row-start-3 row-end-3 md:h-[200px]">
-                <ListingsCard listingsImage={House1} id={4} />
-              </div>
-              <div className="item5 row-start-4 row-end-4 md:h-[200px]">
-                <ListingsCard listingsImage={House1} id={5} />
-              </div>
-              <div className="item6 col-start-2 col-end-3 row-span-2">
-                <ListingsCard listingsImage={House1} id={6} />
-              </div>
-              <div className="item7">
-                <ListingsCard listingsImage={House1} id={7} />
-              </div>
-              <div className="item8 flex justify-center items-center md:flex-row flex-col md:gap-5 gap-4 rounded-2xl border-2 border-solid border-stone-400">
-                <a className="" href="/listings">
-                  Click for more
-                </a>
-                <i className="animate-slide fa-solid fa-arrow-right fa-2xl bg-black -ml-4"></i>
-              </div>
-            </div>
-          </div>
+          <HomePageList />
         </div>
       </section>
 
