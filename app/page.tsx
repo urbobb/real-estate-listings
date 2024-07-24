@@ -11,6 +11,14 @@ import XLogo from "@/app/assets/sponsors/X_Logo.png";
 import CoinbaseLogo from "@/app/assets/sponsors/Coinbase_Logo.png";
 import MetaLogo from "@/app/assets/sponsors/Meta_Logo.png";
 import HomePageList from "@/app/components/HomePageList";
+
+import ListingsCard from "@/app/components/ListingsCard";
+import House1 from "@/app/assets/listings/House1.png";
+import House2 from "@/app/assets/listings/House2.jpg";
+import House3 from "@/app/assets/listings/House3.jpg";
+import House4 from "@/app/assets/listings/House4.jpeg";
+import House5 from "@/app/assets/listings/House5.jpg";
+import House6 from "@/app/assets/listings/House6.jpg";
 import Contact from "./components/Contact";
 
 interface AutoRotatingGroupProps {
@@ -54,9 +62,24 @@ export default function Home() {
   const Pyramid = dynamic(() => import("@/app/components/Pyramid"), {
     ssr: false,
   });
+  const buttonHover = `h-10 w-10 border-2 rounded-3xl`;
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  function scrollLeft() {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollLeft -= 100;
+    }
+  }
+
+  function scrollRight() {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollLeft += 100;
+    }
+  }
 
   return (
     <main className="md:mt-10 md:p-24 pt-24 my-auto">
+      {/* HOME */}
       <section
         id="home"
         className="md:h-full w-full mx-auto md:py-10 items-center justify-center">
@@ -126,7 +149,7 @@ export default function Home() {
 
       <section
         id="listings"
-        className="mx-auto min-h-max md:w-full w-5/6 py-20">
+        className="mx-auto min-h-max md:w-full w-5/6 py-24">
         {/* LISTINGS */}
         <div className="md:w-11/12 mx-auto">
           {/* HEADING */}
@@ -134,8 +157,102 @@ export default function Home() {
             <h1 className="text-2xl font-bold">Listings</h1>
           </div>
 
+          <div className="flex justify-end gap-2 mb-5">
+            <button className={`${buttonHover}`} onClick={scrollLeft}>
+              <i className="fa-solid fa-angle-left"></i>
+            </button>
+
+            <button className={`${buttonHover}`} onClick={scrollRight}>
+              <i className="fa-solid fa-angle-right"></i>
+            </button>
+          </div>
+
           {/* LIST */}
-          <HomePageList />
+          <div
+            ref={scrollContainerRef}
+            className="houseList w-full md:min-h-max overflow-x-auto overflow-y-hidden 
+                      scroll-smooth ">
+            <div className=" md:h-5/6 gap-[5%] flex min-w-max">
+              <div className="item1">
+                <ListingsCard
+                  listingsImage={House1}
+                  location={"New york"}
+                  area={76}
+                  energyClass={"A"}
+                  price={350}
+                  id={1}
+                />
+              </div>
+              <div className="item2">
+                <ListingsCard
+                  listingsImage={House2}
+                  location={"New york"}
+                  area={76}
+                  energyClass={"A"}
+                  price={350}
+                  id={1}
+                />
+              </div>
+              <div className="item3">
+                <ListingsCard
+                  listingsImage={House3}
+                  location={"New york"}
+                  area={76}
+                  energyClass={"A"}
+                  price={350}
+                  id={1}
+                />
+              </div>
+              <div className="item4">
+                <ListingsCard
+                  listingsImage={House4}
+                  location={"New york"}
+                  area={76}
+                  energyClass={"A"}
+                  price={350}
+                  id={1}
+                />
+              </div>
+              <div className="item5">
+                <ListingsCard
+                  listingsImage={House5}
+                  location={"New york"}
+                  area={76}
+                  energyClass={"A"}
+                  price={350}
+                  id={1}
+                />
+              </div>
+              <div className="item6">
+                <ListingsCard
+                  listingsImage={House6}
+                  location={"New york"}
+                  area={76}
+                  energyClass={"A"}
+                  price={350}
+                  id={1}
+                />
+              </div>
+              <div className="item7">
+                <ListingsCard
+                  listingsImage={House6}
+                  location={"New york"}
+                  area={76}
+                  energyClass={"A"}
+                  price={350}
+                  id={1}
+                />
+              </div>
+              <div className="item8 flex justify-center items-center md:flex-row flex-col md:gap-5 gap-4 rounded-2xl border-2 border-solid border-stone-400">
+                <div className="w-[19rem] sm:w-[22rem] md:w-[24rem] flex items-center justify-center">
+                  <a className="" href="/listings">
+                    Click for more
+                  </a>
+                  <i className="animate-slide fa-solid fa-arrow-right fa-2xl bg-black ml-2"></i>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
