@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import { StaticImageData } from "next/image";
-import { Double } from "mongodb";
 
 type Props = {
   listingsImage: StaticImageData;
