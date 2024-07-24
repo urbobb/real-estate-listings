@@ -1,24 +1,65 @@
 import React from "react";
 import Image from "next/image";
 import { StaticImageData } from "next/image";
+import { Double } from "mongodb";
 
 type Props = {
   listingsImage: StaticImageData;
+  location: string;
+  area: number;
+  energyClass: string;
+  price: number;
   id: number;
 };
 
-const ListingsCard = ({ listingsImage, id }: Props) => {
+const ListingsCard = ({
+  listingsImage,
+  location,
+  area,
+  energyClass,
+  price,
+  id,
+}: Props) => {
   return (
-    <a href={`/listings/${id}`} target="_blank" className="w-80 text-white">
-      <div className="h-full flex flex-col justify-between rounded-2xl overflow-hidden border-2 border-solid border-stone-400">
-        <Image
-          className="flex-grow flex items-center justify-center md:h-full md:w-full rounded-2xl hover:scale-90 hover:opacity-70 duration-500 ease-out delay-100 hover:cursor-pointer "
-          src={listingsImage}
-          alt={listingsImage.toString()}
-        />
-      </div>
-      <p>{id}</p>
-    </a>
+    <div className=" bg-[#efd1d1] rounded-xl overflow-hidden mb-2 drop-shadow-2xl w-[19rem] sm:w-[22rem] md:w-[24rem]">
+      <a href={`/listings/${id}`} target="_blank" className="w-full">
+        <div className="md:w-full h-[200px]  overflow-hidden ">
+          <Image
+            className="md:h-full md:w-full rounded-xl hover:scale-110 hover:opacity-70 duration-500 ease-out delay-100 hover:cursor-pointer "
+            src={listingsImage}
+            alt={listingsImage.toString()}
+          />
+        </div>
+        <div className="min-h-fit mt-5 ml-2 w-full">
+          <div className="h-60 flex gap-5">
+            <div className="flex flex-col basis-2/3 gap-5 ">
+              <p>
+                <span className="font-bold text-[14px]">Location:</span>
+              </p>
+              <p>
+                <span className="font-bold text-[14px]">
+                  Superfisce calpistabili:
+                </span>
+              </p>
+              <p>
+                <span className="font-bold text-[14px]">Energy class:</span>
+              </p>
+              <p>
+                <span className="font-bold text-[14px]">Price: </span>
+              </p>
+            </div>
+            <div className="flex flex-col basis-1/4 gap-5 font-light">
+              <p>{location}</p>
+              <p>
+                {area}m<sup>2</sup>
+              </p>
+              <p>{energyClass}</p>
+              <p>{price.toFixed(3)}€</p>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
   );
 };
 
