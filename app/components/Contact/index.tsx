@@ -99,7 +99,8 @@ const Contact = () => {
 
             <button
               type="submit"
-              className="-mt-5 rounded-lg border-2 border-slate-50 px-8 py-3 transition duration-500 hover:text-black hover:bg-blue-50">
+              className="-mt-5 rounded-lg border-2 border-slate-50 px-8 py-3 transition 
+              duration-500 hover:text-black hover:bg-white">
               Send now
             </button>
           </form>
