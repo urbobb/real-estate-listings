@@ -13,12 +13,8 @@ import MetaLogo from "@/app/assets/sponsors/Meta_Logo.png";
 import HomePageList from "@/app/components/HomePageList";
 
 import ListingsCard from "@/app/components/ListingsCard";
-import House1 from "@/app/assets/listings/House1.png";
-import House2 from "@/app/assets/listings/House2.jpg";
-import House3 from "@/app/assets/listings/House3.jpg";
-import House4 from "@/app/assets/listings/House4.jpeg";
-import House5 from "@/app/assets/listings/House5.jpg";
-import House6 from "@/app/assets/listings/House6.jpg";
+
+import { houses } from "@/app/shared/HousesList";
 import Contact from "./components/Contact";
 
 interface AutoRotatingGroupProps {
@@ -43,6 +39,7 @@ function AutoRotatingGroup({ children }: AutoRotatingGroupProps) {
 
 export default function Home() {
   const isAboveMediumScreens = useMediaQuery("(min-width:1060px)");
+  const isAboveSmallScreens = useMediaQuery("(min-width: 640px)");
 
   const Level = dynamic(() => import("@/app/components/Level"), {
     ssr: false,
@@ -64,6 +61,8 @@ export default function Home() {
   });
   const buttonHover = `h-10 w-10 border-2 rounded-3xl`;
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const displayedHouses = isAboveSmallScreens ? houses.slice(0, 3) : houses;
 
   function scrollLeft() {
     if (scrollContainerRef.current) {
@@ -170,79 +169,24 @@ export default function Home() {
           {/* LIST */}
           <div
             ref={scrollContainerRef}
-            className="houseList w-full md:min-h-max overflow-x-auto overflow-y-hidden 
+            className="houseList w-full md:min-h-max mx-auto overflow-x-auto overflow-y-hidden 
                       scroll-smooth ">
-            <div className=" md:h-5/6 gap-[5%] flex min-w-max">
-              <div className="item1">
-                <ListingsCard
-                  listingsImage={House1}
-                  location={"New york"}
-                  area={76}
-                  energyClass={"A"}
-                  price={350}
-                  id={1}
-                />
-              </div>
-              <div className="item2">
-                <ListingsCard
-                  listingsImage={House2}
-                  location={"New york"}
-                  area={76}
-                  energyClass={"A"}
-                  price={350}
-                  id={1}
-                />
-              </div>
-              <div className="item3">
-                <ListingsCard
-                  listingsImage={House3}
-                  location={"New york"}
-                  area={76}
-                  energyClass={"A"}
-                  price={350}
-                  id={1}
-                />
-              </div>
-              <div className="item4">
-                <ListingsCard
-                  listingsImage={House4}
-                  location={"New york"}
-                  area={76}
-                  energyClass={"A"}
-                  price={350}
-                  id={1}
-                />
-              </div>
-              <div className="item5">
-                <ListingsCard
-                  listingsImage={House5}
-                  location={"New york"}
-                  area={76}
-                  energyClass={"A"}
-                  price={350}
-                  id={1}
-                />
-              </div>
-              <div className="item6">
-                <ListingsCard
-                  listingsImage={House6}
-                  location={"New york"}
-                  area={76}
-                  energyClass={"A"}
-                  price={350}
-                  id={1}
-                />
-              </div>
-              <div className="item7">
-                <ListingsCard
-                  listingsImage={House6}
-                  location={"New york"}
-                  area={76}
-                  energyClass={"A"}
-                  price={350}
-                  id={1}
-                />
-              </div>
+            <div className=" md:h-5/6 sm:gap-[2%] gap-10 flex min-w-max mx-auto">
+              {houses.map((house, index) => (
+                <div
+                  className={`flex-[0_0_calc(20%_-_1rem)] box-border`}
+                  key={index}>
+                  <ListingsCard
+                    listingsImage={house.listingsImage}
+                    location={house.location}
+                    area={house.area}
+                    energyClass={house.energyClass}
+                    price={house.price}
+                    id={house.id}
+                  />
+                </div>
+              ))}
+
               <div className="item8 flex justify-center items-center md:flex-row flex-col md:gap-5 gap-4 rounded-2xl border-2 border-solid border-stone-400">
                 <div className="w-[19rem] sm:w-[22rem] md:w-[24rem] flex items-center justify-center">
                   <a className="" href="/listings">
