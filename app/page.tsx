@@ -137,19 +137,6 @@ export default function Home() {
               <div
                 className="md:w-2/5 w-full pl-2 flex justify-between gap-3
                 border-2 border-[#] rounded-full">
-                {/* <div className="flex justify-center items-center">
-                  <label htmlFor="">Type:</label>
-                  <select
-                    className="min-w-fit min-h-max outline-0 md:text-[1.2em] text-[1em]
-                      border-b-2 border-stone-400 focus:border-stone-200 
-                      transition duration-300 bg-transparent">
-                    <option className="" value="value">
-                      All above
-                    </option>
-                    <option value="">Buy</option>
-                    <option value="">Rent</option>
-                  </select>
-                </div> */}
                 <div className="flex justify-start items-center w-full">
                   <label className="basis-1/4" htmlFor="city">
                     City:
