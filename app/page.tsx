@@ -135,7 +135,7 @@ export default function Home() {
                 <h1 className="text-2xl font-bold">Search</h1>
               </div>
               <div
-                className="md:w-2/5 w-full pl-2 flex justify-between md:gap-3 gap-10
+                className="md:w-2/5 w-full pl-2 flex justify-between gap-3
                 border-2 border-[#] rounded-full">
                 {/* <div className="flex justify-center items-center">
                   <label htmlFor="">Type:</label>
@@ -151,7 +151,7 @@ export default function Home() {
                   </select>
                 </div> */}
                 <div className="flex justify-start items-center w-full">
-                  <label className="basis-1/6" htmlFor="city">
+                  <label className="basis-1/4" htmlFor="city">
                     City:
                   </label>
                   <select
