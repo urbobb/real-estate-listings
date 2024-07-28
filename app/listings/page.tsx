@@ -1,6 +1,10 @@
 import React from "react";
 
 export default function Listings() {
+  const inputStyles = `w-full mb-10 min-h-max outline-0 text-[1.5em] 
+  border-b-2 border-stone-400 focus:border-stone-200 transition duration-300
+  bg-transparent`;
+
   return (
     <div className="h-screen mx-auto w-full pt-24 ">
       <div className="md:w-5/6 w-9/12 mx-auto">
@@ -12,7 +16,7 @@ export default function Listings() {
               <div className="flex md:flex-row flex-col">
                 <div className="flex justify-start">
                   <label htmlFor="">Type</label>
-                  <select>
+                  <select className={`${inputStyles}`}>
                     <option value="value">All above</option>
                     <option value="">Buy</option>
                     <option value="">Rent</option>
@@ -20,7 +24,7 @@ export default function Listings() {
                 </div>
                 <div className="flex md:justify-center">
                   <label htmlFor="">Category</label>
-                  <select>
+                  <select className={`${inputStyles}`}>
                     <option value="value">All above</option>
                     <option value="">Display Text 2</option>
                     <option value="">Display Text 3</option>
@@ -29,19 +33,19 @@ export default function Listings() {
               </div>
               <div className="">
                 <label htmlFor="">City</label>
-                <select>
+                <select className={`${inputStyles}`}>
                   <option value="value">All above</option>
                   <option value="">New York</option>
                   <option value="">Miami</option>
                 </select>
                 <label htmlFor="">Zone</label>
-                <input type="text" />
+                <input type="text" className={`${inputStyles}`} />
               </div>
               <div className="">
                 <label htmlFor="">Price</label>
-                <input type="text" />
+                <input type="text" className={`${inputStyles}`} />
                 <label htmlFor="">Squaremeters</label>
-                <input type="text" />
+                <input type="text" className={`${inputStyles}`} />
               </div>
               <button
                 className="-mt-5 rounded-lg border-2 border-slate-50 px-8 py-3 transition 

@@ -126,23 +126,51 @@ export default function Home() {
         </div>
 
         <div className="w-full">
-          {/* SPONSORS */}
-          {isAboveMediumScreens && (
-            <div className="sponsor md:w-11/12 w-full mx-auto py-10 h-[150px] flex justify-start items-center gap-16">
-              <div className="w-28">
-                <Image src={JPMorgan} alt="JPMorgan" />
+          {/* SEARCH LISTINGS */}
+          <form action="">
+            <div
+              className="sponsor md:w-11/12 w-5/6 mx-auto py-5 
+              h-[150px]">
+              <div className="pl-2 mb-3">
+                <h1 className="text-2xl font-bold">Search</h1>
               </div>
-              <div className="w-28">
-                <Image src={CoinbaseLogo} alt="Coinabse" />
-              </div>
-              <div className="w-28">
-                <Image src={MetaLogo} alt="Meta" />
-              </div>
-              <div className="w-12">
-                <Image src={XLogo} alt="X" />
+              <div
+                className="md:w-2/5 w-full pl-2 flex justify-between md:gap-3 gap-10
+                border-2 border-[#] rounded-full">
+                {/* <div className="flex justify-center items-center">
+                  <label htmlFor="">Type:</label>
+                  <select
+                    className="min-w-fit min-h-max outline-0 md:text-[1.2em] text-[1em]
+                      border-b-2 border-stone-400 focus:border-stone-200 
+                      transition duration-300 bg-transparent">
+                    <option className="" value="value">
+                      All above
+                    </option>
+                    <option value="">Buy</option>
+                    <option value="">Rent</option>
+                  </select>
+                </div> */}
+                <div className="flex justify-start items-center w-full">
+                  <label className="basis-1/6" htmlFor="city">
+                    City:
+                  </label>
+                  <select
+                    className="basis-auto w-full min-h-max outline-0 md:text-[1.2em] text-[1em]
+                      border-b-2 border-stone-400 focus:border-stone-200 
+                      transition duration-300 bg-transparent">
+                    <option value="All above">All above</option>
+                    <option value="New York">New York</option>
+                    <option value="Miami">Miami</option>
+                  </select>
+                </div>
+                <button
+                  className="rounded-full border-2 border-slate-50 
+                  px-3 py-2 transition duration-500 hover:text-black hover:bg-white">
+                  <i className="fa-solid fa-magnifying-glass"></i>
+                </button>
               </div>
             </div>
-          )}
+          </form>
         </div>
       </section>
 
