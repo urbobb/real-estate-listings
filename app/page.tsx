@@ -104,7 +104,7 @@ export default function Home() {
           {/* ANIMATIONS */}
           <div className="h-[350px] md:h-[500px] mt-12 flex basis-3/5 justify-center items-center md:z-10 md:ml-40 md:my-auto md:justify-end">
             <Canvas flat dpr={[1, 2]} camera={{ fov: 25, position: [0, 0, 8] }}>
-              <color attach="background" args={["#FFD8D8"]} />
+              <color attach="background" args={["#FFFFFF"]} />
               <ambientLight />
               <PresentationControls
                 global

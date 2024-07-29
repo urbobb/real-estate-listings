@@ -13,28 +13,28 @@ const Navbar = (props: Props) => {
   hover:border-1 border-black rounded-lg`;
   const hamburgerStyle = `transition duration-500 mt-1 block h-[3px] w-[25px] bg-white border-2 border-slate-50`;
 
-  // useEffect(() => {
-  //   if (typeof window === "undefined") return; // Ensure window is defined
+  useEffect(() => {
+    if (typeof window === "undefined") return; // Ensure window is defined
 
-  //   let prevScrollPos = window.scrollY;
+    let prevScrollPos = window.scrollY;
 
-  //   window.onscroll = () => {
-  //     scrollFunction();
-  //   };
+    window.onscroll = () => {
+      scrollFunction();
+    };
 
-  //   function scrollFunction() {
-  //     let currentScrollPos = window.scrollY;
+    function scrollFunction() {
+      let currentScrollPos = window.scrollY;
 
-  //     if (prevScrollPos > currentScrollPos) {
-  //       (document.getElementById("navbar") as HTMLFormElement).style.top = "0";
-  //     } else {
-  //       (document.getElementById("navbar") as HTMLFormElement).style.top =
-  //         "-100px";
-  //     }
+      if (prevScrollPos > currentScrollPos) {
+        (document.getElementById("navbar") as HTMLFormElement).style.top = "0";
+      } else {
+        (document.getElementById("navbar") as HTMLFormElement).style.top =
+          "-100px";
+      }
 
-  //     prevScrollPos = currentScrollPos;
-  //   }
-  // });
+      prevScrollPos = currentScrollPos;
+    }
+  });
 
   function mobileMenu() {
     document.querySelector(".hamburger")?.classList.toggle("active");
@@ -44,7 +44,7 @@ const Navbar = (props: Props) => {
     <nav>
       <div
         id="navbar"
-        className={`${flexBetween} navbar fixed top-0 z-40 py-6 w-full bg-[#FFD8D8] text-slate-500`}>
+        className={`${flexBetween} navbar fixed top-0 z-40 py-6 w-full bg-[#ffffff] text-slate-500`}>
         {/* Parent container of navbar links */}
         <div className={`${flexBetween} mx-auto w-5/6`}>
           {/* Navbar links */}
@@ -83,7 +83,7 @@ const Navbar = (props: Props) => {
             )}
 
             {!isAboveMediumScreens && isMenuToggled && (
-              <div className="fixed right-0 bottom-0 z-30 h-full w-full bg-[#FFD8D8] drop-shadow-xl">
+              <div className="fixed right-0 bottom-0 z-30 h-full w-full bg-[#ffffff] drop-shadow-xl">
                 {/* MENU ITEMS */}
                 <div className="mx-[33%] mt-[8rem] flex flex-col justify-center items-center gap-10 text-2xl">
                   <Links name="Listings" />
