@@ -5,12 +5,6 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { PresentationControls } from "@react-three/drei";
 import useMediaQuery from "@/app/hooks/userMediaQuery";
 import dynamic from "next/dynamic";
-import Image from "next/image";
-import JPMorgan from "@/app/assets/sponsors/JPMorganChase_Logo.png";
-import XLogo from "@/app/assets/sponsors/X_Logo.png";
-import CoinbaseLogo from "@/app/assets/sponsors/Coinbase_Logo.png";
-import MetaLogo from "@/app/assets/sponsors/Meta_Logo.png";
-import HomePageList from "@/app/components/HomePageList";
 
 import ListingsCard from "@/app/components/ListingsCard";
 
@@ -66,13 +60,13 @@ export default function Home() {
 
   function scrollLeft() {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollLeft -= 100;
+      scrollContainerRef.current.scrollLeft -= 500;
     }
   }
 
   function scrollRight() {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollLeft += 100;
+      scrollContainerRef.current.scrollLeft += 500;
     }
   }
 
@@ -135,10 +129,10 @@ export default function Home() {
                 <h1 className="text-2xl font-bold">Search</h1>
               </div>
               <div
-                className="md:w-2/5 w-full pl-2 flex justify-between gap-3
-                border-2 border-[#] rounded-full">
+                className="md:w-1/3 w-full pl-2 flex justify-between gap-3
+                border border-black">
                 <div className="flex justify-start items-center w-full">
-                  <label className="basis-1/4" htmlFor="city">
+                  <label className="basis-1/6" htmlFor="city">
                     City:
                   </label>
                   <select
