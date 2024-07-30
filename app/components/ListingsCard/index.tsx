@@ -20,7 +20,7 @@ const ListingsCard = ({
   id,
 }: Props) => {
   return (
-    <div className=" bg-[#efd1d1] rounded-xl overflow-hidden mb-2 drop-shadow-2xl w-[19rem] sm:w-[22rem] md:w-[24rem]">
+    <div className=" bg-[#ffffff] rounded-xl overflow-hidden mb-2 drop-shadow-md w-[19rem] sm:w-[22rem] md:w-[24rem]">
       <a href={`/listings/${id}`} target="_blank" className="w-full">
         <div className="md:w-full h-[200px]  overflow-hidden ">
           <Image
