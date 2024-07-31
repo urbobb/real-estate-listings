@@ -1,15 +1,15 @@
 "use client";
 import React, { useRef } from "react";
+import Image from "next/image";
 import * as THREE from "three";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { PresentationControls } from "@react-three/drei";
 import useMediaQuery from "@/app/hooks/userMediaQuery";
 import dynamic from "next/dynamic";
-
 import ListingsCard from "@/app/components/ListingsCard";
-
 import { houses } from "@/app/shared/HousesList";
 import Contact from "./components/Contact";
+import IconAboutUs from "@/public/Icon_AboutUs.png";
 
 interface AutoRotatingGroupProps {
   children: React.ReactNode;
@@ -152,6 +152,86 @@ export default function Home() {
               </div>
             </div>
           </form>
+        </div>
+      </section>
+
+      {/* Services */}
+      <section id="services" className="mx-auto h-full md:w-full w-5/6 py-24">
+        <div className="md:w-11/12 mx-auto">
+          <div className="flex flex-col gap-10 mb-28">
+            <div>
+              <p>Discover</p>
+            </div>
+            <div className="md:w-1/2 w-full">
+              <h1 className="font-bold md:text-[2.2rem] text-[1.3rem] md:text-left text-center">
+                Find Your Dream Home in the Italian Alps
+              </h1>
+            </div>
+            <div className="md:w-1/2 w-full">
+              <p className="md:text-left text-center">
+                At Home Finder, we specialize in personalized property matching,
+                leveraging our expert local knowledge and providing premium
+                customer service. Let us help you find the perfect home in the
+                breathtaking Italian Alps.
+              </p>
+            </div>
+          </div>
+          {/** */}
+          <div className="w-full flex md:flex-row flex-col gap-20">
+            <div className="basis-1/3 flex flex-col gap-5 w-full ">
+              <div className="w-[50px]">
+                <Image src={IconAboutUs} alt="Icon" />
+              </div>
+              <div className="w-full">
+                <h2 className="font-extrabold text-[1.3rem] ">
+                  Personalized <br /> Property Matching
+                </h2>
+              </div>
+              <div className="w-full">
+                <p>
+                  We understand that every homebuyer is unique. Our team of
+                  experts will match you with properties that align with your
+                  specific needs and preferences.
+                </p>
+              </div>
+            </div>
+            {/* */}
+            <div className="basis-1/3 flex flex-col gap-5 w-full ">
+              <div className="w-[50px]">
+                <Image src={IconAboutUs} alt="Icon" />
+              </div>
+              <div className="w-full">
+                <h2 className="font-extrabold text-[1.3rem]">
+                  Expert <br /> Local Knowledge
+                </h2>
+              </div>
+              <div className="w-full">
+                <p>
+                  Our deep understanding of the Italian Alps allows us to
+                  provide you with valuable insights and guidance throughout the
+                  home buying process.
+                </p>
+              </div>
+            </div>
+            {/* */}
+            <div className="basis-1/3 flex flex-col gap-5 w-full ">
+              <div className="w-[50px]">
+                <Image src={IconAboutUs} alt="Icon" />
+              </div>
+              <div className="w-full">
+                <h2 className="font-extrabold text-[1.3rem]">
+                  Premium <br /> Customer Service
+                </h2>
+              </div>
+              <div className="w-full">
+                <p>
+                  We are committed to delivering exceptional customer service,
+                  ensuring that your experience with Home Finder is smooth,
+                  enjoyable, and stress-free.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
