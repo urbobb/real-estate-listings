@@ -79,7 +79,7 @@ export default function Home() {
         {/* MAIN HEADER AND ANIMATION */}
         <div className="md:flex mx-auto mt-5 md:w-11/12 w-9/12 md:h-full ">
           {/* INTRODUCTIONS */}
-          <div className="md:basis-2/5 z-20 my-auto">
+          <div className="leftSlide md:basis-2/5 z-20 my-auto">
             <div className="heading">
               <h1 className="md:pb-10 pb-5 text-2xl font-extrabold text-center md:text-start">
                 Welcome to Home Finder
@@ -96,7 +96,7 @@ export default function Home() {
           </div>
 
           {/* ANIMATIONS */}
-          <div className="h-[350px] md:h-[500px] mt-12 flex basis-3/5 justify-center items-center md:z-10 md:ml-40 md:my-auto md:justify-end">
+          <div className="relative rightSlide h-[350px] md:h-[500px] mt-12 flex basis-3/5 justify-center items-center md:z-10 md:ml-40 md:my-auto md:justify-end">
             <Canvas flat dpr={[1, 2]} camera={{ fov: 25, position: [0, 0, 8] }}>
               <color attach="background" args={["#FFFFFF"]} />
               <ambientLight />
@@ -119,7 +119,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="w-full">
+        <div className="w-full leftSlide ">
           {/* SEARCH LISTINGS */}
           <form action="">
             <div
