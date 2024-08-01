@@ -1,21 +1,15 @@
 "use client";
 import React, { useRef } from "react";
+import Image from "next/image";
 import * as THREE from "three";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { PresentationControls } from "@react-three/drei";
 import useMediaQuery from "@/app/hooks/userMediaQuery";
 import dynamic from "next/dynamic";
-import Image from "next/image";
-import JPMorgan from "@/app/assets/sponsors/JPMorganChase_Logo.png";
-import XLogo from "@/app/assets/sponsors/X_Logo.png";
-import CoinbaseLogo from "@/app/assets/sponsors/Coinbase_Logo.png";
-import MetaLogo from "@/app/assets/sponsors/Meta_Logo.png";
-import HomePageList from "@/app/components/HomePageList";
-
 import ListingsCard from "@/app/components/ListingsCard";
-
 import { houses } from "@/app/shared/HousesList";
 import Contact from "./components/Contact";
+import IconAboutUs from "@/public/Icon_AboutUs.png";
 
 interface AutoRotatingGroupProps {
   children: React.ReactNode;
@@ -66,13 +60,13 @@ export default function Home() {
 
   function scrollLeft() {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollLeft -= 100;
+      scrollContainerRef.current.scrollLeft -= 500;
     }
   }
 
   function scrollRight() {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollLeft += 100;
+      scrollContainerRef.current.scrollLeft += 500;
     }
   }
 
@@ -85,7 +79,7 @@ export default function Home() {
         {/* MAIN HEADER AND ANIMATION */}
         <div className="md:flex mx-auto mt-5 md:w-11/12 w-9/12 md:h-full ">
           {/* INTRODUCTIONS */}
-          <div className="md:basis-2/5 z-20 my-auto">
+          <div className="leftSlide md:basis-2/5 z-20 my-auto">
             <div className="heading">
               <h1 className="md:pb-10 pb-5 text-2xl font-extrabold text-center md:text-start">
                 Welcome to Home Finder
@@ -102,9 +96,9 @@ export default function Home() {
           </div>
 
           {/* ANIMATIONS */}
-          <div className="h-[350px] md:h-[500px] mt-12 flex basis-3/5 justify-center items-center md:z-10 md:ml-40 md:my-auto md:justify-end">
+          <div className="relative rightSlide h-[350px] md:h-[500px] mt-12 flex basis-3/5 justify-center items-center md:z-10 md:ml-40 md:my-auto md:justify-end">
             <Canvas flat dpr={[1, 2]} camera={{ fov: 25, position: [0, 0, 8] }}>
-              <color attach="background" args={["#FFD8D8"]} />
+              <color attach="background" args={["#FFFFFF"]} />
               <ambientLight />
               <PresentationControls
                 global
@@ -125,7 +119,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="w-full">
+        <div className="w-full leftSlide ">
           {/* SEARCH LISTINGS */}
           <form action="">
             <div
@@ -135,23 +129,10 @@ export default function Home() {
                 <h1 className="text-2xl font-bold">Search</h1>
               </div>
               <div
-                className="md:w-2/5 w-full pl-2 flex justify-between gap-3
-                border-2 border-[#] rounded-full">
-                {/* <div className="flex justify-center items-center">
-                  <label htmlFor="">Type:</label>
-                  <select
-                    className="min-w-fit min-h-max outline-0 md:text-[1.2em] text-[1em]
-                      border-b-2 border-stone-400 focus:border-stone-200 
-                      transition duration-300 bg-transparent">
-                    <option className="" value="value">
-                      All above
-                    </option>
-                    <option value="">Buy</option>
-                    <option value="">Rent</option>
-                  </select>
-                </div> */}
+                className="md:w-1/3 w-full pl-2 flex justify-between gap-3
+                border border-black">
                 <div className="flex justify-start items-center w-full">
-                  <label className="basis-1/4" htmlFor="city">
+                  <label className="basis-1/6" htmlFor="city">
                     City:
                   </label>
                   <select
@@ -171,6 +152,86 @@ export default function Home() {
               </div>
             </div>
           </form>
+        </div>
+      </section>
+
+      {/* Services */}
+      <section id="services" className="mx-auto h-full md:w-full w-5/6 py-24">
+        <div className="md:w-11/12 mx-auto">
+          <div className="flex flex-col gap-10 mb-28">
+            <div>
+              <p>Discover</p>
+            </div>
+            <div className="md:w-1/2 w-full">
+              <h1 className="font-bold md:text-[2.2rem] text-[1.3rem] md:text-left text-center">
+                Find Your Dream Home in the Italian Alps
+              </h1>
+            </div>
+            <div className="md:w-1/2 w-full">
+              <p className="md:text-left text-center">
+                At Home Finder, we specialize in personalized property matching,
+                leveraging our expert local knowledge and providing premium
+                customer service. Let us help you find the perfect home in the
+                breathtaking Italian Alps.
+              </p>
+            </div>
+          </div>
+          {/** */}
+          <div className="w-full flex md:flex-row flex-col gap-20">
+            <div className="basis-1/3 flex flex-col gap-5 w-full ">
+              <div className="w-[50px]">
+                <Image src={IconAboutUs} alt="Icon" />
+              </div>
+              <div className="w-full">
+                <h2 className="font-extrabold text-[1.3rem] ">
+                  Personalized <br /> Property Matching
+                </h2>
+              </div>
+              <div className="w-full">
+                <p>
+                  We understand that every homebuyer is unique. Our team of
+                  experts will match you with properties that align with your
+                  specific needs and preferences.
+                </p>
+              </div>
+            </div>
+            {/* */}
+            <div className="basis-1/3 flex flex-col gap-5 w-full ">
+              <div className="w-[50px]">
+                <Image src={IconAboutUs} alt="Icon" />
+              </div>
+              <div className="w-full">
+                <h2 className="font-extrabold text-[1.3rem]">
+                  Expert <br /> Local Knowledge
+                </h2>
+              </div>
+              <div className="w-full">
+                <p>
+                  Our deep understanding of the Italian Alps allows us to
+                  provide you with valuable insights and guidance throughout the
+                  home buying process.
+                </p>
+              </div>
+            </div>
+            {/* */}
+            <div className="basis-1/3 flex flex-col gap-5 w-full ">
+              <div className="w-[50px]">
+                <Image src={IconAboutUs} alt="Icon" />
+              </div>
+              <div className="w-full">
+                <h2 className="font-extrabold text-[1.3rem]">
+                  Premium <br /> Customer Service
+                </h2>
+              </div>
+              <div className="w-full">
+                <p>
+                  We are committed to delivering exceptional customer service,
+                  ensuring that your experience with Home Finder is smooth,
+                  enjoyable, and stress-free.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
