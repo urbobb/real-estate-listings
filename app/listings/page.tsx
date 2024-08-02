@@ -13,19 +13,37 @@ export default function Listings() {
   border-b-2 border-stone-400 focus:border-stone-200 transition duration-300
   bg-transparent`;
   const checkBoxLabelStyle = `flex items-center justify-center border w-28 rounded-lg h-10 hover:cursor-pointer 
-  hover:text-blue-600 hover:border-blue-600 focus:bg-blue-100 focus:text-blue-600
-  focus:border-blue-600 `;
+  hover:text-blue-600 hover:border-blue-600 checked:bg-blue-100 checked:text-blue-600
+  checked:border-blue-600 `;
+  // const focusCheckbox = checkBoxState.buy
+  //   ? `focus:bg-blue-100 focus:text-blue-600
+  // focus:border-blue-600`
+  //   : "";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault(); // prevents reloading when the form is submitted
     console.log("Submitted");
   };
 
-  const handleCheckboxChange = (name: string) => {
-    setCheckBoxState((prevState: any) => ({
-      ...prevState,
-      [name]: !prevState[name],
-    }));
+  const handleCheckboxChange = (e: React.MouseEvent<HTMLInputElement>) => {
+    const name = e.currentTarget.value;
+
+    console.log(name);
+
+    setCheckBoxState((prevState: any) => {
+      let newState = {
+        ...prevState,
+        [name]: !prevState[name], // toggle the checkbox state
+      };
+      //console.log("Checked: ", newState);
+
+      // Log the new state of the checkbox
+      console.log(`Checked [${name}]: `, newState);
+
+      return newState;
+    });
+
+    //console.log("Checked: ",);
   };
 
   function handlePriceChange(e: string) {
@@ -35,7 +53,7 @@ export default function Listings() {
   return (
     <div className="h-screen mx-auto w-full pt-24">
       <div className="md:w-5/6 h-full w-9/12 mx-auto">
-        <div className="md:fixed left-0 ml-5 md:w-1/6 mx-auto mt-5 ">
+        <div className="md:fixed md:left-0 ml-10 md:w-1/6 mx-auto mt-5 ">
           <h1 className="text-2xl font-light">Search</h1>
           {/* SEARCH */}
           <div className="sticky">
@@ -46,21 +64,33 @@ export default function Listings() {
               <div className="flex md:gap-10 flex-col">
                 <div className="flex justify-start items-center gap-2">
                   <p>Type</p>
-                  <input
-                    type="checkbox"
-                    checked={checkBoxState.buy}
-                    className="hidden"
-                  />
                   <label
                     htmlFor=""
-                    onClick={(e) => handleCheckboxChange("buy")}
-                    className={`${checkBoxLabelStyle} `}>
+                    className={`${checkBoxLabelStyle}`}
+                    onClick={(e) => handleCheckboxChange(e)}>
                     Buy
                   </label>
-                  <input type="checkbox" className="hidden" />
-                  <label htmlFor="" className={`${checkBoxLabelStyle}`}>
+                  <input
+                    type="checkbox"
+                    id="checkBuy"
+                    checked={checkBoxState.buy}
+                    value="buy"
+                    className="hidden"
+                  />
+
+                  <label
+                    htmlFor=""
+                    className={`${checkBoxLabelStyle}`}
+                    onClick={(e) => handleCheckboxChange(e)}>
                     Rent
                   </label>
+                  <input
+                    type="checkbox"
+                    id="checkRent"
+                    checked={checkBoxState.rent}
+                    value="rent"
+                    className="hidden"
+                  />
                 </div>
                 <div className="flex flex-col md:justify-center gap-2">
                   <p>Category</p>
@@ -104,14 +134,14 @@ export default function Listings() {
                   <label htmlFor="">Price</label>
                   <input
                     type="range"
-                    min="0"
-                    max="100"
+                    min="100000"
+                    max="1000000"
                     className="slider w-full mb-2 min-h-max"
                     onChange={(e) => {
                       handlePriceChange(e.target.value);
                     }}
                   />
-                  <p>{priceState}</p>
+                  <p>{priceState} €</p>
                   <label htmlFor="">Squaremeters</label>
                   <input type="text" className={`${inputStyles}`} />
                 </div>
