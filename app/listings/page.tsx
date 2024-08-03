@@ -12,9 +12,8 @@ export default function Listings() {
   const inputStyles = `w-full mb-2 min-h-max outline-0 text-[1.1em] 
   border-b-2 border-stone-400 focus:border-stone-200 transition duration-300
   bg-transparent`;
-  const checkBoxLabelStyle = `flex items-center justify-center border w-28 rounded-lg h-10 hover:cursor-pointer 
-  hover:text-blue-600 hover:border-blue-600 checked:bg-blue-100 checked:text-blue-600
-  checked:border-blue-600 `;
+  const checkBoxLabelStyle = `flex items-center justify-center border w-28 
+  rounded-lg h-10 hover:cursor-pointer hover:text-blue-600 hover:border-blue-600  `;
   // const focusCheckbox = checkBoxState.buy
   //   ? `focus:bg-blue-100 focus:text-blue-600
   // focus:border-blue-600`
@@ -25,17 +24,14 @@ export default function Listings() {
     console.log("Submitted");
   };
 
-  const handleCheckboxChange = (e: React.MouseEvent<HTMLInputElement>) => {
-    const name = e.currentTarget.value;
+  const handleCheckboxChange = async (name: string) => {
+    //console.log(name);
 
-    console.log(name);
-
-    setCheckBoxState((prevState: any) => {
+    await setCheckBoxState((prevState: any) => {
       let newState = {
         ...prevState,
         [name]: !prevState[name], // toggle the checkbox state
       };
-      //console.log("Checked: ", newState);
 
       // Log the new state of the checkbox
       console.log(`Checked [${name}]: `, newState);
@@ -43,7 +39,7 @@ export default function Listings() {
       return newState;
     });
 
-    //console.log("Checked: ",);
+    console.log(checkBoxState);
   };
 
   function handlePriceChange(e: string) {
@@ -64,33 +60,41 @@ export default function Listings() {
               <div className="flex md:gap-10 flex-col">
                 <div className="flex justify-start items-center gap-2">
                   <p>Type</p>
-                  <label
-                    htmlFor=""
-                    className={`${checkBoxLabelStyle}`}
-                    onClick={(e) => handleCheckboxChange(e)}>
-                    Buy
-                  </label>
                   <input
                     type="checkbox"
                     id="checkBuy"
-                    checked={checkBoxState.buy}
+                    name="rent"
                     value="buy"
+                    checked={checkBoxState.buy}
                     className="hidden"
                   />
-
                   <label
-                    htmlFor=""
-                    className={`${checkBoxLabelStyle}`}
-                    onClick={(e) => handleCheckboxChange(e)}>
-                    Rent
+                    className={`${checkBoxLabelStyle} ${
+                      checkBoxState.buy
+                        ? "bg-blue-100 text-blue-600 border-blue-600"
+                        : "border-gray-300 text-black"
+                    }`}
+                    onClick={(e) => handleCheckboxChange("buy")}>
+                    Buy
                   </label>
+
                   <input
                     type="checkbox"
                     id="checkRent"
-                    checked={checkBoxState.rent}
                     value="rent"
+                    checked={checkBoxState.rent}
+                    onChange={() => {}}
                     className="hidden"
                   />
+                  <label
+                    className={`${checkBoxLabelStyle} ${
+                      checkBoxState.rent
+                        ? "bg-blue-100 text-blue-600 border-blue-600"
+                        : ""
+                    }`}
+                    onClick={(e) => handleCheckboxChange("rent")}>
+                    Rent
+                  </label>
                 </div>
                 <div className="flex flex-col md:justify-center gap-2">
                   <p>Category</p>
