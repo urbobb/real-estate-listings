@@ -56,12 +56,12 @@ export default function Listings() {
       };
 
       // Log the new state of the checkbox
-      console.log(`Checked [${name}]: `, newState);
+      //console.log(`Checked [${name}]: `, newState);
 
       return newState;
     });
 
-    console.log("TypeState: ", typeState);
+    //console.log("TypeState: ", typeState);
   };
 
   const handleCatergoryCheckboxChange = async (name: keyof CatergoryState) => {
@@ -75,7 +75,7 @@ export default function Listings() {
       return newState;
     });
 
-    console.log("Category State: ", catergoryState);
+    //console.log("Category State: ", catergoryState);
   };
 
   function handlePriceChange(e: string) {
@@ -84,9 +84,9 @@ export default function Listings() {
 
   return (
     <div className="h-screen mx-auto w-full pt-24">
-      <div className="md:w-5/6 h-full w-9/12 mx-auto">
-        <div className="md:fixed w-full md:left-0 md:top-0 pt-28 md:w-1/5 h-full mx-auto md:bg-[#FEFCFF]">
-          <div className="w-5/6 mx-auto">
+      <div className="md:w-full h-full w-9/12 mx-auto">
+        <div className="border-2 md:fixed w-full md:left-0 md:top-0 pt-28 sm:w-[300px] h-full mx-auto md:bg-[#FEFCFF]">
+          <div className="md:w-5/6 mx-auto">
             <div className="mb-5">
               <h1 className="text-[1.2rem] font-semibold">Search</h1>
             </div>
@@ -101,130 +101,58 @@ export default function Listings() {
                   <div className="flex flex-col items-start gap-2">
                     <p>Type</p>
                     <div className="flex justify-center items-center gap-2">
-                      <input
-                        type="checkbox"
-                        id="checkRent"
-                        value="buy"
+                      <SearchCheckbox
+                        name="Buy"
                         checked={typeState.buy}
-                        onChange={() => {}}
-                        className="hidden"
+                        handleAction={() => handleTypeCheckboxChange("buy")}
                       />
-                      <label
-                        className={`${checkBoxLabelStyle} ${
-                          typeState.buy
-                            ? "bg-blue-100 text-blue-600 border-blue-600"
-                            : ""
-                        }`}
-                        onClick={(e) => handleTypeCheckboxChange("buy")}>
-                        buy
-                      </label>
-
-                      <input
-                        type="checkbox"
-                        id="checkRent"
-                        value="rent"
+                      <SearchCheckbox
+                        name="Rent"
                         checked={typeState.rent}
-                        onChange={() => {}}
-                        className="hidden"
+                        handleAction={() => handleTypeCheckboxChange("rent")}
                       />
-                      <label
-                        className={`${checkBoxLabelStyle} ${
-                          typeState.rent
-                            ? "bg-blue-100 text-blue-600 border-blue-600"
-                            : ""
-                        }`}
-                        onClick={(e) => handleTypeCheckboxChange("rent")}>
-                        Rent
-                      </label>
                     </div>
                   </div>
                   <div className="flex flex-col md:justify-center gap-2">
                     <p>Category</p>
                     <div className="flex flex-col gap-2">
                       <div className="flex justify-start gap-2">
-                        <input
-                          type="checkbox"
-                          id="checkReside"
-                          value="reside"
+                        <SearchCheckbox
+                          name="Reside"
                           checked={catergoryState.reside}
-                          onChange={() => {}}
-                          className="hidden"
-                        />
-                        <label
-                          className={`${checkBoxLabelStyle} ${
-                            catergoryState.reside
-                              ? "bg-blue-100 text-blue-600 border-blue-600"
-                              : ""
-                          }`}
-                          onClick={(e) =>
+                          handleAction={() =>
                             handleCatergoryCheckboxChange("reside")
-                          }>
-                          Reside
-                        </label>
-
-                        <input
-                          type="checkbox"
-                          id="checkBusiness"
-                          value="rent"
-                          checked={catergoryState.business}
-                          onChange={() => {}}
-                          className="hidden"
+                          }
                         />
-                        <label
-                          className={`${checkBoxLabelStyle} ${
-                            catergoryState.business
-                              ? "bg-blue-100 text-blue-600 border-blue-600"
-                              : ""
-                          }`}
-                          onClick={(e) =>
+
+                        <SearchCheckbox
+                          name="Business"
+                          checked={catergoryState.business}
+                          handleAction={() =>
                             handleCatergoryCheckboxChange("business")
-                          }>
-                          Business
-                        </label>
+                          }
+                        />
                       </div>
                       <div className="flex justify-start gap-2">
-                        <input
-                          type="checkbox"
-                          id="checkLuxury"
-                          value="rent"
+                        <SearchCheckbox
+                          name="Luxury"
                           checked={catergoryState.luxury}
-                          onChange={() => {}}
-                          className="hidden"
-                        />
-                        <label
-                          className={`${checkBoxLabelStyle} ${
-                            catergoryState.luxury
-                              ? "bg-blue-100 text-blue-600 border-blue-600"
-                              : ""
-                          }`}
-                          onClick={(e) =>
+                          handleAction={() =>
                             handleCatergoryCheckboxChange("luxury")
-                          }>
-                          Luxury
-                        </label>
-
-                        <input
-                          type="checkbox"
-                          id="checkHoliday"
-                          value="rent"
-                          checked={catergoryState.holiday}
-                          onChange={() => {}}
-                          className="hidden"
+                          }
                         />
-                        <label
-                          className={`${checkBoxLabelStyle} ${
-                            catergoryState.holiday
-                              ? "bg-blue-100 text-blue-600 border-blue-600"
-                              : ""
-                          }`}
-                          onClick={(e) =>
+
+                        <SearchCheckbox
+                          name="Holiday"
+                          checked={catergoryState.holiday}
+                          handleAction={() =>
                             handleCatergoryCheckboxChange("holiday")
-                          }>
-                          Holiday
-                        </label>
+                          }
+                        />
                       </div>
                     </div>
                   </div>
+                  {/* PLACE */}
                   <div className="flex flex-row gap-2">
                     <p>City</p>
                     <select className={`${inputStyles}`}>
@@ -266,6 +194,7 @@ export default function Listings() {
                 </button>
               </form>
             </div>
+            <div className="h-full"></div>
           </div>
         </div>
       </div>
