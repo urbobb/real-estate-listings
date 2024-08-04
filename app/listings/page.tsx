@@ -1,11 +1,30 @@
 "use client";
 import React, { useState } from "react";
 import SearchListings from "../components/SearchListings";
+import SearchCheckbox from "../components/SearchCheckbox";
+
+type TypeState = {
+  buy: boolean;
+  rent: boolean;
+};
+
+type CatergoryState = {
+  reside: boolean;
+  business: boolean;
+  luxury: boolean;
+  holiday: boolean;
+};
 
 export default function Listings() {
-  const [checkBoxState, setCheckBoxState] = useState({
+  const [typeState, setTypeState] = useState<TypeState>({
     buy: false,
     rent: false,
+  });
+  const [catergoryState, setCatergoryState] = useState<CatergoryState>({
+    reside: false,
+    business: false,
+    luxury: false,
+    holiday: false,
   });
   const [priceState, setPriceState] = useState(0);
 
@@ -19,27 +38,44 @@ export default function Listings() {
   // focus:border-blue-600`
   //   : "";
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const formData = new FormData(e.currentTarget);
     e.preventDefault(); // prevents reloading when the form is submitted
-    console.log("Submitted");
+    const formEntries = Object.fromEntries(formData.entries());
+    console.log("Submitted: ", formEntries);
   };
 
-  const handleCheckboxChange = async (name: string) => {
+  const handleTypeCheckboxChange = async (name: keyof TypeState) => {
+    // giving type to name
     //console.log(name);
 
-    await setCheckBoxState((prevState: any) => {
+    await setTypeState((prevState) => {
       let newState = {
         ...prevState,
         [name]: !prevState[name], // toggle the checkbox state
       };
 
       // Log the new state of the checkbox
-      console.log(`Checked [${name}]: `, newState);
+      //console.log(`Checked [${name}]: `, newState);
 
       return newState;
     });
 
-    console.log(checkBoxState);
+    //console.log("TypeState: ", typeState);
+  };
+
+  const handleCatergoryCheckboxChange = async (name: keyof CatergoryState) => {
+    // giving type to name
+    await setCatergoryState((prevState) => {
+      let newState = {
+        ...prevState,
+        [name]: !prevState[name],
+      };
+
+      return newState;
+    });
+
+    //console.log("Category State: ", catergoryState);
   };
 
   function handlePriceChange(e: string) {
@@ -48,114 +84,117 @@ export default function Listings() {
 
   return (
     <div className="h-screen mx-auto w-full pt-24">
-      <div className="md:w-5/6 h-full w-9/12 mx-auto">
-        <div className="md:fixed md:left-0 ml-10 md:w-1/6 mx-auto mt-5 ">
-          <h1 className="text-2xl font-light">Search</h1>
-          {/* SEARCH */}
-          <div className="sticky">
-            <form
-              action=""
-              onSubmit={handleSubmit}
-              className="flex flex-col gap-5">
-              <div className="flex md:gap-10 flex-col">
-                <div className="flex justify-start items-center gap-2">
-                  <p>Type</p>
-                  <input
-                    type="checkbox"
-                    id="checkBuy"
-                    name="rent"
-                    value="buy"
-                    checked={checkBoxState.buy}
-                    className="hidden"
-                  />
-                  <label
-                    className={`${checkBoxLabelStyle} ${
-                      checkBoxState.buy
-                        ? "bg-blue-100 text-blue-600 border-blue-600"
-                        : "border-gray-300 text-black"
-                    }`}
-                    onClick={(e) => handleCheckboxChange("buy")}>
-                    Buy
-                  </label>
-
-                  <input
-                    type="checkbox"
-                    id="checkRent"
-                    value="rent"
-                    checked={checkBoxState.rent}
-                    onChange={() => {}}
-                    className="hidden"
-                  />
-                  <label
-                    className={`${checkBoxLabelStyle} ${
-                      checkBoxState.rent
-                        ? "bg-blue-100 text-blue-600 border-blue-600"
-                        : ""
-                    }`}
-                    onClick={(e) => handleCheckboxChange("rent")}>
-                    Rent
-                  </label>
-                </div>
-                <div className="flex flex-col md:justify-center gap-2">
-                  <p>Category</p>
-                  <div className="flex flex-col gap-2">
-                    <div className="flex justify-start gap-16">
-                      <input type="checkbox" className="hidden" />
-                      <label htmlFor="" className={`${checkBoxLabelStyle}`}>
-                        Rent
-                      </label>
-                      <input type="checkbox" className="hidden" />
-                      <label htmlFor="" className={`${checkBoxLabelStyle}`}>
-                        Business
-                      </label>
+      <div className="md:w-full h-full w-9/12 mx-auto">
+        <div className="border-2 md:fixed w-full md:left-0 md:top-0 pt-28 sm:w-[300px] h-full mx-auto md:bg-[#FEFCFF]">
+          <div className="md:w-5/6 mx-auto">
+            <div className="mb-5">
+              <h1 className="text-[1.2rem] font-semibold">Search</h1>
+            </div>
+            {/* SEARCH */}
+            <div className="sticky">
+              <form
+                action=""
+                onSubmit={handleSubmit}
+                className="flex flex-col gap-5">
+                <div className="flex md:gap-10 flex-col mb-5">
+                  {/* TYPE */}
+                  <div className="flex flex-col items-start gap-2">
+                    <p>Type</p>
+                    <div className="flex justify-center items-center gap-2">
+                      <SearchCheckbox
+                        name="Buy"
+                        checked={typeState.buy}
+                        handleAction={() => handleTypeCheckboxChange("buy")}
+                      />
+                      <SearchCheckbox
+                        name="Rent"
+                        checked={typeState.rent}
+                        handleAction={() => handleTypeCheckboxChange("rent")}
+                      />
                     </div>
-                    <div className="flex justify-start gap-16">
-                      <input type="checkbox" className="hidden" />
-                      <label htmlFor="" className={`${checkBoxLabelStyle}`}>
-                        Luxus
-                      </label>
-                      <input type="checkbox" className="hidden" />
-                      <label htmlFor="" className={`${checkBoxLabelStyle}`}>
-                        Holiday
-                      </label>
+                  </div>
+                  <div className="flex flex-col md:justify-center gap-2">
+                    <p>Category</p>
+                    <div className="flex flex-col gap-2">
+                      <div className="flex justify-start gap-2">
+                        <SearchCheckbox
+                          name="Reside"
+                          checked={catergoryState.reside}
+                          handleAction={() =>
+                            handleCatergoryCheckboxChange("reside")
+                          }
+                        />
+
+                        <SearchCheckbox
+                          name="Business"
+                          checked={catergoryState.business}
+                          handleAction={() =>
+                            handleCatergoryCheckboxChange("business")
+                          }
+                        />
+                      </div>
+                      <div className="flex justify-start gap-2">
+                        <SearchCheckbox
+                          name="Luxury"
+                          checked={catergoryState.luxury}
+                          handleAction={() =>
+                            handleCatergoryCheckboxChange("luxury")
+                          }
+                        />
+
+                        <SearchCheckbox
+                          name="Holiday"
+                          checked={catergoryState.holiday}
+                          handleAction={() =>
+                            handleCatergoryCheckboxChange("holiday")
+                          }
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  {/* PLACE */}
+                  <div className="flex flex-row gap-2">
+                    <p>City</p>
+                    <select className={`${inputStyles}`}>
+                      <option value="All above">All above</option>
+                      <option value="New York">New York</option>
+                      <option value="Miami">Miami</option>
+                    </select>
+                  </div>
+                  <div className="flex flex-row gap-2">
+                    <p>Zone</p>
+                    <input type="text" className={`${inputStyles}`} />
+                  </div>
+
+                  <div className="flex flex-col gap-10">
+                    <div className="flex flex-col gap-2">
+                      <label htmlFor="">Price</label>
+                      <input
+                        type="range"
+                        min="100000"
+                        max="1000000"
+                        className="slider w-full mb-2 min-h-max"
+                        onChange={(e) => {
+                          handlePriceChange(e.target.value);
+                        }}
+                      />
+                      <p>{priceState} €</p>
+                    </div>
+
+                    <div className="flex flex-col gap-2">
+                      <label htmlFor="">Squaremeters</label>
+                      <input type="text" className={`${inputStyles}`} />
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-row gap-2">
-                  <p>City</p>
-                  <select className={`${inputStyles}`}>
-                    <option value="All above">All above</option>
-                    <option value="New York">New York</option>
-                    <option value="Miami">Miami</option>
-                  </select>
-                </div>
-                <div className="flex flex-row gap-2">
-                  <p>Zone</p>
-                  <input type="text" className={`${inputStyles}`} />
-                </div>
-
-                <div className="">
-                  <label htmlFor="">Price</label>
-                  <input
-                    type="range"
-                    min="100000"
-                    max="1000000"
-                    className="slider w-full mb-2 min-h-max"
-                    onChange={(e) => {
-                      handlePriceChange(e.target.value);
-                    }}
-                  />
-                  <p>{priceState} €</p>
-                  <label htmlFor="">Squaremeters</label>
-                  <input type="text" className={`${inputStyles}`} />
-                </div>
-              </div>
-              <button
-                className="-mt-5 rounded-lg border border-black px-8 py-3 transition 
+                <button
+                  className="-mt-5 rounded-lg border border-black px-8 py-3 transition 
               duration-500 hover:text-white hover:scale-90 hover:bg-black">
-                Search
-              </button>
-            </form>
+                  Search
+                </button>
+              </form>
+            </div>
+            <div className="h-full"></div>
           </div>
         </div>
       </div>
