@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   const pathname = usePathname();
   console.log("Pathname: ", pathname);
-  const enableFooter = pathname === "/listings";
+  const enableFooter = pathname !== "/listings";
   console.log("DisableFooter: ", enableFooter);
 
   return (
@@ -23,7 +23,7 @@ export default function RootLayout({
       <body className={` ${inter.className} min-h-screen`}>
         <Navbar />
         <StrictMode>{children}</StrictMode>
-        {!enableFooter ? <Footer /> : null}
+        {enableFooter ? <Footer /> : null}
       </body>
       <script src="https://kit.fontawesome.com/44b694a7ec.js" async></script>
     </html>
