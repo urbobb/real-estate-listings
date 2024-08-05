@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import SearchListings from "../components/SearchListings";
 import SearchCheckbox from "../components/SearchCheckbox";
+import ListingsCard from "../components/ListingsCard";
+import { houses } from "@/app/shared/HousesList";
 
 type TypeState = {
   buy: boolean;
@@ -83,15 +85,16 @@ export default function Listings() {
   }
 
   return (
-    <div className="h-screen mx-auto w-full pt-24">
-      <div className="md:w-full h-full w-9/12 mx-auto">
-        <div className="border-2 md:fixed w-full md:left-0 md:top-0 pt-28 sm:w-[300px] h-full mx-auto md:bg-[#FEFCFF]">
-          <div className="md:w-5/6 mx-auto">
+    <div className="h-full mx-auto w-full pt-24">
+      <div className="flex flex-row md:w-full h-full w-9/12 mx-auto">
+        <div className="flex basis-1/4 sm:w-[300px] h-full mx-auto ">
+          {/* SEARCHBAR */}
+          <div className="md:fixed md:left-0 md:top-0 ml-5 pt-28 basis-1/4 mx-auto md:bg-[#FEFCFF]">
             <div className="mb-5">
               <h1 className="text-[1.2rem] font-semibold">Search</h1>
             </div>
-            {/* SEARCH */}
-            <div className="sticky">
+
+            <div className="">
               <form
                 action=""
                 onSubmit={handleSubmit}
@@ -195,6 +198,26 @@ export default function Listings() {
               </form>
             </div>
             <div className="h-full"></div>
+          </div>
+        </div>
+
+        {/* Houses */}
+        <div className="flex pt-5 pl-10 ">
+          <div className="flex flex-row flex-wrap gap-5">
+            {houses.map((house, index) => (
+              <div
+                className={`flex-[0_0_calc(20%_-_1rem)] box-border`}
+                key={index}>
+                <ListingsCard
+                  listingsImage={house.listingsImage}
+                  location={house.location}
+                  area={house.area}
+                  energyClass={house.energyClass}
+                  price={house.price}
+                  id={house.id}
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>
