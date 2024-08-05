@@ -30,7 +30,7 @@ const ListingsCard = ({
           />
         </div>
         <div className="min-h-fit mt-5 ml-2 w-full">
-          <div className="h-60 flex gap-5">
+          <div className="h-48 flex gap-5">
             <div className="flex flex-col basis-2/3 gap-5 ">
               <p>
                 <span className="font-bold text-[14px]">Location:</span>
