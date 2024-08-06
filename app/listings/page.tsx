@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import SearchListings from "../components/SearchListings";
 import SearchCheckbox from "../components/SearchCheckbox";
+import ListingsCard from "../components/ListingsCard";
+import { houses } from "@/app/shared/HousesList";
 
 type TypeState = {
   buy: boolean;
@@ -83,19 +85,24 @@ export default function Listings() {
   }
 
   return (
-    <div className="h-screen mx-auto w-full pt-24">
-      <div className="md:w-full h-full w-9/12 mx-auto">
-        <div className="border-2 md:fixed w-full md:left-0 md:top-0 pt-28 sm:w-[300px] h-full mx-auto md:bg-[#FEFCFF]">
-          <div className="md:w-5/6 mx-auto">
-            <div className="mb-5">
-              <h1 className="text-[1.2rem] font-semibold">Search</h1>
+    <div className="relative min-h-screen w-screen pt-20">
+      <div className="flex md:flex-row flex-col md:w-screen min-h-screen ">
+        <div className="flex basis-1/4 border-2 min-h-screen mx-auto bg-[#FEFCFF]">
+          {/* SEARCHBAR */}
+          <div
+            className="md:fixed md:basis-1/4 md:left-0 md:top-0 md:bottom-0 
+          mx-auto p-5 pr-10 md:pt-28">
+            <div className="flex md:justify-start justify-center mb-5 sm:mx-5">
+              <h1 className="md:text-[1.3rem] text-[1.5rem] md:font-extrabold font-semibold tracking-[10px]">
+                Search
+              </h1>
             </div>
-            {/* SEARCH */}
-            <div className="sticky">
+
+            <div className="min-w-max">
               <form
                 action=""
                 onSubmit={handleSubmit}
-                className="flex flex-col gap-5">
+                className="flex flex-col gap-5 mx-5 w-[250px]">
                 <div className="flex md:gap-10 flex-col mb-5">
                   {/* TYPE */}
                   <div className="flex flex-col items-start gap-2">
@@ -195,6 +202,26 @@ export default function Listings() {
               </form>
             </div>
             <div className="h-full"></div>
+          </div>
+        </div>
+
+        {/* Houses */}
+        <div className="w-full mx-auto flex md:pt-5 pt-20 ">
+          <div className="flex justify-center items-center flex-row flex-wrap gap-y-5 gap-x-28">
+            {houses.map((house, index) => (
+              <div
+                className={`flex-[0_0_calc(20%_-_1rem)] box-border`}
+                key={index}>
+                <ListingsCard
+                  listingsImage={house.listingsImage}
+                  location={house.location}
+                  area={house.area}
+                  energyClass={house.energyClass}
+                  price={house.price}
+                  id={house.id}
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>

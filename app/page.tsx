@@ -258,7 +258,7 @@ export default function Home() {
           {/* LIST */}
           <div
             ref={scrollContainerRef}
-            className="houseList w-full md:min-h-max mx-auto overflow-x-auto overflow-y-hidden 
+            className="houseList mb-10 w-full md:min-h-max mx-auto overflow-x-auto overflow-y-hidden 
                       scroll-smooth ">
             <div className=" md:h-5/6 sm:gap-[2%] gap-10 flex min-w-max mx-auto">
               {houses.map((house, index) => (

@@ -24,13 +24,13 @@ const ListingsCard = ({
       <a href={`/listings/${id}`} target="_blank" className="w-full">
         <div className="md:w-full h-[200px]  overflow-hidden ">
           <Image
-            className="md:h-full md:w-full rounded hover:scale-110 hover:opacity-70 duration-500 ease-out delay-100 hover:cursor-pointer "
+            className="md:h-full md:w-full rounded hover:scale-105 duration-500 ease-out delay-100 hover:cursor-pointer "
             src={listingsImage}
             alt={listingsImage.toString()}
           />
         </div>
         <div className="min-h-fit mt-5 ml-2 w-full">
-          <div className="h-60 flex gap-5">
+          <div className="h-48 flex gap-5">
             <div className="flex flex-col basis-2/3 gap-5 ">
               <p>
                 <span className="font-bold text-[14px]">Location:</span>
