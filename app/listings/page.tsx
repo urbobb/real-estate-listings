@@ -85,9 +85,9 @@ export default function Listings() {
   }
 
   return (
-    <div className="relative h-screen w-screen pt-20">
-      <div className="flex md:flex-row flex-col md:w-screen h-screen ">
-        <div className="flex basis-1/4 border-2 h-screen mx-auto bg-[#FEFCFF]">
+    <div className="relative min-h-screen w-screen pt-20">
+      <div className="flex md:flex-row flex-col md:w-screen min-h-screen ">
+        <div className="flex basis-1/4 border-2 min-h-screen mx-auto bg-[#FEFCFF]">
           {/* SEARCHBAR */}
           <div
             className="md:fixed md:basis-1/4 md:left-0 md:top-0 md:bottom-0 

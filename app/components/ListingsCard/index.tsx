@@ -24,7 +24,7 @@ const ListingsCard = ({
       <a href={`/listings/${id}`} target="_blank" className="w-full">
         <div className="md:w-full h-[200px]  overflow-hidden ">
           <Image
-            className="md:h-full md:w-full rounded hover:scale-110 hover:opacity-70 duration-500 ease-out delay-100 hover:cursor-pointer "
+            className="md:h-full md:w-full rounded hover:scale-105 duration-500 ease-out delay-100 hover:cursor-pointer "
             src={listingsImage}
             alt={listingsImage.toString()}
           />
