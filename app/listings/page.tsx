@@ -85,22 +85,24 @@ export default function Listings() {
   }
 
   return (
-    <div className="h-screen mx-auto w-full pt-24">
-      <div className="flex md:flex-row flex-col md:w-full h-screen mx-auto">
-        <div className="flex md:basis-1/3   h-screen mx-auto bg-[#FEFCFF]">
+    <div className="h-screen w-screen pt-20">
+      <div className="flex md:flex-row flex-col md:w-screen h-screen ">
+        <div className="flex basis-1/4 border-2 h-screen mx-auto bg-[#FEFCFF]">
           {/* SEARCHBAR */}
-          <div className="md:fixed md:basis-1/4 md:left-0 md:top-0 md:bottom-0 mx-auto p-5 pr-10 md:pt-28">
-            <div className="flex justify-center  mb-5 sm:mx-5">
-              <h1 className="md:text-[1.2rem] text-[1.5rem] font-semibold tracking-[10px]">
+          <div
+            className="md:fixed md:basis-1/4 md:left-0 md:top-0 md:bottom-0 
+          mx-auto p-5 pr-10 md:pt-28">
+            <div className="flex md:justify-start justify-center mb-5 sm:mx-5">
+              <h1 className="md:text-[1.3rem] text-[1.5rem] md:font-extrabold font-semibold tracking-[10px]">
                 Search
               </h1>
             </div>
 
-            <div className="">
+            <div className="min-w-max">
               <form
                 action=""
                 onSubmit={handleSubmit}
-                className="flex flex-col gap-5 mx-5">
+                className="flex flex-col gap-5 mx-5 w-[250px]">
                 <div className="flex md:gap-10 flex-col mb-5">
                   {/* TYPE */}
                   <div className="flex flex-col items-start gap-2">
@@ -204,8 +206,8 @@ export default function Listings() {
         </div>
 
         {/* Houses */}
-        <div className="flex md:pt-5 pt-20 pl-10 ">
-          <div className="flex flex-row flex-wrap gap-5">
+        <div className="w-full mx-auto flex md:pt-5 pt-20 ">
+          <div className="flex justify-center items-center flex-row flex-wrap gap-y-5 gap-x-28">
             {houses.map((house, index) => (
               <div
                 className={`flex-[0_0_calc(20%_-_1rem)] box-border`}
