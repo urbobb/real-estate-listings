@@ -39,7 +39,7 @@ const Navbar = (props: Props) => {
 
   function mobileMenu() {
     document.querySelector(".hamburger")?.classList.toggle("active");
-    document.querySelector(".mobileMenu")?.classList.toggle("active");
+    //document.querySelector(".mobileMenu")?.classList.toggle("active");
   }
 
   return (

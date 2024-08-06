@@ -17,18 +17,6 @@ body {
   transition: top 0.5s ease-in-out;
 }
 
-.mobileMenu {
-  position: fixed;
-  right: -100%;
-  bottom: 0;
-  z-index: 30;
-  height: 100%;
-  width: 100%;
-  background-color: #ffffff;
-  box-shadow: 0px 4px 2px -2px gray;
-  transition: right 0.5s ease-out; /* Add transition for smooth sliding */
-}
-
 .mobileMenu.active {
   right: 0; /* Bring the menu into view */
 }
