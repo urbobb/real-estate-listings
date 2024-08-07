@@ -161,7 +161,7 @@ export default function Home() {
         className="mx-auto h-full md:w-full md:py-24 py-16 border-b">
         <div className="md:w-11/12 w-5/6 mx-auto">
           <div className="flex flex-col gap-10 mb-28">
-            <div className="flex justify-center">
+            <div className="flex md:justify-normal justify-center">
               <p className="text-[1.3rem] font-semibold">Discover</p>
             </div>
             <div className="md:w-1/2 w-full">
