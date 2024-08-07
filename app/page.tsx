@@ -265,9 +265,7 @@ export default function Home() {
                       scroll-smooth ">
             <div className=" md:h-5/6 sm:gap-[2%] gap-10 flex min-w-max mx-auto">
               {houses.map((house, index) => (
-                <div
-                  className={`flex-[0_0_calc(20%_-_1rem)] box-border`}
-                  key={index}>
+                <div className={`flex box-border`} key={index}>
                   <ListingsCard
                     listingsImage={house.listingsImage}
                     location={house.location}
