@@ -263,28 +263,34 @@ export default function Home() {
             ref={scrollContainerRef}
             className="houseList mb-10 w-full md:min-h-max mx-auto overflow-x-auto overflow-y-hidden 
                       scroll-smooth ">
-            <div className=" md:h-5/6 sm:gap-[2%] gap-10 flex min-w-max mx-auto">
-              {houses.map((house, index) => (
-                <div className={`flex box-border`} key={index}>
-                  <ListingsCard
-                    listingsImage={house.listingsImage}
-                    location={house.location}
-                    area={house.area}
-                    energyClass={house.energyClass}
-                    price={house.price}
-                    id={house.id}
-                  />
-                </div>
-              ))}
-
-              <div className="item8 flex justify-center items-center md:flex-row flex-col md:gap-5 gap-4 rounded-2xl border-2 border-solid border-stone-400">
-                <div className="w-[19rem] sm:w-[22rem] md:w-[24rem] flex items-center justify-center">
-                  <a className="" href="/listings">
+            <div className=" md:h-5/6 sm:gap-[2%] gap-10 flex md:flex-row flex-col min-w-max mx-auto">
+              {houses.slice(0, 3).map(
+                (
+                  house,
+                  index // render only first three houses
+                ) => (
+                  <div className={`flex box-border`} key={index}>
+                    <ListingsCard
+                      listingsImage={house.listingsImage}
+                      location={house.location}
+                      area={house.area}
+                      energyClass={house.energyClass}
+                      price={house.price}
+                      id={house.id}
+                    />
+                  </div>
+                )
+              )}
+              <a className="" href="/listings">
+                <div
+                  className="item8 md:h-[calc(100%-20px)] h-[150px] flex justify-center items-center md:flex-row flex-col 
+              md:gap-5 gap-4 rounded-2xl border-2 border-solid border-stone-400">
+                  <div className="w-[19rem] sm:w-[22rem] md:w-[24rem] flex items-center justify-center">
                     Click for more
-                  </a>
-                  <i className="animate-slide fa-solid fa-arrow-right fa-2xl bg-black ml-2"></i>
+                    <i className="animate-slide fa-solid fa-arrow-right fa-2xl bg-black ml-2"></i>
+                  </div>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
         </div>
