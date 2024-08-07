@@ -75,7 +75,7 @@ export default function Home() {
       {/* HOME */}
       <section
         id="home"
-        className="md:h-full w-full mx-auto md:py-10 items-center justify-center">
+        className="md:h-full w-full mx-auto md:py-10 pt-5 pb-10 items-center justify-center border-b">
         {/* MAIN HEADER AND ANIMATION */}
         <div className="md:flex mx-auto mt-5 md:w-11/12 w-9/12 md:h-full ">
           {/* INTRODUCTIONS */}
@@ -156,11 +156,13 @@ export default function Home() {
       </section>
 
       {/* Services */}
-      <section id="services" className="mx-auto h-full md:w-full w-5/6 py-24">
-        <div className="md:w-11/12 mx-auto">
+      <section
+        id="services"
+        className="mx-auto h-full md:w-full md:py-24 py-16 border-b">
+        <div className="md:w-11/12 w-5/6 mx-auto">
           <div className="flex flex-col gap-10 mb-28">
-            <div>
-              <p>Discover</p>
+            <div className="flex justify-center">
+              <p className="text-[1.3rem] font-semibold">Discover</p>
             </div>
             <div className="md:w-1/2 w-full">
               <h1 className="font-bold md:text-[2.2rem] text-[1.3rem] md:text-left text-center">
@@ -178,7 +180,7 @@ export default function Home() {
           </div>
           {/** */}
           <div className="w-full flex md:flex-row flex-col gap-20">
-            <div className="basis-1/3 flex flex-col gap-5 w-full ">
+            <div className="basis-1/3 flex flex-col gap-5 w-full border p-4 border-black">
               <div className="w-[50px]">
                 <Image src={IconAboutUs} alt="Icon" />
               </div>
@@ -196,7 +198,7 @@ export default function Home() {
               </div>
             </div>
             {/* */}
-            <div className="basis-1/3 flex flex-col gap-5 w-full ">
+            <div className="basis-1/3 flex flex-col gap-5 w-full border p-4 border-black">
               <div className="w-[50px]">
                 <Image src={IconAboutUs} alt="Icon" />
               </div>
@@ -214,7 +216,7 @@ export default function Home() {
               </div>
             </div>
             {/* */}
-            <div className="basis-1/3 flex flex-col gap-5 w-full ">
+            <div className="basis-1/3 flex flex-col gap-5 w-full border p-4 border-black">
               <div className="w-[50px]">
                 <Image src={IconAboutUs} alt="Icon" />
               </div>
@@ -235,11 +237,12 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Listings */}
       <section
         id="listings"
-        className="mx-auto min-h-max md:w-full w-5/6 py-24">
+        className="mx-auto min-h-max md:w-full md:py-24 py-16 border-b">
         {/* LISTINGS */}
-        <div className="md:w-11/12 mx-auto">
+        <div className="md:w-11/12 w-5/6 mx-auto">
           {/* HEADING */}
           <div className="md:w-full mb-10">
             <h1 className="text-2xl font-bold">Listings</h1>

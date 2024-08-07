@@ -46,7 +46,7 @@ const Navbar = (props: Props) => {
     <nav>
       <div
         id="navbar"
-        className={`${flexBetween} navbar border-b-2 fixed top-0 z-40 py-6 w-full bg-[#ffffff] text-slate-500`}>
+        className={`${flexBetween} navbar border-b-2 fixed top-0 z-40 h-[90px] py-6 w-full bg-[#ffffff] text-slate-500`}>
         {/* Parent container of navbar links */}
         <div className={`${flexBetween} mx-auto w-5/6`}>
           {/* Navbar links */}
