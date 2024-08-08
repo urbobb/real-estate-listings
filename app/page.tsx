@@ -75,7 +75,7 @@ export default function Home() {
       {/* HOME */}
       <section
         id="home"
-        className="md:h-full w-full mx-auto md:py-10 items-center justify-center">
+        className="md:h-full w-full mx-auto md:py-10 pt-5 pb-10 items-center justify-center border-b">
         {/* MAIN HEADER AND ANIMATION */}
         <div className="md:flex mx-auto mt-5 md:w-11/12 w-9/12 md:h-full ">
           {/* INTRODUCTIONS */}
@@ -156,11 +156,13 @@ export default function Home() {
       </section>
 
       {/* Services */}
-      <section id="services" className="mx-auto h-full md:w-full w-5/6 py-24">
-        <div className="md:w-11/12 mx-auto">
+      <section
+        id="services"
+        className="mx-auto h-full md:w-full md:py-24 py-16 border-b">
+        <div className="md:w-11/12 w-5/6 mx-auto">
           <div className="flex flex-col gap-10 mb-28">
-            <div>
-              <p>Discover</p>
+            <div className="flex md:justify-normal justify-center">
+              <p className="text-[1.3rem] font-semibold">Discover</p>
             </div>
             <div className="md:w-1/2 w-full">
               <h1 className="font-bold md:text-[2.2rem] text-[1.3rem] md:text-left text-center">
@@ -178,7 +180,7 @@ export default function Home() {
           </div>
           {/** */}
           <div className="w-full flex md:flex-row flex-col gap-20">
-            <div className="basis-1/3 flex flex-col gap-5 w-full ">
+            <div className="basis-1/3 flex flex-col gap-5 w-full border p-4 border-black">
               <div className="w-[50px]">
                 <Image src={IconAboutUs} alt="Icon" />
               </div>
@@ -196,7 +198,7 @@ export default function Home() {
               </div>
             </div>
             {/* */}
-            <div className="basis-1/3 flex flex-col gap-5 w-full ">
+            <div className="basis-1/3 flex flex-col gap-5 w-full border p-4 border-black">
               <div className="w-[50px]">
                 <Image src={IconAboutUs} alt="Icon" />
               </div>
@@ -214,7 +216,7 @@ export default function Home() {
               </div>
             </div>
             {/* */}
-            <div className="basis-1/3 flex flex-col gap-5 w-full ">
+            <div className="basis-1/3 flex flex-col gap-5 w-full border p-4 border-black">
               <div className="w-[50px]">
                 <Image src={IconAboutUs} alt="Icon" />
               </div>
@@ -235,11 +237,12 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Listings */}
       <section
         id="listings"
-        className="mx-auto min-h-max md:w-full w-5/6 py-24">
+        className="mx-auto min-h-max md:w-full md:py-24 py-16 border-b">
         {/* LISTINGS */}
-        <div className="md:w-11/12 mx-auto">
+        <div className="md:w-11/12 w-5/6 mx-auto">
           {/* HEADING */}
           <div className="md:w-full mb-10">
             <h1 className="text-2xl font-bold">Listings</h1>
@@ -260,30 +263,34 @@ export default function Home() {
             ref={scrollContainerRef}
             className="houseList mb-10 w-full md:min-h-max mx-auto overflow-x-auto overflow-y-hidden 
                       scroll-smooth ">
-            <div className=" md:h-5/6 sm:gap-[2%] gap-10 flex min-w-max mx-auto">
-              {houses.map((house, index) => (
+            <div className=" md:h-5/6 sm:gap-[2%] gap-10 flex md:flex-row flex-col min-w-max mx-auto">
+              {houses.slice(0, 3).map(
+                (
+                  house,
+                  index // render only first three houses
+                ) => (
+                  <div className={`flex box-border`} key={index}>
+                    <ListingsCard
+                      listingsImage={house.listingsImage}
+                      location={house.location}
+                      area={house.area}
+                      energyClass={house.energyClass}
+                      price={house.price}
+                      id={house.id}
+                    />
+                  </div>
+                )
+              )}
+              <a className="" href="/listings">
                 <div
-                  className={`flex-[0_0_calc(20%_-_1rem)] box-border`}
-                  key={index}>
-                  <ListingsCard
-                    listingsImage={house.listingsImage}
-                    location={house.location}
-                    area={house.area}
-                    energyClass={house.energyClass}
-                    price={house.price}
-                    id={house.id}
-                  />
-                </div>
-              ))}
-
-              <div className="item8 flex justify-center items-center md:flex-row flex-col md:gap-5 gap-4 rounded-2xl border-2 border-solid border-stone-400">
-                <div className="w-[19rem] sm:w-[22rem] md:w-[24rem] flex items-center justify-center">
-                  <a className="" href="/listings">
+                  className="item8 md:h-[calc(100%-20px)] h-[150px] flex justify-center items-center md:flex-row flex-col 
+              md:gap-5 gap-4 rounded-2xl border border-solid border-stone-400">
+                  <div className="w-[19rem] sm:w-[22rem] md:w-[20rem] flex items-center justify-center">
                     Click for more
-                  </a>
-                  <i className="animate-slide fa-solid fa-arrow-right fa-2xl bg-black ml-2"></i>
+                    <i className="animate-slide fa-solid fa-arrow-right fa-2xl bg-black ml-2"></i>
+                  </div>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
         </div>

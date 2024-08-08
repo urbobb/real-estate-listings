@@ -4,6 +4,7 @@ import SearchListings from "../components/SearchListings";
 import SearchCheckbox from "../components/SearchCheckbox";
 import ListingsCard from "../components/ListingsCard";
 import { houses } from "@/app/shared/HousesList";
+import { DevBundlerService } from "next/dist/server/lib/dev-bundler-service";
 
 type TypeState = {
   buy: boolean;
@@ -83,27 +84,28 @@ export default function Listings() {
   function handlePriceChange(e: string) {
     setPriceState(parseInt(e));
   }
+  DevBundlerService;
 
   return (
-    <div className="relative min-h-screen w-screen pt-20">
-      <div className="flex md:flex-row flex-col md:w-screen min-h-screen ">
-        <div className="flex basis-1/4 border-2 min-h-screen mx-auto bg-[#FEFCFF]">
+    <div className="relative md:min-h-screen md:w-screen w-full mx-auto pt-20">
+      <div className="flex md:flex-row flex-col md:w-screen w-full md:min-h-screen mx-auto ">
+        <div className="flex md:basis-1/4 w-full md:min-h-screen mx-auto bg-[#FEFCFF]">
           {/* SEARCHBAR */}
           <div
-            className="md:fixed md:basis-1/4 md:left-0 md:top-0 md:bottom-0 
-          mx-auto p-5 pr-10 md:pt-28">
-            <div className="flex md:justify-start justify-center mb-5 sm:mx-5">
+            className="md:fixed basis-1/4 w-full md:left-0 md:top-0 md:bottom-0 mx-auto p-5 
+            pr-10 md:pt-28">
+            <div className="flex md:justify-start justify-center md:mb-5 mb-2 sm:mx-5 md:mt-0 mt-1">
               <h1 className="md:text-[1.3rem] text-[1.5rem] md:font-extrabold font-semibold tracking-[10px]">
                 Search
               </h1>
             </div>
 
-            <div className="min-w-max">
+            <div className="md:min-w-max w-full">
               <form
                 action=""
                 onSubmit={handleSubmit}
                 className="flex flex-col gap-5 mx-5 w-[250px]">
-                <div className="flex md:gap-10 flex-col mb-5">
+                <div className="flex md:gap-10 gap-8 flex-col mb-5">
                   {/* TYPE */}
                   <div className="flex flex-col items-start gap-2">
                     <p>Type</p>
@@ -201,7 +203,6 @@ export default function Listings() {
                 </button>
               </form>
             </div>
-            <div className="h-full"></div>
           </div>
         </div>
 

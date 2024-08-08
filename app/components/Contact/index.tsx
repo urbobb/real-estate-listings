@@ -44,7 +44,9 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="w-full pt-24 pb-14 bg-gray-20 ">
+    <section
+      id="contact"
+      className="flex justify-center items-center w-full h-[calc(100vh-180px)] md:pt-24 pt-16 pb-14 bg-gray-20 ">
       <div className="mx-auto w-9/12 md:w-11/12 md:h-full">
         {/* HEADER */}
         <div className="md:w-3/5 text-white-50 mb-12">
