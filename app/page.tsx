@@ -284,8 +284,8 @@ export default function Home() {
               <a className="" href="/listings">
                 <div
                   className="item8 md:h-[calc(100%-20px)] h-[150px] flex justify-center items-center md:flex-row flex-col 
-              md:gap-5 gap-4 rounded-2xl border-2 border-solid border-stone-400">
-                  <div className="w-[19rem] sm:w-[22rem] md:w-[24rem] flex items-center justify-center">
+              md:gap-5 gap-4 rounded-2xl border border-solid border-stone-400">
+                  <div className="w-[19rem] sm:w-[22rem] md:w-[20rem] flex items-center justify-center">
                     Click for more
                     <i className="animate-slide fa-solid fa-arrow-right fa-2xl bg-black ml-2"></i>
                   </div>
