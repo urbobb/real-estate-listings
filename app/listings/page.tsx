@@ -91,11 +91,11 @@ export default function Listings() {
       <div className="flex md:flex-row flex-col md:w-screen w-full md:min-h-screen  ">
         {/* SEARCHBAR */}
         <div
-          className="flex md:min-h-screen 
+          className="flex md:min-h-screen justify-center items-center
           w-full md:w-[400px] bg-[#fcf9fd]">
           <div
-            className="relative md:fixed flex flex-col justify-center items-center md:top-0 min-h-max 
-            md:w-auto w-11/12 mx-auto md:bottom-0  md:pt-28">
+            className="relative md:fixed md:top-0 flex flex-col justify-center items-center min-h-max 
+            md:w-auto w-11/12 mx-auto md:pt-28">
             {/* TITLE */}
             <div className="flex md:justify-start justify-center md:mb-5 mb-2 sm:mx-5 md:mt-0 mt-5">
               <h1 className="md:text-[1.3rem] text-[1.5rem] md:font-extrabold font-semibold tracking-[10px]">
