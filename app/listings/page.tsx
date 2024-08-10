@@ -5,6 +5,7 @@ import SearchCheckbox from "../components/SearchCheckbox";
 import ListingsCard from "../components/ListingsCard";
 import { houses } from "@/app/shared/HousesList";
 import { DevBundlerService } from "next/dist/server/lib/dev-bundler-service";
+import { getListing } from "@/lib/listingActions";
 
 type TypeState = {
   buy: boolean;
@@ -19,6 +20,7 @@ type CatergoryState = {
 };
 
 export default function Listings() {
+  const [listings, setListings] = useState({});
   const [typeState, setTypeState] = useState<TypeState>({
     buy: false,
     rent: false,
@@ -30,6 +32,13 @@ export default function Listings() {
     holiday: false,
   });
   const [priceState, setPriceState] = useState(0);
+
+  //Get the listings
+  async function handleAction() {
+    return await getListing();
+  }
+
+  handleAction();
 
   const inputStyles = `w-full mb-2 min-h-max outline-0 text-[1.1em] 
   border-b-2 border-stone-400 focus:border-stone-200 transition duration-300

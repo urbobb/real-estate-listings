@@ -1,0 +1,47 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Listing {
+  id           Int          @id @default(autoincrement())
+  title        String
+  description  String
+  price        Decimal?      @db.Money
+  location     String
+  zipCode      Int
+  propertyType String
+  bedrooms     Int
+  bathrooms    Int
+  area         Int
+  energyclass  String?
+  listingType  String
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  images       Image[]
+}
+
+model Image {
+  id        Int     @id @default(autoincrement())
+  url       String
+  listingId Int
+  listing   Listing @relation(fields: [listingId], references: [id])
+}
+
+enum PropertyType {
+  HOUSE
+  APARTMENT
+  CONDO
+  LAND
+}
+
+enum ListingType {
+  FOR_SALE
+  FOR_RENT
+  SOLD
+}
