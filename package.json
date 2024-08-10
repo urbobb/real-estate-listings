@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "run-actions": "ts-node lib/listingActions.ts"
+    "run-actions": "ts-node lib/listingActions.ts",
+    "vercel-build": "prisma generate && prisma migrate deploy && next build"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
