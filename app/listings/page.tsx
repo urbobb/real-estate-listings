@@ -93,6 +93,8 @@ export default function Listings() {
         <div
           className="flex md:min-h-screen justify-center items-center
           w-full md:w-[400px] bg-[#fcf9fd]">
+          {" "}
+          {/*bg-[#FEFCFF]*/}
           <div
             className="relative md:fixed md:top-0 flex flex-col justify-center items-center min-h-max 
             md:w-auto w-11/12 mx-auto md:pt-28">
