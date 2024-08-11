@@ -271,7 +271,6 @@ export default function Home() {
                 ) => (
                   <div className={`flex box-border`} key={index}>
                     <ListingsCard
-                      listingsImage={house.listingsImage}
                       location={house.location}
                       area={house.area}
                       energyClass={house.energyClass}
