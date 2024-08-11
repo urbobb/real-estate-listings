@@ -6,7 +6,7 @@ type Props = {
   listingsImage: StaticImageData;
   location: string;
   area: number;
-  energyClass: string;
+  bedrooms: number;
   price: number;
   id: number;
 };
@@ -15,7 +15,7 @@ const ListingsCard = ({
   listingsImage,
   location,
   area,
-  energyClass,
+  bedrooms,
   price,
   id,
 }: Props) => {
@@ -31,30 +31,38 @@ const ListingsCard = ({
         </div>
         <div className="min-h-fit mt-5 ml-2 w-full">
           <div className="h-48 flex gap-5">
-            <div className="flex flex-col basis-2/3 gap-5 ">
-              <p>
-                <span className="font-bold text-[14px]">Location:</span>
-              </p>
-              <p>
-                <span className="font-bold text-[14px]">
-                  Superfisce calpistabili:
-                </span>
-              </p>
-              <p>
-                <span className="font-bold text-[14px]">Energy class:</span>
-              </p>
-              <p>
-                <span className="font-bold text-[14px]">Price: </span>
-              </p>
+            <div className="flex flex-col w-full gap-5 ">
+              <div className="flex flex-row gap-28">
+                <p className="w-1/2">
+                  <span className="font-bold text-[14px]">Location:</span>
+                </p>
+                <p className="w-1/2">{location}</p>
+              </div>
+
+              <div className="flex flex-row gap-28">
+                <p className="w-1/2">
+                  <span className="font-bold text-[14px]">Superfisce:</span>
+                </p>
+                <p className="w-1/2">
+                  {area}m<sup>2</sup>
+                </p>
+              </div>
+
+              <div className="flex flex-row gap-28">
+                <p className="w-1/2">
+                  <span className="font-bold text-[14px]">Bedrooms:</span>
+                </p>
+                <p className="w-1/2">{bedrooms}</p>
+              </div>
+
+              <div className="flex flex-row gap-28">
+                <p className="w-1/2">
+                  <span className="font-bold text-[14px]">Price: </span>
+                </p>
+                <p className="w-1/2">{price}€</p>
+              </div>
             </div>
-            <div className="flex flex-col basis-1/4 gap-5 font-light">
-              <p>{location}</p>
-              <p>
-                {area}m<sup>2</sup>
-              </p>
-              <p>{energyClass}</p>
-              <p>{price.toFixed(3)}€</p>
-            </div>
+            {/* <div className="flex flex-col basis-1/2 gap-5 font-light"></div> */}
           </div>
         </div>
       </a>
