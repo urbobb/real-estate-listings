@@ -34,7 +34,7 @@ const HomePageList = (props: Props) => {
             listingsImage={House1}
             location={"New york"}
             area={76}
-            energyClass={"A"}
+            bedrooms={2}
             price={350}
             id={1}
           />
@@ -44,7 +44,7 @@ const HomePageList = (props: Props) => {
             listingsImage={House2}
             location={"New york"}
             area={76}
-            energyClass={"A"}
+            bedrooms={2}
             price={350}
             id={1}
           />
@@ -54,7 +54,7 @@ const HomePageList = (props: Props) => {
             listingsImage={House3}
             location={"New york"}
             area={76}
-            energyClass={"A"}
+            bedrooms={2}
             price={350}
             id={1}
           />
@@ -64,7 +64,7 @@ const HomePageList = (props: Props) => {
             listingsImage={House4}
             location={"New york"}
             area={76}
-            energyClass={"A"}
+            bedrooms={2}
             price={350}
             id={1}
           />
@@ -74,7 +74,7 @@ const HomePageList = (props: Props) => {
             listingsImage={House5}
             location={"New york"}
             area={76}
-            energyClass={"A"}
+            bedrooms={2}
             price={350}
             id={1}
           />
@@ -84,7 +84,7 @@ const HomePageList = (props: Props) => {
             listingsImage={House6}
             location={"New york"}
             area={76}
-            energyClass={"A"}
+            bedrooms={2}
             price={350}
             id={1}
           />
@@ -94,7 +94,7 @@ const HomePageList = (props: Props) => {
             listingsImage={House6}
             location={"New york"}
             area={76}
-            energyClass={"A"}
+            bedrooms={2}
             price={350}
             id={1}
           />
