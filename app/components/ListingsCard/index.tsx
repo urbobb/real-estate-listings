@@ -36,14 +36,14 @@ const ListingsCard = ({
                 <p className="w-1/2">
                   <span className="font-bold text-[14px]">Location:</span>
                 </p>
-                <p className="w-1/2">{location}</p>
+                <p className="w-1/2 mr-2">{location}</p>
               </div>
 
               <div className="flex flex-row gap-28">
                 <p className="w-1/2">
                   <span className="font-bold text-[14px]">Superfisce:</span>
                 </p>
-                <p className="w-1/2">
+                <p className="w-1/2 mr-2">
                   {area}m<sup>2</sup>
                 </p>
               </div>
@@ -52,14 +52,14 @@ const ListingsCard = ({
                 <p className="w-1/2">
                   <span className="font-bold text-[14px]">Bedrooms:</span>
                 </p>
-                <p className="w-1/2">{bedrooms}</p>
+                <p className="w-1/2 mr-2">{bedrooms}</p>
               </div>
 
               <div className="flex flex-row gap-28">
                 <p className="w-1/2">
                   <span className="font-bold text-[14px]">Price: </span>
                 </p>
-                <p className="w-1/2">{price}€</p>
+                <p className="w-1/2 mr-2">{price.toLocaleString()}€</p>
               </div>
             </div>
             {/* <div className="flex flex-col basis-1/2 gap-5 font-light"></div> */}
