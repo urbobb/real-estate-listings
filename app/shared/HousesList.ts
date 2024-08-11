@@ -12,7 +12,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 1,
   },
   {
@@ -21,7 +21,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 3000000,
     id: 2,
   },
   {
@@ -30,7 +30,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 3,
   },
   {
@@ -39,7 +39,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 4,
   },
   {
@@ -48,7 +48,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 6,
   },
   {
@@ -57,7 +57,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 7,
   },
   {
@@ -66,7 +66,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 7,
   },
   {
@@ -75,7 +75,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 7,
   },
   {
@@ -84,7 +84,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 7,
   },
   {
@@ -93,7 +93,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 7,
   },
   {
@@ -102,7 +102,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 7,
   },
   {
@@ -111,7 +111,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 7,
   },
   {
@@ -120,7 +120,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 7,
   },
   {
@@ -129,7 +129,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 7,
   },
   {
@@ -138,7 +138,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 7,
   },
   {
@@ -147,7 +147,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 7,
   },
   {
@@ -156,7 +156,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 7,
   },
   {
@@ -165,7 +165,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 7,
   },
   {
@@ -174,7 +174,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 7,
   },
   {
@@ -183,7 +183,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 7,
   },
   {
@@ -192,7 +192,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 7,
   },
   {
@@ -201,7 +201,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 7,
   },
   {
@@ -210,7 +210,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 7,
   },
   {
@@ -219,7 +219,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 7,
   },
   {
@@ -228,7 +228,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 7,
   },
   {
@@ -237,7 +237,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 7,
   },
   {
@@ -246,7 +246,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 7,
   },
   {
@@ -255,7 +255,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 7,
   },
   {
@@ -264,7 +264,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 7,
   },
   {
@@ -273,7 +273,7 @@ export const houses = [
     area: 76,
     bedrooms: 2,
     energyClass: "A",
-    price: 300.0,
+    price: 300000,
     id: 7,
   },
 ];
