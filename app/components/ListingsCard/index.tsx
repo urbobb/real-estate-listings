@@ -4,7 +4,6 @@ import { StaticImageData } from "next/image";
 import House1 from "@/app/assets/listings/House1.png";
 
 type Props = {
-  //listingsImage: StaticImageData;
   location: string;
   area: number;
   energyClass: string | null;
@@ -12,14 +11,7 @@ type Props = {
   id: number;
 };
 
-const ListingsCard = ({
-  // listingsImage,
-  location,
-  area,
-  energyClass,
-  price,
-  id,
-}: Props) => {
+const ListingsCard = ({ location, area, energyClass, price, id }: Props) => {
   return (
     <div className=" bg-[#ffffff] rounded overflow-hidden mb-5 drop-shadow w-[19rem] sm:w-[22rem] md:w-[24rem]">
       <a href={`/listings/${id}`} target="_blank" className="w-full">
