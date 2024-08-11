@@ -2,8 +2,19 @@ import React from "react";
 import SearchBarListings from "@/app/components/SearchListings";
 import ListingsCard from "../components/ListingsCard";
 import { houses } from "@/app/shared/HousesList";
+import { getListing } from "@/lib/listingActions";
 
-export default function Listings() {
+export default async function Listings() {
+  //Retrieve the listings
+  // Fetch listings from the database
+  const data = await getListing();
+
+  if (data === null) {
+    return;
+  }
+
+  //console.log("Data: ", typeof handleAction());
+
   return (
     <div className="relative md:min-h-screen md:w-screen w-full mx-auto pt-20">
       <div className="flex md:flex-row flex-col md:w-screen w-full md:min-h-screen  ">
@@ -33,15 +44,15 @@ export default function Listings() {
         {/* Houses */}
         <div className="w-full mx-auto flex  pt-20 ">
           <div className="flex justify-center items-center flex-row flex-wrap gap-y-5 gap-x-28">
-            {houses.map((house, index) => (
+            {data.map((house) => (
               <div
                 className={`flex-[0_0_calc(20%_-_1rem)] box-border`}
-                key={index}>
+                key={house.id}>
                 <ListingsCard
-                  listingsImage={house.listingsImage}
+                  // listingsImage={house.images?.[0]?.url || ""}
                   location={house.location}
                   area={house.area}
-                  energyClass={house.energyClass}
+                  energyClass={house.energyclass}
                   price={house.price}
                   id={house.id}
                 />

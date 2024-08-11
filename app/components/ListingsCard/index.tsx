@@ -1,18 +1,19 @@
 import React from "react";
 import Image from "next/image";
 import { StaticImageData } from "next/image";
+import House1 from "@/app/assets/listings/House1.png";
 
 type Props = {
-  listingsImage: StaticImageData;
+  //listingsImage: StaticImageData;
   location: string;
   area: number;
-  energyClass: string;
+  energyClass: string | null;
   price: number;
   id: number;
 };
 
 const ListingsCard = ({
-  listingsImage,
+  // listingsImage,
   location,
   area,
   energyClass,
@@ -25,8 +26,8 @@ const ListingsCard = ({
         <div className="md:w-full h-[200px]  overflow-hidden ">
           <Image
             className="md:h-full md:w-full rounded hover:scale-105 duration-500 ease-out delay-100 hover:cursor-pointer "
-            src={listingsImage}
-            alt={listingsImage.toString()}
+            src={House1}
+            alt={House1.toString()}
           />
         </div>
         <div className="min-h-fit mt-5 ml-2 w-full">

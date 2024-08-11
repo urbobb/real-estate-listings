@@ -12,7 +12,7 @@ model Listing {
   id           Int          @id @default(autoincrement())
   title        String
   description  String
-  price        Decimal?      @db.Money
+  price        Int
   location     String
   zipCode      Int
   propertyType String
