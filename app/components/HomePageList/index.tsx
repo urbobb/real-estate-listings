@@ -31,7 +31,6 @@ const HomePageList = (props: Props) => {
       <div className=" md:h-5/6 gap-[5%] flex min-w-max">
         <div className="item1">
           <ListingsCard
-            listingsImage={House1}
             location={"New york"}
             area={76}
             energyClass={"A"}
@@ -41,7 +40,6 @@ const HomePageList = (props: Props) => {
         </div>
         <div className="item2">
           <ListingsCard
-            listingsImage={House2}
             location={"New york"}
             area={76}
             energyClass={"A"}
@@ -51,7 +49,6 @@ const HomePageList = (props: Props) => {
         </div>
         <div className="item3">
           <ListingsCard
-            listingsImage={House3}
             location={"New york"}
             area={76}
             energyClass={"A"}
@@ -61,7 +58,6 @@ const HomePageList = (props: Props) => {
         </div>
         <div className="item4">
           <ListingsCard
-            listingsImage={House4}
             location={"New york"}
             area={76}
             energyClass={"A"}
@@ -71,7 +67,6 @@ const HomePageList = (props: Props) => {
         </div>
         <div className="item5">
           <ListingsCard
-            listingsImage={House5}
             location={"New york"}
             area={76}
             energyClass={"A"}
@@ -81,7 +76,6 @@ const HomePageList = (props: Props) => {
         </div>
         <div className="item6">
           <ListingsCard
-            listingsImage={House6}
             location={"New york"}
             area={76}
             energyClass={"A"}
@@ -91,7 +85,6 @@ const HomePageList = (props: Props) => {
         </div>
         <div className="item7">
           <ListingsCard
-            listingsImage={House6}
             location={"New york"}
             area={76}
             energyClass={"A"}
