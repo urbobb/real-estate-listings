@@ -49,7 +49,6 @@ export default async function Listings() {
                 className={`flex-[0_0_calc(20%_-_1rem)] box-border`}
                 key={house.id}>
                 <ListingsCard
-                  // listingsImage={house.images?.[0]?.url || ""}
                   location={house.location}
                   area={house.area}
                   energyClass={house.energyclass}
