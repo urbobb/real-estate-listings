@@ -6,12 +6,12 @@ import House1 from "@/app/assets/listings/House1.png";
 type Props = {
   location: string;
   area: number;
-  energyClass: string | null;
+  bedrooms: number;
   price: number;
   id: number;
 };
 
-const ListingsCard = ({ location, area, energyClass, price, id }: Props) => {
+const ListingsCard = ({ location, area, bedrooms, price, id }: Props) => {
   return (
     <div className=" bg-[#ffffff] rounded overflow-hidden mb-5 drop-shadow w-[19rem] sm:w-[22rem] md:w-[24rem]">
       <a href={`/listings/${id}`} target="_blank" className="w-full">
@@ -24,30 +24,38 @@ const ListingsCard = ({ location, area, energyClass, price, id }: Props) => {
         </div>
         <div className="min-h-fit mt-5 ml-2 w-full">
           <div className="h-48 flex gap-5">
-            <div className="flex flex-col basis-2/3 gap-5 ">
-              <p>
-                <span className="font-bold text-[14px]">Location:</span>
-              </p>
-              <p>
-                <span className="font-bold text-[14px]">
-                  Superfisce calpistabili:
-                </span>
-              </p>
-              <p>
-                <span className="font-bold text-[14px]">Energy class:</span>
-              </p>
-              <p>
-                <span className="font-bold text-[14px]">Price: </span>
-              </p>
+            <div className="flex flex-col w-full gap-5 ">
+              <div className="flex flex-row gap-28">
+                <p className="w-1/2">
+                  <span className="font-bold text-[14px]">Location:</span>
+                </p>
+                <p className="w-1/2 mr-2">{location}</p>
+              </div>
+
+              <div className="flex flex-row gap-28">
+                <p className="w-1/2">
+                  <span className="font-bold text-[14px]">Superfisce:</span>
+                </p>
+                <p className="w-1/2 mr-2">
+                  {area}m<sup>2</sup>
+                </p>
+              </div>
+
+              <div className="flex flex-row gap-28">
+                <p className="w-1/2">
+                  <span className="font-bold text-[14px]">Bedrooms:</span>
+                </p>
+                <p className="w-1/2 mr-2">{bedrooms}</p>
+              </div>
+
+              <div className="flex flex-row gap-28">
+                <p className="w-1/2">
+                  <span className="font-bold text-[14px]">Price: </span>
+                </p>
+                <p className="w-1/2 mr-2">{price.toLocaleString()}€</p>
+              </div>
             </div>
-            <div className="flex flex-col basis-1/4 gap-5 font-light">
-              <p>{location}</p>
-              <p>
-                {area}m<sup>2</sup>
-              </p>
-              <p>{energyClass}</p>
-              <p>{price.toFixed(3)}€</p>
-            </div>
+            {/* <div className="flex flex-col basis-1/2 gap-5 font-light"></div> */}
           </div>
         </div>
       </a>

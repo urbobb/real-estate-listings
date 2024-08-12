@@ -273,7 +273,7 @@ export default function Home() {
                     <ListingsCard
                       location={house.location}
                       area={house.area}
-                      energyClass={house.energyClass}
+                      bedrooms={house.bedrooms}
                       price={house.price}
                       id={house.id}
                     />

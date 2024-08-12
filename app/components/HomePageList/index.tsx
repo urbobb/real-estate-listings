@@ -33,7 +33,7 @@ const HomePageList = (props: Props) => {
           <ListingsCard
             location={"New york"}
             area={76}
-            energyClass={"A"}
+            bedrooms={2}
             price={350}
             id={1}
           />
@@ -42,7 +42,7 @@ const HomePageList = (props: Props) => {
           <ListingsCard
             location={"New york"}
             area={76}
-            energyClass={"A"}
+            bedrooms={2}
             price={350}
             id={1}
           />
@@ -51,43 +51,7 @@ const HomePageList = (props: Props) => {
           <ListingsCard
             location={"New york"}
             area={76}
-            energyClass={"A"}
-            price={350}
-            id={1}
-          />
-        </div>
-        <div className="item4">
-          <ListingsCard
-            location={"New york"}
-            area={76}
-            energyClass={"A"}
-            price={350}
-            id={1}
-          />
-        </div>
-        <div className="item5">
-          <ListingsCard
-            location={"New york"}
-            area={76}
-            energyClass={"A"}
-            price={350}
-            id={1}
-          />
-        </div>
-        <div className="item6">
-          <ListingsCard
-            location={"New york"}
-            area={76}
-            energyClass={"A"}
-            price={350}
-            id={1}
-          />
-        </div>
-        <div className="item7">
-          <ListingsCard
-            location={"New york"}
-            area={76}
-            energyClass={"A"}
+            bedrooms={2}
             price={350}
             id={1}
           />

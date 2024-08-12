@@ -51,7 +51,7 @@ export default async function Listings() {
                 <ListingsCard
                   location={house.location}
                   area={house.area}
-                  energyClass={house.energyclass}
+                  bedrooms={house.bedrooms}
                   price={house.price}
                   id={house.id}
                 />
