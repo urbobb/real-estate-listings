@@ -1,11 +1,50 @@
 import prisma from "@/lib/db";
+import { NextResponse } from "next/server";
 
-export const getListing = async () => {
+export const getListing = async (formData: FormData) => {
   try {
-    const getListings = await prisma.listing.findMany({});
+    let getListings;
+    if (formData) {
+      const dataToSearch = {
+        listingType: formData.get("listingType") as string,
+        propertyType: formData.get("propertyType") as string,
+        city: formData.get("city") as string,
+        price: formData.get("price") as string,
+        area: formData.get("area") as string,
+      };
+      console.log("Query:", {
+        listingType: dataToSearch.listingType,
+        propertyType: dataToSearch.propertyType,
+        city: dataToSearch.city,
+        price: dataToSearch.price,
+        area: dataToSearch.area,
+      });
 
-    //console.log("Listings: ", getListings);
-    return getListings;
+      getListings = await prisma.listing.findMany({
+        where: {
+          listingType: {
+            in: dataToSearch.listingType
+              ? [dataToSearch.listingType]
+              : undefined,
+          },
+        },
+      });
+
+      console.log("Sorted Listings: ", getListings);
+      return NextResponse.json(
+        { message: "Data fetching successfull", data: getListings },
+        { status: 200 }
+      );
+    } else {
+      //console.log("All FormData: ", formData);
+      getListings = await prisma.listing.findMany({});
+
+      //console.log("Listings: ", getListings);
+      return NextResponse.json(
+        { message: "Data fetching successfull", data: getListings },
+        { status: 200 }
+      );
+    }
   } catch (err) {
     console.log("Error during database operation: ", err);
     return [];

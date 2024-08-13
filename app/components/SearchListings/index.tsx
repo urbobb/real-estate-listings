@@ -2,32 +2,50 @@
 import React, { useState } from "react";
 import SearchCheckbox from "../SearchCheckbox";
 
+interface Listing {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  location: string;
+  zipCode: number;
+  propertyType: string;
+  bedrooms: number;
+  bathrooms: number;
+  area: number;
+  energyclass: string;
+  listingType: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 type Props = {};
 
 type TypeState = {
-  buy: boolean;
-  rent: boolean;
+  FOR_SALE: boolean;
+  FOR_RENT: boolean;
 };
 
 type CatergoryState = {
-  reside: boolean;
-  business: boolean;
-  luxury: boolean;
-  holiday: boolean;
+  HOUSE: boolean;
+  APPARTMENT: boolean;
+  CONDO: boolean;
+  LAND: boolean;
 };
 
 const SearchBarListings = ({}: Props) => {
   const [typeState, setTypeState] = useState<TypeState>({
-    buy: false,
-    rent: false,
+    FOR_SALE: false,
+    FOR_RENT: false,
   });
   const [catergoryState, setCatergoryState] = useState<CatergoryState>({
-    reside: false,
-    business: false,
-    luxury: false,
-    holiday: false,
+    HOUSE: false,
+    APPARTMENT: false,
+    CONDO: false,
+    LAND: false,
   });
   const [priceState, setPriceState] = useState(0);
+  const [dataReceivedDB, setDataReceivedDB] = useState([]);
 
   const inputStyles = `w-full mb-2 min-h-max outline-0 text-[1.1em] 
   border-b-2 border-stone-400 focus:border-stone-200 transition duration-300
@@ -40,10 +58,51 @@ const SearchBarListings = ({}: Props) => {
   //   : "";
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    const formData = new FormData(e.currentTarget);
     e.preventDefault(); // prevents reloading when the form is submitted
-    const formEntries = Object.fromEntries(formData.entries());
-    console.log("Submitted: ", formEntries);
+    const formData = new FormData(e.currentTarget); // Get form data
+    // const formEntries = Object.fromEntries(formData.entries());
+    // console.log("Submitted: ", formEntries);
+
+    try {
+      const response = await fetch("/api/listings", {
+        method: "POST",
+        body: JSON.stringify({
+          listingType: formData.get("ListingType"),
+          propertyType: formData.get("PropertyType"),
+          city: formData.get("City"),
+          price: formData.get("Price"),
+          area: formData.get("Area"),
+        }),
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Valid response:", data.data);
+        setDataReceivedDB(data.data);
+
+        // If the login is successful, refresh the page
+        //window.location.reload();
+      } else {
+        const error = await response.json();
+        console.error("Data fetching failed", error.message);
+      }
+
+      console.log("Data received for rendering: ", dataReceivedDB);
+    } catch (err) {
+      console.error("Data fetching failed Step: ", err);
+    }
+
+    setTypeState({
+      FOR_SALE: false,
+      FOR_RENT: false,
+    });
+    setCatergoryState({
+      HOUSE: false,
+      APPARTMENT: false,
+      CONDO: false,
+      LAND: false,
+    });
   };
 
   const handleTypeCheckboxChange = async (name: keyof TypeState) => {
@@ -95,14 +154,18 @@ const SearchBarListings = ({}: Props) => {
           <p>Type</p>
           <div className="w-full flex flex-row justify-around items-center ">
             <SearchCheckbox
-              name="Buy"
-              checked={typeState.buy}
-              handleAction={() => handleTypeCheckboxChange("buy")}
+              name="ListingType"
+              labelName="Sale"
+              checked={typeState.FOR_SALE}
+              value={"FOR_SALE"}
+              handleAction={() => handleTypeCheckboxChange("FOR_SALE")}
             />
             <SearchCheckbox
-              name="Rent"
-              checked={typeState.rent}
-              handleAction={() => handleTypeCheckboxChange("rent")}
+              name="ListingType"
+              labelName="Rent"
+              checked={typeState.FOR_RENT}
+              value={"FOR_RENT"}
+              handleAction={() => handleTypeCheckboxChange("FOR_RENT")}
             />
           </div>
         </div>
@@ -111,28 +174,36 @@ const SearchBarListings = ({}: Props) => {
           <div className="flex flex-col gap-2">
             <div className="w-full flex flex-row justify-around gap-2">
               <SearchCheckbox
-                name="Reside"
-                checked={catergoryState.reside}
-                handleAction={() => handleCatergoryCheckboxChange("reside")}
+                name="PropertyType"
+                labelName="House"
+                value={"HOUSE"}
+                checked={catergoryState.HOUSE}
+                handleAction={() => handleCatergoryCheckboxChange("HOUSE")}
               />
 
               <SearchCheckbox
-                name="Business"
-                checked={catergoryState.business}
-                handleAction={() => handleCatergoryCheckboxChange("business")}
+                name="PropertyType"
+                labelName="Appartment"
+                value={"APPARTMENT"}
+                checked={catergoryState.APPARTMENT}
+                handleAction={() => handleCatergoryCheckboxChange("APPARTMENT")}
               />
             </div>
             <div className="w-full flex flex-row justify-around gap-2">
               <SearchCheckbox
-                name="Luxury"
-                checked={catergoryState.luxury}
-                handleAction={() => handleCatergoryCheckboxChange("luxury")}
+                name="PropertyType"
+                labelName="Condo"
+                value={"CONDO"}
+                checked={catergoryState.CONDO}
+                handleAction={() => handleCatergoryCheckboxChange("CONDO")}
               />
 
               <SearchCheckbox
-                name="Holiday"
-                checked={catergoryState.holiday}
-                handleAction={() => handleCatergoryCheckboxChange("holiday")}
+                name="PropertyType"
+                labelName="Land"
+                value={"LAND"}
+                checked={catergoryState.LAND}
+                handleAction={() => handleCatergoryCheckboxChange("LAND")}
               />
             </div>
           </div>
@@ -159,18 +230,21 @@ const SearchBarListings = ({}: Props) => {
             <input
               name="Price"
               type="range"
-              min="100000"
+              min="10000"
               max="1000000"
+              step={10000}
               className="slider w-full mb-2 min-h-max"
               onChange={(e) => {
                 handlePriceChange(e.target.value);
               }}
             />
-            <p>{priceState} €</p>
+            <p>{priceState.toLocaleString()} €</p>
           </div>
 
           <div className="flex flex-col gap-2">
-            <label htmlFor="">Squaremeters</label>
+            <label htmlFor="">
+              Area in m<sup>2</sup>
+            </label>
             <select name="Area" className={`${inputStyles}`}>
               <option value="All above">All above</option>
               <option value="60">{`<`}60m&#178;</option>

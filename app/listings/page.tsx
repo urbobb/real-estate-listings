@@ -7,11 +7,16 @@ import { getListing } from "@/lib/listingActions";
 export default async function Listings() {
   //Retrieve the listings
   // Fetch listings from the database
-  const data = await getListing();
 
-  if (data === null) {
-    return;
-  }
+  // const receivedData = (data) => {
+  //   console.log("Received Data from Database:", data);
+  // };
+
+  // const data = await getListing();
+
+  // if (data === null) {
+  //   return;
+  // }
 
   //console.log("Data: ", typeof handleAction());
 
@@ -44,7 +49,7 @@ export default async function Listings() {
         {/* Houses */}
         <div className="w-full mx-auto flex  pt-20 ">
           <div className="flex justify-center items-center flex-row flex-wrap gap-y-5 gap-x-28">
-            {data.map((house) => (
+            {houses.map((house) => (
               <div
                 className={`flex-[0_0_calc(20%_-_1rem)] box-border`}
                 key={house.id}>

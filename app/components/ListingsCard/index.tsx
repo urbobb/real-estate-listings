@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import { StaticImageData } from "next/image";
 import House1 from "@/app/assets/listings/House1.png";
 
 type Props = {
