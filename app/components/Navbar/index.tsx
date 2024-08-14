@@ -66,7 +66,7 @@ const Navbar = (props: Props) => {
               <div className={`flex items-center justify-end w-full`}>
                 <div className={`${flexBetween} gap-8 text-sm`}>
                   <Links name="Listings" />
-                  <Links name="About" />
+                  <Links name="AboutUs" />
                   <Links name="Contact" />
                   <Links name="Profile" />
                 </div>
