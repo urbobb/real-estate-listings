@@ -10,21 +10,22 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const formData = await req.json(); // Parse JSON body
+    const formEntries = await req.json(); // Parse JSON body
 
-    const { listingType, propertyType, city, price, area } = formData;
-    console.log("Route FormData", listingType, propertyType, city, price, area);
+    const { listingType, propertyType, city, price, area } = formEntries;
+    console.log("Route FormData", formEntries);
 
-    const searchData = new FormData();
-    searchData.append("listingType", listingType);
-    searchData.append("propertyType", propertyType);
-    searchData.append("city", city);
-    searchData.append("price", price);
-    searchData.append("area", area);
+    // const searchData = new FormData();
+    // searchData.append("listingType", listingType);
+    // searchData.append("propertyType", propertyType);
+    // searchData.append("city", city);
+    // searchData.append("price", price);
+    // searchData.append("area", area);
 
     // Fetch listings based on form data
-    return await getListing(searchData);
+    const listings = await getListing(formEntries);
 
+    return listings;
     // Return the listings as a JSON response
     //return NextResponse.json(listings, { status: 200 });
   } catch (err) {
@@ -37,3 +38,15 @@ export async function POST(req: NextRequest) {
 
   return new NextResponse();
 }
+
+// export async function GET(req: NextRequest) {
+//   try {
+//     const data = await getListing();
+//     return data;
+//   } catch (err) {
+//     return NextResponse.json(
+//       { error: "Failed to fetch Data" },
+//       { status: 500 }
+//     );
+//   }
+// }

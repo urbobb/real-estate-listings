@@ -1,47 +1,50 @@
+"use server";
 import prisma from "@/lib/db";
 import { NextResponse } from "next/server";
 
-export const getListing = async (formData: FormData) => {
+export const getListing = async (searchData = {}) => {
+  console.log("Search Data:: ", searchData);
   try {
-    let getListings;
-    if (formData) {
-      const dataToSearch = {
-        listingType: formData.get("listingType") as string,
-        propertyType: formData.get("propertyType") as string,
-        city: formData.get("city") as string,
-        price: formData.get("price") as string,
-        area: formData.get("area") as string,
-      };
-      console.log("Query:", {
-        listingType: dataToSearch.listingType,
-        propertyType: dataToSearch.propertyType,
-        city: dataToSearch.city,
-        price: dataToSearch.price,
-        area: dataToSearch.area,
-      });
+    if (searchData) {
+      const { listingType, formEntries } = searchData;
+      console.log("Listing Type:: ", formEntries);
 
-      getListings = await prisma.listing.findMany({
+      // console.log("Query:", {
+      //   listingType: dataToSearch.listingType,
+      //   propertyType: dataToSearch.propertyType,
+      //   city: dataToSearch.city,
+      //   price: dataToSearch.price,
+      //   area: dataToSearch.area,
+      // });
+
+      const query = {
         where: {
-          listingType: {
-            in: dataToSearch.listingType
-              ? [dataToSearch.listingType]
-              : undefined,
+          listingType: formEntries.listingType,
+          propertyType: formEntries.propertyType,
+          price: {
+            lt: Number(formEntries.price), // or lte: for less than or equal to
           },
         },
-      });
+      };
+      const getListings = await prisma.listing.findMany(query);
 
-      console.log("Sorted Listings: ", getListings);
+      //console.log("Sorted Listings: ", getListings);
       return NextResponse.json(
-        { message: "Data fetching successfull", data: getListings },
+        {
+          message: "Data fetching successfull",
+          data: getListings,
+        },
         { status: 200 }
       );
     } else {
-      //console.log("All FormData: ", formData);
-      getListings = await prisma.listing.findMany({});
+      const getListings = await prisma.listing.findMany();
 
-      //console.log("Listings: ", getListings);
+      //console.log("Sorted Listings: ", getListings);
       return NextResponse.json(
-        { message: "Data fetching successfull", data: getListings },
+        {
+          message: "Data fetching successfull",
+          data: getListings,
+        },
         { status: 200 }
       );
     }
