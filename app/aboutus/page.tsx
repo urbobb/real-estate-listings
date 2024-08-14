@@ -1,13 +1,7 @@
-"use client";
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Model from "../components/Model";
 import trump from "@/app/assets/trump.webp";
-
-type TypeState = {
-  buy: boolean;
-  rent: boolean;
-};
 
 export default function AboutUs() {
   return (
@@ -23,7 +17,7 @@ export default function AboutUs() {
             <div className="intro">
               <p className="text-lg text-center md:text-start">
                 Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
+                industry. Lorem Ipsum has been the industry`s standard dummy
                 text ever since the 1500s, when an unknown printer took a galley
                 of type and scrambled it to make a type specimen book. It has
                 survived not only five centuries, but also the leap into
@@ -51,7 +45,7 @@ export default function AboutUs() {
         <div className="intro basis-1/2 justify-start items-center">
           <p className="h-full flex justify-center items-center">
             Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
+            industry. Lorem Ipsum has been the industry`s standard dummy text
             ever since the 1500s, when an unknown printer took a galley of type
             and scrambled it to make a type specimen book. It has survived not
             only five centuries, but also the leap into electronic typesetting,
@@ -71,7 +65,7 @@ export default function AboutUs() {
         <div className="intro basis-1/2 justify-start items-center">
           <p className="h-full flex justify-end items-center">
             Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
+            industry. Lorem Ipsum has been the industry`s standard dummy text
             ever since the 1500s, when an unknown printer took a galley of type
             and scrambled it to make a type specimen book. It has survived not
             only five centuries, but also the leap into electronic typesetting,
