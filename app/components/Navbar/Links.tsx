@@ -9,7 +9,7 @@ const Links = ({ name }: Props) => {
 
   return (
     <a
-      href={`#${lowerCasePage}`}
+      href={`/${lowerCasePage}`}
       className="border-2 hover:border-slate-50 rounded-md p-1.5 md:w-full min-w-max
           tracking-widest transition duration-500 font-extrabold hover:text-white
           hover:bg-black flex justify-center items-center">
