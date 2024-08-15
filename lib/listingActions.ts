@@ -98,7 +98,10 @@ export const getListing = async (searchData: SearchData) => {
     }
   } catch (err) {
     console.log("Error during database operation: ", err);
-    return [];
+    return NextResponse.json(
+      { message: "Error during data fetch", error: err },
+      { status: 500 }
+    );
   }
 };
 
@@ -106,6 +109,7 @@ export const getAllListing = async () => {
   try {
     console.log("All");
     const getListings = await prisma.listing.findMany();
+
     return NextResponse.json(
       {
         message: "Data fetching successfull",
@@ -115,7 +119,10 @@ export const getAllListing = async () => {
     );
   } catch (err) {
     console.log("Error during database operation: ", err);
-    return [];
+    return NextResponse.json(
+      { message: "Error during data fetch", error: err },
+      { status: 500 }
+    );
   }
 };
 

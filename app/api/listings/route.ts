@@ -13,21 +13,23 @@ export async function POST(req: NextRequest) {
     const formEntries = await req.json(); // Parse JSON body
 
     //const { listingType, propertyType, city, price, area } = formEntries;
-    console.log("Route FormData", formEntries);
+    //console.log("Route FormData", formEntries);
 
     if (formEntries === "GETALL") {
       console.log("Get it");
-      const Listings = await getAllListing();
-      return Listings;
+      const listings = await getAllListing();
+      console.log("Route FormData", listings);
+      //return listings;
+      return NextResponse.json(listings, { status: 200 });
     } else {
       // Fetch listings based on form data
       const listings = await getListing(formEntries);
-
-      return listings;
+      console.log("Route FormData", listings);
+      //return listings;
+      return NextResponse.json(listings, { status: 200 });
     }
 
     // Return the listings as a JSON response
-    //return NextResponse.json(listings, { status: 200 });
   } catch (err) {
     console.error("Failed to fetch data", err);
     return NextResponse.json(

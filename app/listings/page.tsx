@@ -79,9 +79,13 @@ export default function Listings() {
 
         if (response.ok) {
           const data = await response.json();
-          console.log("Valid response:", data.data);
-          setDataReceivedDB(data.data);
-          console.log("Iterateable: ", dataReceivedDB);
+          console.log("Valid response:", data);
+          if (data && data.data) {
+            setDataReceivedDB(data.data);
+            console.log("Iterateable: ", data.data);
+          } else {
+            console.error("No data received or data format is incorrect.");
+          }
         } else {
           const error = await response.json();
           console.error("Data fetching failed", error.message);
@@ -116,11 +120,23 @@ export default function Listings() {
       });
 
       if (response.ok) {
-        const data = await response.json();
-        console.log("Valid response:", data.data);
+        const rawData = await response.text();
+        console.log("Valid response:", rawData);
+        try {
+          const data = JSON.parse(rawData); // Attempt to parse JSON
+          console.log("Parsed response:", data); // Log parsed response
 
-        setDataReceivedDB(data.data);
-        console.log("Iterateable: ", dataReceivedDB);
+          if (data && data.data) {
+            setDataReceivedDB(data.data);
+            console.log("Iterateable: ", data.data);
+          } else {
+            console.error(
+              "Data does not contain 'data' property or is undefined."
+            );
+          }
+        } catch (err) {
+          console.error("Error parsing JSON:", err);
+        }
       } else {
         const error = await response.json();
         console.error("Data fetching failed", error.message);
