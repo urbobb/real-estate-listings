@@ -4,19 +4,20 @@ type Props = {};
 
 const Footer = (props: Props) => {
   return (
-    <footer id="footer" className="bg-[#ffffff] w-full py-8">
-      <div className="mx-auto md:w-5/6 w-9/12 flex justify-between z-40">
+    <footer id="footer" className="bg-[#ffffff] w-full py-8 mb-10 text-sm">
+      <div className="mx-auto md:w-5/6 w-9/12 flex justify-between z-40 border-t pt-5">
         <div className="">
-          <p className="md:text-lg">© Designed by Bob</p>
+          <p className="">© 2024 Home Finder. All rights reserved.</p>
         </div>
-        <div className="w-20 flex justify-between hover:cursor-pointer">
-          <a href="https://www.linkedin.com/" target="_blank">
-            <i className="fa-brands fa-linkedin md:fa-2x fa-xl"></i>
+        <div className="flex justify-between gap-8 hover:cursor-pointer">
+          <a href="/privacypolicy" target="_blank">
+            <p>Privacy Policy</p>
           </a>
-          <a
-            href="https://github.com/Bangerr/real-estate-listings"
-            target="_blank">
-            <i className="fa-brands fa-github md:fa-2x fa-xl"></i>
+          <a href="/termsofservice" target="_blank">
+            <p>Terms of Service</p>
+          </a>
+          <a href="/cookiessettings">
+            <p>Cookies Settings</p>
           </a>
         </div>
       </div>
