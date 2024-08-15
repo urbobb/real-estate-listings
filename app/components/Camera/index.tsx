@@ -19,7 +19,7 @@ export default function Camera() {
     };
     wander();
     return () => clearTimeout(timeout);
-  }, []);
+  }, [api]);
 
   // Accessing geometry by name
   const cameraMesh = scene.getObjectByName("Camera") as THREE.Mesh;
