@@ -1,34 +1,81 @@
 "use server";
 import prisma from "@/lib/db";
 import { NextResponse } from "next/server";
+import { property } from "three/examples/jsm/nodes/Nodes.js";
 
-export const getListing = async (searchData = {}) => {
-  console.log("Search Data:: ", searchData);
+interface FormEntries {
+  id?: number;
+  title?: string;
+  description?: string;
+  price: number;
+  location?: string;
+  zipCode?: number;
+  propertyType?: string;
+  bedrooms?: number;
+  bathrooms?: number;
+  area?: number;
+  energyclass?: string;
+  listingType?: string;
+}
+
+interface SearchData {
+  formEntries: FormEntries;
+}
+
+export const getListing = async (searchData: SearchData) => {
+  console.log("Search Data:: ", searchData.formEntries);
+  const { formEntries } = searchData;
+  console.log("Listing Type:: ", formEntries);
   try {
     if (searchData) {
-      const { listingType, formEntries } = searchData;
-      console.log("Listing Type:: ", formEntries);
+      // const areaCondtions: any = {};
 
-      // console.log("Query:", {
-      //   listingType: dataToSearch.listingType,
-      //   propertyType: dataToSearch.propertyType,
-      //   city: dataToSearch.city,
-      //   price: dataToSearch.price,
-      //   area: dataToSearch.area,
-      // });
+      // if (formEntries.area !== undefined) {
+      //   //Determine the area condition based on the formEntries.area value
+      //   if (formEntries.area < 60) {
+      //     areaCondtions.lt = 60;
+      //   } else if (formEntries.area < 70) {
+      //     areaCondtions.lt = 70;
+      //   } else if (formEntries.area < 80) {
+      //     areaCondtions.lt = 80;
+      //   } else if (formEntries.area < 90) {
+      //     areaCondtions.lt = 90;
+      //   } else if (formEntries.area > 90) {
+      //     areaCondtions.gt = 90;
+      //   }
+      // }
 
       const query = {
         where: {
-          listingType: formEntries.listingType,
-          propertyType: formEntries.propertyType,
-          price: {
-            lt: Number(formEntries.price), // or lte: for less than or equal to
-          },
+          ...(formEntries.price && {
+            price: { lt: Number(formEntries.price) }, // Filter based on price less than the provided value
+          }),
+          ...(formEntries.location && {
+            location: formEntries.location,
+          }),
+          ...(formEntries.propertyType && {
+            propertyType: formEntries.propertyType,
+          }),
+          ...(formEntries.area && {
+            area: {
+              gte: formEntries.area,
+            },
+          }),
+          ...(formEntries.listingType && {
+            listingType: formEntries.listingType,
+          }),
+
+          //listingType: formEntries.listingType,
+          //propertyType: formEntries.propertyType,
+          // price: {
+          //   lt: Number(formEntries.price), // Filter based on price less than the provided value
+          // },
+          //area: areaCondtions, // Apply the area condition dynamically
         },
       };
       const getListings = await prisma.listing.findMany(query);
 
-      //console.log("Sorted Listings: ", getListings);
+      console.log("Sorted Listings: ", getListings);
       return NextResponse.json(
         {
           message: "Data fetching successfull",
@@ -36,7 +83,8 @@ export const getListing = async (searchData = {}) => {
         },
         { status: 200 }
       );
-    } else {
+    } else if (formEntries.price < 100000) {
+      console.log("All");
       const getListings = await prisma.listing.findMany();
 
       //console.log("Sorted Listings: ", getListings);
@@ -48,6 +96,23 @@ export const getListing = async (searchData = {}) => {
         { status: 200 }
       );
     }
+  } catch (err) {
+    console.log("Error during database operation: ", err);
+    return [];
+  }
+};
+
+export const getAllListing = async () => {
+  try {
+    console.log("All");
+    const getListings = await prisma.listing.findMany();
+    return NextResponse.json(
+      {
+        message: "Data fetching successfull",
+        data: getListings,
+      },
+      { status: 200 }
+    );
   } catch (err) {
     console.log("Error during database operation: ", err);
     return [];
@@ -92,118 +157,118 @@ export async function createListing(
   }
 }
 
-// Create more listings
+//Create more listings
 // export async function createListing() {
 //   try {
 //     const listingsData = [
 //       {
 //         title: "Modern House",
 //         description: "A beautiful modern house.",
-//         price: 500000,
+//         price: 550000,
 //         location: "New York",
 //         zipCode: 10001,
 //         propertyType: "HOUSE",
 //         bedrooms: 3,
 //         bathrooms: 2,
-//         area: 1500,
+//         area: 150,
 //         energyclass: "A",
 //         listingType: "FOR_SALE",
 //       },
 //       {
 //         title: "Cozy Apartment",
 //         description: "A cozy apartment in the city.",
-//         price: 300000,
+//         price: 350000,
 //         location: "San Francisco",
 //         zipCode: 94105,
 //         propertyType: "APARTMENT",
 //         bedrooms: 2,
 //         bathrooms: 1,
-//         area: 800,
+//         area: 80,
 //         energyclass: "B",
 //         listingType: "FOR_RENT",
 //       },
 //       {
 //         title: "Spacious Condo",
 //         description: "A spacious condo with a great view.",
-//         price: 400000,
+//         price: 420000,
 //         location: "Chicago",
 //         zipCode: 60614,
 //         propertyType: "CONDO",
 //         bedrooms: 4,
 //         bathrooms: 3,
-//         area: 2000,
+//         area: 80,
 //         energyclass: "C",
 //         listingType: "FOR_SALE",
 //       },
 //       {
 //         title: "Beautiful Land",
 //         description: "Vacant land for development.",
-//         price: 200000,
+//         price: 210000,
 //         location: "Austin",
 //         zipCode: 73301,
 //         propertyType: "LAND",
 //         bedrooms: 0,
 //         bathrooms: 0,
-//         area: 5000,
+//         area: 58,
 //         energyclass: null,
 //         listingType: "FOR_SALE",
 //       },
 //       {
 //         title: "Luxury House",
 //         description: "A luxury house with high-end features.",
-//         price: 1500000,
+//         price: 1100000,
 //         location: "Los Angeles",
 //         zipCode: 90001,
 //         propertyType: "HOUSE",
 //         bedrooms: 5,
 //         bathrooms: 4,
-//         area: 3500,
+//         area: 79,
 //         energyclass: "A",
 //         listingType: "SOLD",
 //       },
 //       {
 //         title: "Charming Studio",
 //         description: "A charming studio apartment.",
-//         price: 250000,
+//         price: 260000,
 //         location: "Seattle",
 //         zipCode: 98101,
 //         propertyType: "APARTMENT",
 //         bedrooms: 1,
 //         bathrooms: 1,
-//         area: 600,
+//         area: 127,
 //         energyclass: "B",
 //         listingType: "FOR_RENT",
 //       },
 //       {
 //         title: "Urban Loft",
 //         description: "An urban loft with industrial design.",
-//         price: 350000,
+//         price: 380000,
 //         location: "Philadelphia",
 //         zipCode: 19103,
 //         propertyType: "CONDO",
 //         bedrooms: 2,
 //         bathrooms: 2,
-//         area: 1200,
+//         area: 120,
 //         energyclass: "C",
 //         listingType: "FOR_SALE",
 //       },
 //       {
 //         title: "Countryside Land",
 //         description: "Land in the countryside.",
-//         price: 180000,
+//         price: 120000,
 //         location: "Denver",
 //         zipCode: 80201,
 //         propertyType: "LAND",
 //         bedrooms: 0,
 //         bathrooms: 0,
-//         area: 4500,
+//         area: 140,
 //         energyclass: null,
 //         listingType: "FOR_SALE",
 //       },
 //       {
 //         title: "Penthouse Suite",
 //         description: "A luxurious penthouse suite.",
-//         price: 2000000,
+//         price: 2500000,
 //         location: "Miami",
 //         zipCode: 33101,
 //         propertyType: "CONDO",
@@ -216,13 +281,13 @@ export async function createListing(
 //       {
 //         title: "Suburban House",
 //         description: "A family house in the suburbs.",
-//         price: 600000,
+//         price: 620000,
 //         location: "Atlanta",
 //         zipCode: 30301,
 //         propertyType: "HOUSE",
 //         bedrooms: 4,
 //         bathrooms: 3,
-//         area: 2500,
+//         area: 90,
 //         energyclass: "B",
 //         listingType: "FOR_RENT",
 //       },

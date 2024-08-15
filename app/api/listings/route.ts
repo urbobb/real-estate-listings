@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getListing } from "@/lib/listingActions";
+import { getAllListing, getListing } from "@/lib/listingActions";
 
 export async function POST(req: NextRequest) {
   if (req.method !== "POST") {
@@ -12,20 +12,20 @@ export async function POST(req: NextRequest) {
   try {
     const formEntries = await req.json(); // Parse JSON body
 
-    const { listingType, propertyType, city, price, area } = formEntries;
+    //const { listingType, propertyType, city, price, area } = formEntries;
     console.log("Route FormData", formEntries);
 
-    // const searchData = new FormData();
-    // searchData.append("listingType", listingType);
-    // searchData.append("propertyType", propertyType);
-    // searchData.append("city", city);
-    // searchData.append("price", price);
-    // searchData.append("area", area);
+    if (formEntries === "GETALL") {
+      console.log("Get it");
+      const Listings = await getAllListing();
+      return Listings;
+    } else {
+      // Fetch listings based on form data
+      const listings = await getListing(formEntries);
 
-    // Fetch listings based on form data
-    const listings = await getListing(formEntries);
+      return listings;
+    }
 
-    return listings;
     // Return the listings as a JSON response
     //return NextResponse.json(listings, { status: 200 });
   } catch (err) {
