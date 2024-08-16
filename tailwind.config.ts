@@ -15,19 +15,19 @@ const config: Config = {
       },
     },
     screens: {
-      xs: "375px",
+      xs: "420px",
       // => @media (min-width: 480px) { ... }
 
-      sm: "420px",
+      sm: "576px",
       // => @media (min-width: 640px) { ... }
 
       md: "768px",
       // => @media (min-width: 768px) { ... }
 
-      lg: "1024px",
+      lg: "992px",
       // => @media (min-width: 1024px) { ... }
 
-      xl: "1280px",
+      xl: "1200px",
       // => @media (min-width: 1280px) { ... }
 
       "2xl": "1536px",
