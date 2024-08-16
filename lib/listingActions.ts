@@ -28,27 +28,41 @@ export const getListing = async (searchData: SearchData) => {
   console.log("Listing Type:: ", formEntries);
   try {
     if (searchData) {
-      // const areaCondtions: any = {};
+      const areaCondtions: any = {};
+      const priceConditions: any = {};
+      const area = formEntries.area;
+      const price = formEntries.price;
 
-      // if (formEntries.area !== undefined) {
-      //   //Determine the area condition based on the formEntries.area value
-      //   if (formEntries.area < 60) {
-      //     areaCondtions.lt = 60;
-      //   } else if (formEntries.area < 70) {
-      //     areaCondtions.lt = 70;
-      //   } else if (formEntries.area < 80) {
-      //     areaCondtions.lt = 80;
-      //   } else if (formEntries.area < 90) {
-      //     areaCondtions.lt = 90;
-      //   } else if (formEntries.area > 90) {
-      //     areaCondtions.gt = 90;
-      //   }
-      // }
+      if (area !== undefined) {
+        //Determine the area condition based on the formEntries.area value
+        if (area <= 60) {
+          areaCondtions.lte = 60; // less than 60
+        } else if (area === 70) {
+          areaCondtions.gte = 60;
+          areaCondtions.lte = 70; // Between 70 and 80
+        } else if (area === 80) {
+          areaCondtions.gte = 70;
+          areaCondtions.lte = 80; // Between 80 and 90
+        } else if (area.toString() === "<90") {
+          areaCondtions.gte = 80; // Greater than 90
+          areaCondtions.lte = 91; // Between 80 and 90
+        } else if (area.toString() === ">90") {
+          areaCondtions.gte = 90;
+        }
+      }
+
+      if (price !== undefined) {
+        if (price < 1000000) {
+          priceConditions.lte = 1000000;
+        } else if (price >= 1000000) {
+          priceConditions.gte = 100000;
+        }
+      }
 
       const query = {
         where: {
           ...(formEntries.price && {
-            price: { lt: Number(formEntries.price) }, // Filter based on price less than the provided value
+            price: priceConditions, // Filter based on price less than the provided value
           }),
           ...(formEntries.location && {
             location: formEntries.location,
@@ -57,9 +71,7 @@ export const getListing = async (searchData: SearchData) => {
             propertyType: formEntries.propertyType,
           }),
           ...(formEntries.area && {
-            area: {
-              gte: formEntries.area,
-            },
+            area: areaCondtions,
           }),
           ...(formEntries.listingType && {
             listingType: formEntries.listingType,
@@ -76,18 +88,6 @@ export const getListing = async (searchData: SearchData) => {
       const getListings = await prisma.listing.findMany(query);
 
       console.log("Sorted Listings: ", getListings);
-      return NextResponse.json(
-        {
-          message: "Data fetching successfull",
-          data: getListings,
-        },
-        { status: 200 }
-      );
-    } else if (formEntries.price < 100000) {
-      console.log("All");
-      const getListings = await prisma.listing.findMany();
-
-      //console.log("Sorted Listings: ", getListings);
       return NextResponse.json(
         {
           message: "Data fetching successfull",
