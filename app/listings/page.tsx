@@ -24,10 +24,6 @@ interface Listing {
   updatedAt: string;
 }
 
-type Props = {
-  //fetchData: (formData: FormData) => void;
-};
-
 type TypeState = {
   FOR_SALE: boolean;
   FOR_RENT: boolean;
@@ -59,14 +55,10 @@ export default function Listings() {
   bg-transparent`;
   const checkBoxLabelStyle = `flex items-center justify-center border w-28 
   rounded-lg h-10 hover:cursor-pointer hover:text-blue-600 hover:border-blue-600  `;
-  // const focusCheckbox = checkBoxState.buy
-  //   ? `focus:bg-blue-100 focus:text-blue-600
-  // focus:border-blue-600`
-  //   : "";
+
   useEffect(() => {
     //This useEffect acts as componentDidMount
-    //It will only run once when the component mounts, since
-    // the dependency array is empty
+    //It will only run once when the component mounts, since the dependency array is empty
     console.log("Entered");
 
     async function fetchAllListings() {
@@ -79,13 +71,9 @@ export default function Listings() {
 
         if (response.ok) {
           const data = await response.json();
-          console.log("Valid response:", data);
-          if (data && data.data) {
-            setDataReceivedDB(data.data);
-            console.log("Iterateable: ", data.data);
-          } else {
-            console.error("No data received or data format is incorrect.");
-          }
+          console.log("Valid response:", data.data);
+          setDataReceivedDB(data.data);
+          console.log("Iterateable: ", dataReceivedDB);
         } else {
           const error = await response.json();
           console.error("Data fetching failed", error.message);
@@ -120,23 +108,11 @@ export default function Listings() {
       });
 
       if (response.ok) {
-        const rawData = await response.text();
-        console.log("Valid response:", rawData);
-        try {
-          const data = JSON.parse(rawData); // Attempt to parse JSON
-          console.log("Parsed response:", data); // Log parsed response
+        const data = await response.json();
+        console.log("Valid response:", data.data);
 
-          if (data && data.data) {
-            setDataReceivedDB(data.data);
-            console.log("Iterateable: ", data.data);
-          } else {
-            console.error(
-              "Data does not contain 'data' property or is undefined."
-            );
-          }
-        } catch (err) {
-          console.error("Error parsing JSON:", err);
-        }
+        setDataReceivedDB(data.data);
+        console.log("Iterateable: ", dataReceivedDB);
       } else {
         const error = await response.json();
         console.error("Data fetching failed", error.message);
@@ -337,11 +313,11 @@ export default function Listings() {
                       </label>
                       <select name="area" className={`${inputStyles}`}>
                         <option value="">All above</option>
-                        <option value="60">60m&#178;</option>
-                        <option value="70">70m&#178;</option>
-                        <option value="80">80m&#178;</option>
-                        <option value="90">90m&#178;</option>
-                        <option value="100">100m&#178;</option>
+                        <option value="60">&lt;60m&#178;</option>
+                        <option value="70">&lt;70m&#178;</option>
+                        <option value="80">&lt;80m&#178;</option>
+                        <option value="<90">&lt;90m&#178;</option>
+                        <option value=">90">&gt;90&#178;</option>
                       </select>
                     </div>
                   </div>
@@ -357,7 +333,7 @@ export default function Listings() {
         </div>
 
         {/* Houses */}
-        <div className="w-full mx-auto flex  pt-20 ">
+        <div className="w-full mx-auto flex justify-center pt-20 ">
           <div className="flex justify-center md:items-start items-center flex-row flex-wrap gap-y-5 gap-x-28">
             {dataReceivedDB.map((house) => (
               <div className={`flex box-border`} key={house.id}>

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAllListing, getListing } from "@/lib/listingActions";
 
-export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest, res: NextResponse) {
   if (req.method !== "POST") {
     return NextResponse.json(
       { error: `Method ${req.method} NOT Allowed` },
@@ -12,21 +12,14 @@ export async function POST(req: NextRequest) {
   try {
     const formEntries = await req.json(); // Parse JSON body
 
-    //const { listingType, propertyType, city, price, area } = formEntries;
-    //console.log("Route FormData", formEntries);
-
     if (formEntries === "GETALL") {
       console.log("Get it");
-      const listings = await getAllListing();
-      console.log("Route FormData", listings);
-      //return listings;
-      return NextResponse.json(listings, { status: 200 });
+      return await getAllListing();
+      //return NextResponse.json(listings, { status: 200 });
     } else {
       // Fetch listings based on form data
-      const listings = await getListing(formEntries);
-      console.log("Route FormData", listings);
-      //return listings;
-      return NextResponse.json(listings, { status: 200 });
+      return await getListing(formEntries);
+      //return NextResponse.json(listings, { status: 200 });
     }
 
     // Return the listings as a JSON response
@@ -37,7 +30,6 @@ export async function POST(req: NextRequest) {
       { status: 500 }
     );
   }
-
   return new NextResponse();
 }
 
