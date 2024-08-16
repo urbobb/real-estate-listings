@@ -39,12 +39,12 @@ export const getListing = async (searchData: SearchData) => {
           areaCondtions.lte = 60; // less than 60
         } else if (area === 70) {
           areaCondtions.gte = 60;
-          areaCondtions.lte = 70; // Between 70 and 80
+          areaCondtions.lte = 71; // Between 60 and 70
         } else if (area === 80) {
           areaCondtions.gte = 70;
-          areaCondtions.lte = 80; // Between 80 and 90
+          areaCondtions.lte = 81; // Between 70 and 80
         } else if (area.toString() === "<90") {
-          areaCondtions.gte = 80; // Greater than 90
+          areaCondtions.gte = 80;
           areaCondtions.lte = 91; // Between 80 and 90
         } else if (area.toString() === ">90") {
           areaCondtions.gte = 90;
