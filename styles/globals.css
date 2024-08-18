@@ -53,6 +53,10 @@ body {
   opacity: 1;
 }
 
+.fullPageScroll {
+  scrollbar-width: thin;
+}
+
 @keyframes slideinLeft {
   from {
     translate: -150vw 0;
@@ -82,6 +86,12 @@ body {
   }
   100% {
     transform: translateX(0); /* Back to the original position */
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .fullPageScroll {
+    scrollbar-width: none;
   }
 }
 
