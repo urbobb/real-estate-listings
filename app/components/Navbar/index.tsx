@@ -65,10 +65,10 @@ const Navbar = (props: Props) => {
             {isAboveMediumScreens ? (
               <div className={`flex items-center justify-end w-full`}>
                 <div className={`${flexBetween} gap-8 text-sm`}>
-                  <Links name="Listings" />
-                  <Links name="AboutUs" />
-                  <Links name="Contact" />
-                  <Links name="Profile" />
+                  <Links name="Listings" enable={true} />
+                  <Links name="AboutUs" enable={true} />
+                  <Links name="Contact" enable={true} />
+                  <Links name="Profile" enable={false} />
                 </div>
               </div>
             ) : (
@@ -90,10 +90,10 @@ const Navbar = (props: Props) => {
               bg-[#ffffff] drop-shadow-xl">
                 {/* MENU ITEMS */}
                 <div className="mx-[33%] mt-[8rem] flex flex-col justify-center items-center gap-10 text-2xl">
-                  <Links name="Listings" />
-                  <Links name="About" />
-                  <Links name="Contact" />
-                  <Links name="Profile" />
+                  <Links name="Listings" enable={true} />
+                  <Links name="AboutUs" enable={true} />
+                  <Links name="Contact" enable={true} />
+                  <Links name="Profile" enable={false} />
                 </div>
               </div>
             )}
