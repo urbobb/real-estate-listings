@@ -21,6 +21,7 @@
     "@react-three/fiber": "^8.16.8",
     "@splinetool/react-spline": "^4.0.0",
     "@splinetool/runtime": "^1.9.0",
+    "@types/google.maps": "^3.55.12",
     "@types/three": "^0.166.0",
     "emailjs": "^4.0.3",
     "install": "^0.13.0",
