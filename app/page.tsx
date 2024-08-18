@@ -10,6 +10,7 @@ import ListingsCard from "@/app/components/ListingsCard";
 import { houses } from "@/app/shared/HousesList";
 import Contact from "./components/Contact";
 import IconAboutUs from "@/public/Icon_AboutUs.png";
+import GoogleMapComponent from "./components/GoogleMapComponent";
 
 interface AutoRotatingGroupProps {
   children: React.ReactNode;
@@ -269,7 +270,7 @@ export default function Home() {
                   house,
                   index // render only first three houses
                 ) => (
-                  <div className={`flex box-border`} key={index}>
+                  <div className={`flex justify-center box-border`} key={index}>
                     <ListingsCard
                       location={house.location}
                       area={house.area}
@@ -296,7 +297,55 @@ export default function Home() {
       </section>
 
       {/* CONTACT */}
-      <Contact />
+      <div className="w-full h-full">
+        <div className="w-11/12 mx-auto flex md:flex-row flex-col justify-between">
+          <div className="flex lg:w-1/2">
+            <Contact title={"Contact me"} />
+          </div>
+          {/* ADRESS AND MAPS */}
+          <div className="flex md:basis-3/5 md:mt-0">
+            <div className="lg:w-3/4 w-full mx-auto flex justify-center items-center">
+              <div className="md:border border-black p-5 w-full flex flex-col gap-2">
+                <div className="flex flex-col w-full">
+                  <h1 className="font-bold text-xl">Adresse</h1>
+                  <p>Rome Str. 1| Via Roma 1</p>
+                  <p>00042 Rome (BZ)</p>
+                </div>
+                <div className="flex flex-col w-full">
+                  <h1 className="font-bold">Kontakt</h1>
+                  <div className="flex flex-row gap-5">
+                    <p className="w-1/2 font-semibold flex justify-start">
+                      Telefon:
+                    </p>
+                    <p className="w-1/2 flex justify-end">0928 42958329</p>
+                  </div>
+                  <div className="flex flex-row gap-5">
+                    <p className="w-1/2 font-semibold flex justify-start ">
+                      Mobil:
+                    </p>
+                    <p className="w-1/2 flex justify-end">3958284759</p>
+                  </div>
+                  <div className="flex flex-row gap-5">
+                    <p className="w-1/2 font-semibold flex justify-start ">
+                      E-Mail:
+                    </p>
+                    <a
+                      className="w-1/2 flex justify-end"
+                      href="mailto:info@homefinderr.com">
+                      info@homefinderr.com
+                    </a>
+                  </div>
+                </div>
+
+                {/* */}
+                <div className="w-full h-full mt-5">
+                  <GoogleMapComponent />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
   );
 }

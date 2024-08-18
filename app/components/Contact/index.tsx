@@ -3,9 +3,15 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
 
-const Contact = () => {
+type Props = {
+  title: string;
+};
+
+const Contact = ({ title }: Props) => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [stateMessage, setStateMessage] = useState("");
+  const formResultTextStyle =
+    stateMessage === "Message sent" ? "text-green-500" : "text-red";
 
   const inputStyles = `w-full mb-10 min-h-max outline-0 text-[1.5em] border-b-2 
   border-stone-400 focus:border-stone-200 
@@ -25,7 +31,7 @@ const Contact = () => {
       )
       .then(
         (result) => {
-          setStateMessage("Message sent!");
+          setStateMessage("Message sent");
           setIsSubmitting(false);
           setTimeout(() => {
             setStateMessage("");
@@ -47,11 +53,11 @@ const Contact = () => {
     <section
       id="contact"
       className="flex justify-center items-center w-full h-[calc(100vh-180px)] md:pt-24 pt-16 pb-14 bg-gray-20 ">
-      <div className="mx-auto w-9/12 md:w-11/12 md:h-full">
+      <div className="mx-auto w-5/6 md:w-11/12 md:h-full">
         {/* HEADER */}
         <div className="md:w-3/5 text-white-50 mb-12">
           <h1 className="text-2xl font-bold">
-            <span>Contact me</span>
+            <span>{title}</span>
           </h1>
         </div>
 
@@ -76,6 +82,17 @@ const Contact = () => {
               required
               pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
               placeholder="EMAIL"
+            />
+
+            <input
+              name="phone"
+              id="phone"
+              className={inputStyles}
+              type="text"
+              required
+              minLength={10}
+              maxLength={10}
+              placeholder="PHONE"
             />
 
             <input
@@ -104,6 +121,11 @@ const Contact = () => {
               className="-mt-5 rounded-lg px-8 py-3 transition duration-500 text-white bg-black hover:scale-90">
               Send now
             </button>
+            {stateMessage === "Message sent" ? (
+              <p className={`pt-10 ${formResultTextStyle} `}>
+                {stateMessage} 🥳
+              </p>
+            ) : null}
           </form>
         </div>
       </div>
