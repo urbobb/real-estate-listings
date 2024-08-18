@@ -1,7 +1,7 @@
-import House1 from "@/app/assets/listings/House1.jpg";
+import House1 from "@/app/assets/listings/House1.png";
 import House2 from "@/app/assets/listings/House2.jpg";
 import House3 from "@/app/assets/listings/House3.jpg";
-import House4 from "@/app/assets/listings/House4.jpg";
+import House4 from "@/app/assets/listings/House4.jpeg";
 import House5 from "@/app/assets/listings/House5.jpg";
 import House6 from "@/app/assets/listings/House6.jpg";
 import { property } from "three/examples/jsm/nodes/Nodes.js";
