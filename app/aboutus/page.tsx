@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Model from "../components/Model";
-import trump from "@/app/assets/trump.webp";
+import image from "@/app/assets/image.jpg";
 
 type TypeState = {
   buy: boolean;
@@ -11,9 +11,9 @@ type TypeState = {
 
 export default function AboutUs() {
   return (
-    <div className="md:min-h-screen w-full mx-auto md:mt-28 mt-20 md:py-10 pt-5 pb-10 items-center justify-center border-b">
+    <div className="md:min-h-screen w-full mx-auto md:mt-0 mt-24 md:py-10 pt-5 pb-10 items-center justify-center border-b">
       {/* MAIN HEADER AND ANIMATION */}
-      <div className="md:flex mx-auto mt-5 md:w-5/6 w-9/12 md:h-full ">
+      <div className="md:flex mx-auto md:w-5/6 w-9/12 min-h-screen ">
         {/* INTRODUCTIONS */}
         <div className="leftSlide md:basis-2/5 z-20 my-auto">
           <div className="heading">
@@ -47,7 +47,11 @@ export default function AboutUs() {
       </div>
       {/* TEAM */}
       {/* First */}
-      <div className="flex md:flex-row flex-col w-5/6 mx-auto mt-28 md:border-none border md:p-0 p-4">
+      <div className=" mx-auto md:w-5/6 w-9/12 mt-28">
+        <h1 className="font-bold text-black md:text-3xl text-xl">Our Team</h1>
+      </div>
+
+      <div className="flex md:flex-row flex-col w-5/6 mx-auto  md:border-none border md:p-0 p-4">
         <div className="intro basis-1/2 justify-start items-center">
           <p className="h-full flex justify-center items-center">
             Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -59,14 +63,26 @@ export default function AboutUs() {
           </p>
         </div>
         <div className="basis-1/2 flex justify-end">
-          <Image width={500} height={500} src={trump} alt="notewierd" />
+          <Image
+            className="border border-black"
+            width={500}
+            height={500}
+            src={image}
+            alt="notewierd"
+          />
         </div>
       </div>
 
       {/* Second */}
       <div className="flex md:flex-row flex-col w-5/6 mx-auto mt-36 md:border-none border md:p-0 p-4">
         <div className="basis-1/2 flex justify-start">
-          <Image width={500} height={500} src={trump} alt="notewierd" />
+          <Image
+            className="border border-black"
+            width={500}
+            height={500}
+            src={image}
+            alt="notewierd"
+          />
         </div>
         <div className="intro basis-1/2 justify-start items-center">
           <p className="h-full flex justify-end items-center">
