@@ -131,7 +131,7 @@ export default function Home() {
               </div>
               <div
                 className="md:w-1/3 w-full pl-2 flex justify-between gap-3
-                border border-black">
+                border border-black pointer-events-none opacity-50">
                 <div className="flex justify-start items-center w-full">
                   <label className="basis-1/6" htmlFor="city">
                     City:
