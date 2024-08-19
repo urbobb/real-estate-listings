@@ -17,21 +17,21 @@ export default function AboutUs() {
           <div className="h-full lg:w-3/4 w-full mx-auto flex border border-black p-5">
             <div className="w-full flex flex-col gap-2">
               <div className="flex flex-col w-full">
-                <h1 className="font-bold text-xl">Adresse</h1>
+                <h1 className="font-bold text-xl">Address</h1>
                 <p>Rennweg 1 | Via delle corse 1</p>
                 <p>39012 Meran/o (BZ)</p>
               </div>
               <div className="flex flex-col w-full">
-                <h1 className="font-bold">Kontakt</h1>
+                <h1 className="font-bold">Contact</h1>
                 <div className="flex flex-row gap-5">
                   <p className="w-1/2 font-semibold flex justify-start">
-                    Telefon:
+                    Telephone:
                   </p>
                   <p className="w-1/2 flex justify-end">0473 42958329</p>
                 </div>
                 <div className="flex flex-row gap-5">
                   <p className="w-1/2 font-semibold flex justify-start ">
-                    Mobil:
+                    Mobile:
                   </p>
                   <p className="w-1/2 flex justify-end">3958284759</p>
                 </div>
