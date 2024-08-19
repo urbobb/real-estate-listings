@@ -303,13 +303,13 @@ export default function Home() {
             <Contact title={"Contact me"} />
           </div>
           {/* ADRESS AND MAPS */}
-          <div className="flex md:basis-3/5 md:mt-0">
-            <div className="lg:w-3/4 w-full mx-auto flex justify-center items-center">
-              <div className="md:border border-black p-5 w-full flex flex-col gap-2">
+          <div className="h-[635px] flex basis-3/5 justify-center items-start md:mt-24 ">
+            <div className="h-full lg:w-3/4 w-full mx-auto flex border border-black p-5">
+              <div className="w-full flex flex-col gap-2">
                 <div className="flex flex-col w-full">
                   <h1 className="font-bold text-xl">Adresse</h1>
-                  <p>Rome Str. 1| Via Roma 1</p>
-                  <p>00042 Rome (BZ)</p>
+                  <p>Rennweg 1 | Via delle corse 1</p>
+                  <p>39012 Meran/o (BZ)</p>
                 </div>
                 <div className="flex flex-col w-full">
                   <h1 className="font-bold">Kontakt</h1>
@@ -317,7 +317,7 @@ export default function Home() {
                     <p className="w-1/2 font-semibold flex justify-start">
                       Telefon:
                     </p>
-                    <p className="w-1/2 flex justify-end">0928 42958329</p>
+                    <p className="w-1/2 flex justify-end">0473 42958329</p>
                   </div>
                   <div className="flex flex-row gap-5">
                     <p className="w-1/2 font-semibold flex justify-start ">
@@ -336,9 +336,25 @@ export default function Home() {
                     </a>
                   </div>
                 </div>
-
+                <div className="flex flex-col w-full">
+                  <h1 className="font-bold">Business Hours:</h1>
+                  <div className="flex flex-row gap-5 w-full">
+                    <p className="w-1/2 flex justify-start font-semibold text-sm ">
+                      Mon - Fri:
+                    </p>
+                    <p className="w-1/2 flex justify-end text-sm">
+                      9:00 AM - 6:00 PM
+                    </p>
+                  </div>
+                  <div className="flex flex-row gap-5 w-full">
+                    <p className="w-1/2 font-semibold text-sm justify-start">
+                      Sat - Sun:
+                    </p>
+                    <p className="w-1/2 flex justify-end text-sm">Closed</p>
+                  </div>
+                </div>
                 {/* */}
-                <div className="w-full h-full mt-5">
+                <div className="w-full h-full">
                   <GoogleMapComponent />
                 </div>
               </div>

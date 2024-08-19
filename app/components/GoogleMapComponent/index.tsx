@@ -35,7 +35,7 @@ function GoogleMapComponent() {
 
   return isLoaded ? (
     <GoogleMap
-      mapContainerStyle={containerStyle}
+      mapContainerStyle={{ width: "100%", height: "100%" }}
       center={center}
       zoom={15}
       onLoad={onLoad}

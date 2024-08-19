@@ -13,7 +13,7 @@ export default function AboutUs() {
         <div className="h-full flex basis-1/2 justify-start">
           <Contact title={"Need more Info? Leave us a message"} />
         </div>
-        <div className="h-[500px] flex basis-3/5 justify-center items-center md:mt-24 ">
+        <div className="h-[635px] flex basis-3/5 justify-center items-start md:mt-24 ">
           <div className="h-full lg:w-3/4 w-full mx-auto flex border border-black p-5">
             <div className="w-full flex flex-col gap-2">
               <div className="flex flex-col w-full">
