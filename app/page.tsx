@@ -314,23 +314,25 @@ export default function Home() {
                 <div className="flex flex-col w-full">
                   <h1 className="font-bold">Contact</h1>
                   <div className="flex flex-row gap-5">
-                    <p className="w-1/2 font-semibold flex justify-start">
+                    <p className="w-1/2 font-semibold flex justify-start text-sm">
                       Telephone:
                     </p>
-                    <p className="w-1/2 flex justify-end">0473 42958329</p>
+                    <p className="w-1/2 flex justify-end text-sm">
+                      0473 42958329
+                    </p>
                   </div>
                   <div className="flex flex-row gap-5">
-                    <p className="w-1/2 font-semibold flex justify-start ">
+                    <p className="w-1/2 font-semibold flex justify-start text-sm">
                       Mobile:
                     </p>
-                    <p className="w-1/2 flex justify-end">3958284759</p>
+                    <p className="w-1/2 flex justify-end text-sm">3958284759</p>
                   </div>
                   <div className="flex flex-row gap-5">
-                    <p className="w-1/2 font-semibold flex justify-start ">
+                    <p className="w-1/2 font-semibold flex justify-start text-sm">
                       E-Mail:
                     </p>
                     <a
-                      className="w-1/2 flex justify-end"
+                      className="w-1/2 flex justify-end text-sm"
                       href="mailto:info@homefinderr.com">
                       info@homefinderr.com
                     </a>
