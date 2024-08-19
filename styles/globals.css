@@ -57,6 +57,16 @@ body {
   scrollbar-width: thin;
 }
 
+.InDevPrompt.active {
+  display: hidden;
+}
+
+.cookie-alert.hide {
+  opacity: 0;
+  transform: translateY(100%);
+  transition-delay: 1000ms;
+}
+
 @keyframes slideinLeft {
   from {
     translate: -150vw 0;

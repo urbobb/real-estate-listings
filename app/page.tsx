@@ -71,9 +71,27 @@ export default function Home() {
     }
   }
 
+  function hidePrompt() {
+    document.querySelector(".cookie-alert")?.classList.add("hide");
+  }
+
   return (
     <main className="md:mt-10 md:p-24 pt-24 my-auto">
       {/* HOME */}
+
+      <div
+        className={`cookie-alert fixed bottom-[15px] right-[15px] w-[320px] m-0 z-[999] opacity-[1] translate-y-0 transition-all ease-out delay-150 rounded-lg overflow-hidden flex `}>
+        <div className="lg:h-[200px] lg:w-[400px] h-[150px] w-[300px] flex flex-col justify-center items-center p-3 bg-blue-400">
+          <p className="text-center">
+            This site is currently under Development.
+          </p>
+          <button
+            className="p-3 border border-black rounded bg-black text-white mt-5"
+            onClick={() => hidePrompt()}>
+            Got it!
+          </button>
+        </div>
+      </div>
       <section
         id="home"
         className="md:h-full w-full mx-auto md:py-10 pt-5 pb-10 items-center justify-center border-b">
@@ -131,7 +149,8 @@ export default function Home() {
               </div>
               <div
                 className="md:w-1/3 w-full pl-2 flex justify-between gap-3
-                border border-black pointer-events-none opacity-50">
+
+                border border-black pointer-events-none opacity-30">
                 <div className="flex justify-start items-center w-full">
                   <label className="basis-1/6" htmlFor="city">
                     City:
