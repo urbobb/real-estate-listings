@@ -1,7 +1,6 @@
 "use server";
 import prisma from "@/lib/db";
 import { NextResponse } from "next/server";
-import { property } from "three/examples/jsm/nodes/Nodes.js";
 
 interface FormEntries {
   id?: number;
@@ -96,6 +95,33 @@ export const getListing = async (searchData: SearchData) => {
         { status: 200 }
       );
     }
+  } catch (err) {
+    console.log("Error during database operation: ", err);
+    return NextResponse.json(
+      { message: "Error during data fetch", error: err },
+      { status: 500 }
+    );
+  }
+};
+
+export const getListingById = async (idParam: { id: string }) => {
+  const id = parseInt(idParam.id, 10);
+
+  console.log("Extracted ID:", id);
+  try {
+    const getListing = await prisma.listing.findUnique({
+      where: {
+        id: id, // get my ID
+      },
+    });
+
+    return NextResponse.json(
+      {
+        message: "Data fetching successfull",
+        data: getListing,
+      },
+      { status: 200 }
+    );
   } catch (err) {
     console.log("Error during database operation: ", err);
     return NextResponse.json(

@@ -2,7 +2,7 @@ import React from "react";
 
 type Props = {
   title: string;
-  content: string | number;
+  content: string | number | undefined;
   icon: string;
 };
 

@@ -1,14 +1,35 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { houses } from "@/app/shared/HousesList";
 import ContactInfo from "@/app/components/ContactInfo";
 import ImageGallery from "@/app/components/ImageGallery";
 import balcony from "@/app/assets/balcony.png";
 import Image from "next/image";
 import ListingDetailItem from "@/app/components/ListingDetailItem";
+import { usePathname } from "next/navigation";
+
+interface Listing {
+  id?: number;
+  title?: string;
+  description?: string;
+  price?: number;
+  location?: string;
+  zipCode?: number;
+  propertyType?: string;
+  bedrooms?: number;
+  bathrooms?: number;
+  area?: number;
+  energyclass?: string;
+  listingType?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
 
 export default function List({ params }: { params: { id: string } }) {
   //const res = await fetch(`/listings/${params.id}`);
+  const pathname = usePathname();
+  console.log("wtf", pathname);
+  const [dataReceivedDB, setDataReceivedDB] = useState<Listing>({});
   const house = houses[parseInt(params.id, 10)];
 
   let images = [
@@ -24,14 +45,37 @@ export default function List({ params }: { params: { id: string } }) {
     { src: houses[9].listingsImage },
   ];
 
-  let details = [
-    {
-      yearOfConstruction: 1990,
-    },
-  ];
-
   const detailsStyle = `flex flex-col`;
   const detailsContentStyle = `text-sm ml-7`;
+
+  useEffect(() => {
+    //extract the id from the pathname
+    const id = pathname.split("/").pop(); //// assume the id is the last segment of the path
+    async function fetchListing() {
+      try {
+        const response = await fetch(`/api/${pathname}`, {
+          method: "POST",
+          body: JSON.stringify({
+            id, // send the extracted id in the request body
+          }),
+          headers: { "Content-Type": "application/json" },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Valid response:", data.data);
+          setDataReceivedDB(data.data);
+          console.log("Iterateable: ", dataReceivedDB);
+        } else {
+          const error = await response.json();
+          console.error("Data fetching failed", error.message);
+        }
+      } catch (err) {
+        console.error("Data fetching failed Step: ", err);
+      }
+    }
+    fetchListing();
+  }, [pathname]);
 
   return (
     <div className="w-full md:p-24 md:pt-24 pt-[70px] my-auto">
@@ -49,20 +93,20 @@ export default function List({ params }: { params: { id: string } }) {
                     <div className="flex md:flex-row flex-col gap-5 justify-between">
                       <div className="flex flex-col gap-5">
                         <h1 className="font-bold text-xl">
-                          {houses[0].title.toLocaleString()}
+                          {dataReceivedDB.title}
                         </h1>
                         <div className="flex flex-row gap-5">
                           <p>
                             <i className="fa-solid fa-bed"></i>{" "}
-                            {houses[1].bedrooms} Beds
+                            {dataReceivedDB.bedrooms} Beds
                           </p>
                           <p>
                             <i className="fa-solid fa-bath"></i>{" "}
-                            {houses[1].bathrooms} Baths
+                            {dataReceivedDB.bathrooms} Baths
                           </p>
                           <p>
                             <i className="fa-solid fa-ruler"></i>{" "}
-                            {houses[1].area}
+                            {dataReceivedDB.area}
                             m&#178;
                           </p>
                         </div>
@@ -71,9 +115,9 @@ export default function List({ params }: { params: { id: string } }) {
                       {/* PRICE AND LOCATION */}
                       <div className="">
                         <p className="font-bold text-[1.2rem] mb-2">
-                          {houses[0].price.toLocaleString()} €
+                          {dataReceivedDB.price?.toLocaleString()} €
                         </p>
-                        <p>Location: {houses[1].location}</p>
+                        <p>Location: {dataReceivedDB.location}</p>
                       </div>
                     </div>
                     {/* DETAILS */}
@@ -85,12 +129,12 @@ export default function List({ params }: { params: { id: string } }) {
                       <div className="grid grid-cols-2 md:gap-y-2 gap-y-4">
                         <ListingDetailItem
                           title={"Property Type"}
-                          content={houses[0].propertyType}
+                          content={dataReceivedDB.propertyType}
                           icon={`fa-solid fa-building mr-2`}
                         />
                         <ListingDetailItem
                           title={"Contract"}
-                          content={houses[0].listingType}
+                          content={dataReceivedDB.listingType}
                           icon={`fa-solid fa-file-signature mr-2`}
                         />
                         <ListingDetailItem
@@ -110,17 +154,17 @@ export default function List({ params }: { params: { id: string } }) {
                         />
                         <ListingDetailItem
                           title={"Area"}
-                          content={`${houses[0].area}m²`}
+                          content={`${dataReceivedDB.area}m²`}
                           icon={`fa-solid fa-elevator mr-2`}
                         />
                         <ListingDetailItem
                           title={"Bedrooms"}
-                          content={houses[0].bedrooms}
+                          content={dataReceivedDB.bedrooms}
                           icon={`fa-solid fa-bed mr-2`}
                         />
                         <ListingDetailItem
                           title={"Bathrooms"}
-                          content={houses[0].bathrooms}
+                          content={dataReceivedDB.bathrooms}
                           icon={`fa-solid fa-bath mr-2`}
                         />
                         <ListingDetailItem
