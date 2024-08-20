@@ -18,8 +18,8 @@ export default function AboutUs() {
             <div className="w-full flex flex-col gap-2">
               <div className="flex flex-col w-full">
                 <h1 className="font-bold text-xl">Address</h1>
-                <p>Rennweg 1 | Via delle corse 1</p>
-                <p>39012 Meran/o (BZ)</p>
+                <p>Rom Str. 1 | Via Roma 1</p>
+                <p>000101 Roma (BZ)</p>
               </div>
               <div className="flex flex-col w-full">
                 <h1 className="font-bold">Contact</h1>
