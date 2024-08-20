@@ -8,9 +8,27 @@ const ContactInfo = () => {
   return (
     <form className="flex flex-col gap-5 p-5 pb-5" action="">
       <h1 className="font-bold text-2xl">Request Info</h1>
-      <input type="text" placeholder="Name" className={`${inputStyles}`} />
-      <input type="text" placeholder="Phone" className={`${inputStyles}`} />
-      <input type="text" placeholder="Message" className={`${inputStyles}`} />
+      <input
+        type="text"
+        required
+        placeholder="Name"
+        className={`${inputStyles}`}
+      />
+      <input
+        type="text"
+        required
+        placeholder="Phone"
+        className={`${inputStyles}`}
+      />
+      <textarea
+        name="message"
+        id="message"
+        className={inputStyles}
+        required
+        rows={3}
+        maxLength={200}
+        placeholder="MESSAGE"
+      />
       <button className={`${btnStyle}`}>Request Info</button>
     </form>
   );

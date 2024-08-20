@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import { houses } from "@/app/shared/HousesList";
 import ContactInfo from "@/app/components/ContactInfo";
 import ImageGallery from "@/app/components/ImageGallery";
+import balcony from "@/app/assets/balcony.png";
+import Image from "next/image";
+import ListingDetailItem from "@/app/components/ListingDetailItem";
 
 export default function List({ params }: { params: { id: string } }) {
   //const res = await fetch(`/listings/${params.id}`);
@@ -26,6 +29,9 @@ export default function List({ params }: { params: { id: string } }) {
       yearOfConstruction: 1990,
     },
   ];
+
+  const detailsStyle = `flex flex-col`;
+  const detailsContentStyle = `text-sm ml-7`;
 
   return (
     <div className="w-full md:p-24 md:pt-24 pt-[70px] my-auto">
@@ -76,15 +82,79 @@ export default function List({ params }: { params: { id: string } }) {
                         <i className="fa-solid fa-house"></i> Property
                         Information
                       </h1>
-                      <div className="px-4">
-                        <div className="mb-5">
-                          <h2 className="font-semibold mb-2">Year Built</h2>
-                          <p>&bull; Year Built: {houses[0].yearBuilt}</p>
+                      <div className="grid grid-cols-2 md:gap-y-2 gap-y-4">
+                        <ListingDetailItem
+                          title={"Property Type"}
+                          content={houses[0].propertyType}
+                          icon={`fa-solid fa-building mr-2`}
+                        />
+                        <ListingDetailItem
+                          title={"Contract"}
+                          content={houses[0].listingType}
+                          icon={`fa-solid fa-file-signature mr-2`}
+                        />
+                        <ListingDetailItem
+                          title={"Floors"}
+                          content={houses[0].floors}
+                          icon={`fa-solid fa-stairs mr-2`}
+                        />
+                        <ListingDetailItem
+                          title={"Building Floors"}
+                          content={houses[0].floors}
+                          icon={`fa-solid fa-building mr-2`}
+                        />
+                        <ListingDetailItem
+                          title={"Elevator"}
+                          content={houses[0].elevator ? "Yes" : "No"}
+                          icon={`fa-solid fa-elevator mr-2`}
+                        />
+                        <ListingDetailItem
+                          title={"Area"}
+                          content={`${houses[0].area}m²`}
+                          icon={`fa-solid fa-elevator mr-2`}
+                        />
+                        <ListingDetailItem
+                          title={"Bedrooms"}
+                          content={houses[0].bedrooms}
+                          icon={`fa-solid fa-bed mr-2`}
+                        />
+                        <ListingDetailItem
+                          title={"Bathrooms"}
+                          content={houses[0].bathrooms}
+                          icon={`fa-solid fa-bath mr-2`}
+                        />
+                        <ListingDetailItem
+                          title={"Furnished"}
+                          content={houses[0].furnished}
+                          icon={`fa-solid fa-couch mr-2`}
+                        />
+
+                        <div className={`${detailsStyle}`}>
+                          <div className=" flex flex-row gap-2">
+                            <Image
+                              src={balcony}
+                              alt="balconyImage"
+                              height={18}
+                            />
+                            <h2 className="font-semibold md:text-base text-[0.9rem]">
+                              Balcony
+                            </h2>
+                          </div>
+                          <p className={`${detailsContentStyle}`}>
+                            {houses[0] ? "Yes" : "No"}
+                          </p>
                         </div>
-                        <div>
-                          <h2 className="font-semibold mb-2">Property Type</h2>
-                          <p>&bull; Property Type: {houses[0].propertyType} </p>
-                        </div>
+
+                        <ListingDetailItem
+                          title={"Garage"}
+                          content={houses[0].garage}
+                          icon={`fa-solid fa-car mr-2`}
+                        />
+                        <ListingDetailItem
+                          title={"Heating"}
+                          content={houses[0].heating}
+                          icon={`fa-solid fa-fire mr-2`}
+                        />
                       </div>
                     </div>
                   </div>
@@ -96,7 +166,7 @@ export default function List({ params }: { params: { id: string } }) {
                 </div>
               </div>
             </div>
-            <div className="relative flex justify-center h-full border rounded-lg">
+            <div className="relative flex justify-center h-full border rounded-lg md:mt-0 mt-10">
               <ContactInfo />
             </div>
           </div>
