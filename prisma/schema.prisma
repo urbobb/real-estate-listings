@@ -9,21 +9,28 @@ datasource db {
 }
 
 model Listing {
-  id           Int      @id @default(autoincrement())
-  title        String
-  description  String
-  price        Int
-  location     String
-  zipCode      Int
-  propertyType String
-  bedrooms     Int
-  bathrooms    Int
-  area         Int
-  energyclass  String?
-  listingType  String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  images       Image[]
+  id              Int      @id @default(autoincrement())
+  title           String
+  description     String
+  price           Int
+  location        String
+  zipCode         Int
+  propertyType    String
+  bedrooms        Int
+  bathrooms       Int
+  area            Int
+  energyclass     String?
+  floors          Int
+  buildingFloors  Int
+  elevator        Boolean
+  furnished       String
+  balcony         Boolean
+  garage          Int
+  heating         String
+  listingType     String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  images          Image[]
 }
 
 model Image {

@@ -25,27 +25,27 @@ interface Listing {
 }
 
 type TypeState = {
-  FOR_SALE: boolean;
-  FOR_RENT: boolean;
+  Sale: boolean;
+  Rent: boolean;
 };
 
 type CatergoryState = {
-  HOUSE: boolean;
-  APPARTMENT: boolean;
-  CONDO: boolean;
-  LAND: boolean;
+  House: boolean;
+  Appartment: boolean;
+  Condo: boolean;
+  Land: boolean;
 };
 
 export default function Listings() {
   const [typeState, setTypeState] = useState<TypeState>({
-    FOR_SALE: true,
-    FOR_RENT: false,
+    Sale: true,
+    Rent: false,
   });
   const [catergoryState, setCatergoryState] = useState<CatergoryState>({
-    HOUSE: false,
-    APPARTMENT: false,
-    CONDO: false,
-    LAND: false,
+    House: false,
+    Appartment: false,
+    Condo: false,
+    Land: false,
   });
   const [priceState, setPriceState] = useState(250000);
   const [dataReceivedDB, setDataReceivedDB] = useState<Listing[]>([]);
@@ -141,8 +141,8 @@ export default function Listings() {
 
     await setTypeState((prevState) => {
       let newState = {
-        FOR_SALE: false,
-        FOR_RENT: false,
+        Sale: false,
+        Rent: false,
         [name]: !prevState[name], // toggle the checkbox state
       };
 
@@ -159,10 +159,10 @@ export default function Listings() {
     // giving type to name
     await setCatergoryState((prevState) => {
       let newState = {
-        HOUSE: false,
-        APPARTMENT: false,
-        CONDO: false,
-        LAND: false,
+        House: false,
+        Appartment: false,
+        Condo: false,
+        Land: false,
         [name]: !prevState[name],
       };
       console.log(`Checked [${name}]: `, newState);
@@ -207,20 +207,16 @@ export default function Listings() {
                       <SearchCheckbox
                         name="listingType"
                         labelName="Sale"
-                        checked={typeState.FOR_SALE}
-                        value={"FOR_SALE"}
-                        handleAction={() =>
-                          handleTypeCheckboxChange("FOR_SALE")
-                        }
+                        checked={typeState.Sale}
+                        value={"Sale"}
+                        handleAction={() => handleTypeCheckboxChange("Sale")}
                       />
                       <SearchCheckbox
                         name="listingType"
                         labelName="Rent"
-                        checked={typeState.FOR_RENT}
-                        value={"FOR_RENT"}
-                        handleAction={() =>
-                          handleTypeCheckboxChange("FOR_RENT")
-                        }
+                        checked={typeState.Rent}
+                        value={"Rent"}
+                        handleAction={() => handleTypeCheckboxChange("Rent")}
                       />
                     </div>
                   </div>
@@ -231,20 +227,20 @@ export default function Listings() {
                         <SearchCheckbox
                           name="propertyType"
                           labelName="House"
-                          value={"HOUSE"}
-                          checked={catergoryState.HOUSE}
+                          value={"House"}
+                          checked={catergoryState.House}
                           handleAction={() =>
-                            handleCatergoryCheckboxChange("HOUSE")
+                            handleCatergoryCheckboxChange("House")
                           }
                         />
 
                         <SearchCheckbox
                           name="PropertyType"
                           labelName="Appartment"
-                          value={"APPARTMENT"}
-                          checked={catergoryState.APPARTMENT}
+                          value={"Appartment"}
+                          checked={catergoryState.Appartment}
                           handleAction={() =>
-                            handleCatergoryCheckboxChange("APPARTMENT")
+                            handleCatergoryCheckboxChange("Appartment")
                           }
                         />
                       </div>
@@ -252,10 +248,10 @@ export default function Listings() {
                         <SearchCheckbox
                           name="propertyType"
                           labelName="Condo"
-                          value={"CONDO"}
-                          checked={catergoryState.CONDO}
+                          value={"Condo"}
+                          checked={catergoryState.Condo}
                           handleAction={() =>
-                            handleCatergoryCheckboxChange("CONDO")
+                            handleCatergoryCheckboxChange("Condo")
                           }
                         />
 
@@ -263,9 +259,9 @@ export default function Listings() {
                           name="propertyType"
                           labelName="Land"
                           value={"LAND"}
-                          checked={catergoryState.LAND}
+                          checked={catergoryState.Land}
                           handleAction={() =>
-                            handleCatergoryCheckboxChange("LAND")
+                            handleCatergoryCheckboxChange("Land")
                           }
                         />
                       </div>

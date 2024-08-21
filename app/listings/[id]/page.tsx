@@ -20,9 +20,14 @@ interface Listing {
   bathrooms?: number;
   area?: number;
   energyclass?: string;
+  floors?: number;
+  buildingFloors?: number;
+  elevator?: boolean;
+  furnished?: string;
+  balcony?: boolean;
+  garage?: number;
+  heating?: string;
   listingType?: string;
-  createdAt?: string;
-  updatedAt?: string;
 }
 
 export default function List({ params }: { params: { id: string } }) {
@@ -139,12 +144,12 @@ export default function List({ params }: { params: { id: string } }) {
                         />
                         <ListingDetailItem
                           title={"Floors"}
-                          content={houses[0].floors}
+                          content={dataReceivedDB.floors}
                           icon={`fa-solid fa-stairs mr-2`}
                         />
                         <ListingDetailItem
                           title={"Building Floors"}
-                          content={houses[0].floors}
+                          content={dataReceivedDB.buildingFloors}
                           icon={`fa-solid fa-building mr-2`}
                         />
                         <ListingDetailItem
@@ -169,7 +174,7 @@ export default function List({ params }: { params: { id: string } }) {
                         />
                         <ListingDetailItem
                           title={"Furnished"}
-                          content={houses[0].furnished}
+                          content={dataReceivedDB.furnished}
                           icon={`fa-solid fa-couch mr-2`}
                         />
 
@@ -185,18 +190,23 @@ export default function List({ params }: { params: { id: string } }) {
                             </h2>
                           </div>
                           <p className={`${detailsContentStyle}`}>
-                            {houses[0] ? "Yes" : "No"}
+                            {dataReceivedDB.balcony ? "Yes" : "No"}
                           </p>
                         </div>
 
                         <ListingDetailItem
                           title={"Garage"}
-                          content={houses[0].garage}
+                          content={dataReceivedDB.garage}
                           icon={`fa-solid fa-car mr-2`}
                         />
                         <ListingDetailItem
                           title={"Heating"}
-                          content={houses[0].heating}
+                          content={dataReceivedDB.heating}
+                          icon={`fa-solid fa-fire mr-2`}
+                        />
+                        <ListingDetailItem
+                          title={"Energy Class"}
+                          content={dataReceivedDB.energyclass}
                           icon={`fa-solid fa-fire mr-2`}
                         />
                       </div>
@@ -205,7 +215,7 @@ export default function List({ params }: { params: { id: string } }) {
 
                   <div className="flex flex-col gap-5 mt-10 basis-[25%]">
                     <h1>Description:</h1>
-                    <p className="text-justify">{houses[0].description}</p>
+                    <p className="text-justify">{dataReceivedDB.description}</p>
                   </div>
                 </div>
               </div>

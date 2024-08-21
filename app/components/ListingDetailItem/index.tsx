@@ -16,7 +16,9 @@ const ListingDetailItem = ({ title, content, icon }: Props) => {
         <i className={`${icon}`}></i>
         {title}
       </h2>
-      <p className={`${detailsContentStyle}`}>{content}</p>
+      <p className={`${detailsContentStyle}`}>
+        {content === null ? "-" : content}
+      </p>
     </div>
   );
 };
