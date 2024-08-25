@@ -18,11 +18,16 @@ interface Listing {
   listingType: string;
   createdAt: string;
   updatedAt: string;
+  images: Image[];
 }
 
-type Props = {
-  //fetchData: (formData: FormData) => void;
-};
+interface Image {
+  id: number;
+  url: string;
+  listingId: number;
+}
+
+type Props = {};
 
 type TypeState = {
   FOR_SALE: boolean;
@@ -77,9 +82,7 @@ const SearchBarListings = ({}: Props) => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("Valid response:", data.data);
         setDataReceivedDB(data.data);
-        console.log("Iterateable: ", dataReceivedDB);
       } else {
         const error = await response.json();
         console.error("Data fetching failed", error.message);
@@ -298,6 +301,7 @@ const SearchBarListings = ({}: Props) => {
               className={`flex-[0_0_calc(20%_-_1rem)] box-border`}
               key={house.id}>
               <ListingsCard
+                image={house.images[0].url}
                 location={house.location}
                 area={house.area}
                 bedrooms={house.bedrooms}
