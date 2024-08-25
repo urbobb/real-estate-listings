@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import * as THREE from "three";
 import { Canvas, useFrame } from "@react-three/fiber";
@@ -12,6 +12,30 @@ import Contact from "./components/Contact";
 import IconAboutUs from "@/public/Icon_AboutUs.png";
 import GoogleMapComponent from "./components/GoogleMapComponent";
 
+interface Listing {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  location: string;
+  zipCode: number;
+  propertyType: string;
+  bedrooms: number;
+  bathrooms: number;
+  area: number;
+  energyclass: string;
+  listingType: string;
+  createdAt: string;
+  updatedAt: string;
+  images: Image[];
+}
+
+interface Image {
+  id: number;
+  url: string;
+  listingId: number;
+}
+
 interface AutoRotatingGroupProps {
   children: React.ReactNode;
 }
@@ -21,18 +45,21 @@ function AutoRotatingGroup({ children }: AutoRotatingGroupProps) {
 
   useFrame((state, delta) => {
     if (groupRef.current) {
-      groupRef.current.rotation.y += delta * 0.1; // Adjust the speed as needed
+      groupRef.current.rotation.y += delta * 0.5; // Adjust the speed as needed
     }
   });
 
   return (
-    <group ref={groupRef} position-y={-0.75} dispose={null}>
+    <group ref={groupRef} position-y={-0.9} dispose={null}>
       {children}
     </group>
   );
 }
 
 export default function Home() {
+  const [dataReceivedDB, setDataReceivedDB] = useState<Listing[]>([]);
+  const [imagesUrl, setImagesUrl] = useState<string[]>([]);
+
   const isAboveMediumScreens = useMediaQuery("(min-width:1060px)");
   const isAboveSmallScreens = useMediaQuery("(min-width: 640px)");
 
@@ -48,16 +75,45 @@ export default function Home() {
   const Camera = dynamic(() => import("@/app/components/Camera"), {
     ssr: false,
   });
-  const Icon = dynamic(() => import("@/app/components/Icon"), {
-    ssr: false,
-  });
   const Pyramid = dynamic(() => import("@/app/components/Pyramid"), {
     ssr: false,
   });
   const buttonHover = `h-10 w-10 border-2 rounded-3xl`;
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  const displayedHouses = isAboveSmallScreens ? houses.slice(0, 3) : houses;
+  useEffect(() => {
+    //This useEffect acts as componentDidMount
+    //It will only run once when the component mounts, since the dependency array is empty
+
+    async function fetchAllListings() {
+      try {
+        const response = await fetch("/api/listings", {
+          method: "POST",
+          body: JSON.stringify("GETALL"),
+          headers: { "Content-Type": "application/json" },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setDataReceivedDB(data.data);
+
+          const allImagesUrls = data.data.map((listing: Listing) =>
+            listing.images.map((image) => image.url)
+          );
+          setImagesUrl(allImagesUrls);
+        } else {
+          const error = await response.json();
+          console.error("Data fetching failed", error.message);
+        }
+
+        //console.log("Data received for rendering: ", dataReceivedDB);
+      } catch (err) {
+        console.error("Data fetching failed Step: ", err);
+      }
+    }
+
+    fetchAllListings();
+  }, []);
 
   function scrollLeft() {
     if (scrollContainerRef.current) {
@@ -267,16 +323,19 @@ export default function Home() {
           <div className="md:w-full mb-10">
             <h1 className="text-2xl font-bold">Listings</h1>
           </div>
+          {isAboveSmallScreens ? (
+            <div className="flex justify-end gap-2 mb-5">
+              <button className={`${buttonHover}`} onClick={scrollLeft}>
+                <i className="fa-solid fa-angle-left"></i>
+              </button>
 
-          <div className="flex justify-end gap-2 mb-5">
-            <button className={`${buttonHover}`} onClick={scrollLeft}>
-              <i className="fa-solid fa-angle-left"></i>
-            </button>
-
-            <button className={`${buttonHover}`} onClick={scrollRight}>
-              <i className="fa-solid fa-angle-right"></i>
-            </button>
-          </div>
+              <button className={`${buttonHover}`} onClick={scrollRight}>
+                <i className="fa-solid fa-angle-right"></i>
+              </button>
+            </div>
+          ) : (
+            ""
+          )}
 
           {/* LIST */}
           <div
@@ -284,13 +343,14 @@ export default function Home() {
             className="houseList mb-10 w-full md:min-h-max mx-auto overflow-x-auto overflow-y-hidden 
                       scroll-smooth ">
             <div className=" md:h-5/6 sm:gap-[2%] gap-10 flex md:flex-row flex-col min-w-max mx-auto">
-              {houses.slice(0, 3).map(
+              {dataReceivedDB.slice(0, 3).map(
                 (
                   house,
                   index // render only first three houses
                 ) => (
                   <div className={`flex justify-center box-border`} key={index}>
                     <ListingsCard
+                      image={house.images[0].url}
                       location={house.location}
                       area={house.area}
                       bedrooms={house.bedrooms}
