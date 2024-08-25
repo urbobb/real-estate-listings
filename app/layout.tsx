@@ -19,7 +19,7 @@ export default function RootLayout({
   console.log("DisableFooter: ", enableFooter);
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={` ${inter.className} min-h-screen`}>
         <Navbar />
         <StrictMode>{children}</StrictMode>
