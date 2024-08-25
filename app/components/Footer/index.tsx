@@ -14,15 +14,7 @@ const Footer = (props: Props) => {
         <div className="flex justify-between gap-8 hover:cursor-pointer">
           <a href="/privacypolicy" target="_blank">
             <p>Privacy Policy</p>
-        <div className="flex justify-between gap-8 hover:cursor-pointer">
-          <a href="/privacypolicy" target="_blank">
-            <p>Privacy Policy</p>
           </a>
-          <a href="/termsofservice" target="_blank">
-            <p>Terms of Service</p>
-          </a>
-          <a href="/cookiessettings">
-            <p>Cookies Settings</p>
           <a href="/termsofservice" target="_blank">
             <p>Terms of Service</p>
           </a>
