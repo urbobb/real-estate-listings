@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAllListing, getListing } from "@/lib/listingActions";
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
   if (req.method !== "POST") {
     return NextResponse.json(
       { error: `Method ${req.method} NOT Allowed` },
