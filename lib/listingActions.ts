@@ -3,8 +3,8 @@ import prisma from "@/lib/db";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import sharp from "sharp";
+import { v4 as uuidv4 } from "uuid";
+import { revalidatePath } from "next/cache";
 
 interface FormEntries {
   id?: number;
@@ -33,25 +33,23 @@ const s3 = new S3Client({
   },
 });
 
-export async function uploadFileToS3(file, fileName: string) {
+export async function uploadFileToAWS(buffer: Buffer, uniqueFileName: string) {
   const session = await getServerSession();
 
   // if (!session) {
   //   return { failure: "Not authenticated" };
   // }
 
-  const fileBuffer = await sharp(file).jpeg({ quality: 50 }).toBuffer();
-
   const putObjectCommand = new PutObjectCommand({
     Bucket: process.env.AWS_BUCKET_NAME!,
-    Key: `${fileName}`,
-    Body: fileBuffer,
-    ContentType: "image/jpg",
+    Key: `${uniqueFileName}`,
+    Body: buffer,
+    ContentType: "image/jpeg",
   });
   try {
     const response = await s3.send(putObjectCommand);
     console.log("Files uploaded successfully: ", response);
-    return fileName;
+    return uniqueFileName;
   } catch (err) {
     throw err;
   }
@@ -153,6 +151,12 @@ export const getListingById = async (idParam: { id: string }) => {
       where: {
         id: id, // get my ID
       },
+      include: {
+        images: {
+          where: { listingId: id },
+          orderBy: [{ id: "desc" }], // sort by id in descending order
+        },
+      },
     });
 
     return NextResponse.json(
@@ -174,7 +178,14 @@ export const getListingById = async (idParam: { id: string }) => {
 export const getAllListing = async () => {
   try {
     console.log("All");
-    const getListings = await prisma.listing.findMany();
+    const getListings = await prisma.listing.findMany({
+      include: {
+        // include images
+        images: {
+          orderBy: [{ id: "desc" }], // sort by id in descending order
+        },
+      },
+    });
 
     return NextResponse.json(
       {
@@ -225,10 +236,13 @@ export async function createListing(formData: FormData) {
 
     for (const file of files) {
       const buffer = Buffer.from(await file.arrayBuffer());
-      const fileName = await uploadFileToS3(buffer, file.name);
+      const uniqueFileName = `${uuidv4()}-${Date.now()}-${file.name}`; // Generate a unique filename
+      const fileName = await uploadFileToAWS(buffer, uniqueFileName);
       console.log("FileName:", fileName);
-      uplodedFiles.push(fileName);
+      uplodedFiles.push(uniqueFileName);
     }
+    // Generate a unique filename
+    //const uniqueFileName = `${uuidv4()}-${Date.now()}-${fileName}`;
 
     const imageUrls = uplodedFiles;
     console.log("Data to create listing:", data);
@@ -241,11 +255,16 @@ export async function createListing(formData: FormData) {
       select: { id: true },
     });
 
-    const newId = lastListing ? lastListing.id + 1 : 1; // Set to 1 if no records exist
+    const lastImage = await prisma.image.findFirst({
+      orderBy: { id: "desc" },
+      select: { id: true },
+    });
+    const newListingId = lastListing ? lastListing.id + 1 : 1; // Set to 1 if no records exist
+    const newImageId = lastImage ? lastImage.id + 1 : 1; // Set to 1 if no records exist
 
     const createListings = await prisma.listing.create({
       data: {
-        id: newId,
+        id: newListingId,
         title: data.title,
         description: data.description,
         price: data.price,
@@ -271,6 +290,8 @@ export async function createListing(formData: FormData) {
         },
       },
     });
+
+    revalidatePath("/");
 
     console.log("Created listings:", createListings);
   } catch (err) {

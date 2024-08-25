@@ -36,19 +36,7 @@ export default function List({ params }: { params: { id: string } }) {
   console.log("wtf", pathname);
   const [dataReceivedDB, setDataReceivedDB] = useState<Listing>({});
   const house = houses[parseInt(params.id, 10)];
-
-  let images = [
-    { src: houses[0].listingsImage },
-    { src: houses[1].listingsImage },
-    { src: houses[2].listingsImage },
-    { src: houses[3].listingsImage },
-    { src: houses[4].listingsImage },
-    { src: houses[5].listingsImage },
-    { src: houses[6].listingsImage },
-    { src: houses[1].listingsImage },
-    { src: houses[3].listingsImage },
-    { src: houses[9].listingsImage },
-  ];
+  const [imagesUrl, setImagesUrl] = useState<string[]>([]);
 
   const detailsStyle = `flex flex-col`;
   const detailsContentStyle = `text-sm ml-7`;
@@ -68,9 +56,11 @@ export default function List({ params }: { params: { id: string } }) {
 
         if (response.ok) {
           const data = await response.json();
-          console.log("Valid response:", data.data);
           setDataReceivedDB(data.data);
-          console.log("Iterateable: ", dataReceivedDB);
+          if (data.data && data.data.images) {
+            const urls = data.data.images.map((image: any) => image.url);
+            setImagesUrl(urls);
+          }
         } else {
           const error = await response.json();
           console.error("Data fetching failed", error.message);
@@ -80,14 +70,14 @@ export default function List({ params }: { params: { id: string } }) {
       }
     }
     fetchListing();
-  }, [pathname]);
+  }, []);
 
   return (
     <div className="w-full md:p-24 md:pt-24 pt-[70px] my-auto">
       <div className="flex flex-col gap-8 md:h-full md:w-9/12 w-full mx-auto md:py-10 pt-5 pb-10 drop-shadow-sm ">
         {/* IMAGES */}
         <div className="grid gap-8 md:grid-cols-1 w-full">
-          <ImageGallery images={images} />
+          <ImageGallery images={imagesUrl} />
         </div>
         <div className="md:w-full w-11/12 mx-auto">
           <div className="description  flex lg:flex-row flex-col md:gap-16 gap-5 p-5 justify-between ">

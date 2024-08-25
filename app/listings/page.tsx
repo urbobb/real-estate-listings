@@ -22,6 +22,13 @@ interface Listing {
   listingType: string;
   createdAt: string;
   updatedAt: string;
+  images: Image[];
+}
+
+interface Image {
+  id: number;
+  url: string;
+  listingId: number;
 }
 
 type TypeState = {
@@ -49,6 +56,7 @@ export default function Listings() {
   });
   const [priceState, setPriceState] = useState(250000);
   const [dataReceivedDB, setDataReceivedDB] = useState<Listing[]>([]);
+  const [imagesUrl, setImagesUrl] = useState<string[]>([]);
 
   const inputStyles = `w-full mb-2 min-h-max outline-0 text-[1.1em] 
   border-b-2 border-stone-400 focus:border-stone-200 transition duration-300
@@ -71,9 +79,12 @@ export default function Listings() {
 
         if (response.ok) {
           const data = await response.json();
-          console.log("Valid response:", data.data);
           setDataReceivedDB(data.data);
-          console.log("Iterateable: ", dataReceivedDB);
+
+          const allImagesUrls = data.data.map((listing: Listing) =>
+            listing.images.map((image) => image.url)
+          );
+          setImagesUrl(allImagesUrls);
         } else {
           const error = await response.json();
           console.error("Data fetching failed", error.message);
@@ -86,10 +97,6 @@ export default function Listings() {
     }
 
     fetchAllListings();
-
-    //setDataReceivedDB();
-
-    //console.log("mount");
   }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -109,10 +116,7 @@ export default function Listings() {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("Valid response:", data.data);
-
         setDataReceivedDB(data.data);
-        console.log("Iterateable: ", dataReceivedDB);
       } else {
         const error = await response.json();
         console.error("Data fetching failed", error.message);
@@ -334,6 +338,7 @@ export default function Listings() {
             {dataReceivedDB.map((house) => (
               <div className={`flex box-border`} key={house.id}>
                 <ListingsCard
+                  image={house.images[0].url}
                   location={house.location}
                   area={house.area}
                   bedrooms={house.bedrooms}
