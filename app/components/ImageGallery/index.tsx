@@ -56,7 +56,6 @@ export default function ImageGallery({ images }: Images) {
             width={500}
             height={500}
             className={`${onClickImageStyle} object-cover object-center`}
-            onClick={handleOpenImage}
           />
           <span className="absolute left- top-0 rounded-br-lg bg-red-500 px-3 py-1.5 uppercase tracking-wider text-white">
             {listingType.sale}
