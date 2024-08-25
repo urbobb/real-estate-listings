@@ -68,7 +68,6 @@ const Navbar = (props: Props) => {
                   <Links name="Listings" enable={true} />
                   <Links name="AboutUs" enable={true} />
                   <Links name="Contact" enable={true} />
-                  <Links name="Profile" enable={false} />
                 </div>
               </div>
             ) : (
@@ -93,7 +92,6 @@ const Navbar = (props: Props) => {
                   <Links name="Listings" enable={true} />
                   <Links name="AboutUs" enable={true} />
                   <Links name="Contact" enable={true} />
-                  <Links name="Profile" enable={false} />
                 </div>
               </div>
             )}
