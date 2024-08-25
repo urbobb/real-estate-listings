@@ -70,7 +70,7 @@ export default function List({ params }: { params: { id: string } }) {
       }
     }
     fetchListing();
-  }, []);
+  }, [pathname]);
 
   return (
     <div className="w-full md:p-24 md:pt-24 pt-[70px] my-auto">
