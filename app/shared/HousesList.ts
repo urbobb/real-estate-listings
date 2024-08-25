@@ -11,7 +11,7 @@ export const houses = [
   {
     title: "Spasious house in New York",
     listingsImage: House1,
-    location: "new york",
+    location: "San Francisco",
     area: 76,
     bedrooms: 2,
     bathrooms: 2,
