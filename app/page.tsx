@@ -95,9 +95,9 @@ export default function Home() {
 
         if (response.ok) {
           const data = await response.json();
-          setDataReceivedDB(data.data);
+          setDataReceivedDB(data);
 
-          const allImagesUrls = data.data.map((listing: Listing) =>
+          const allImagesUrls = data.map((listing: Listing) =>
             listing.images.map((image) => image.url)
           );
           setImagesUrl(allImagesUrls);
