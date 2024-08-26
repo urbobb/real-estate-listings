@@ -79,9 +79,10 @@ export default function Listings() {
 
         if (response.ok) {
           const data = await response.json();
-          setDataReceivedDB(data.data);
+          setDataReceivedDB(data);
+          console.log("Data:", data);
 
-          const allImagesUrls = data.data.map((listing: Listing) =>
+          const allImagesUrls = data.map((listing: Listing) =>
             listing.images.map((image) => image.url)
           );
           setImagesUrl(allImagesUrls);

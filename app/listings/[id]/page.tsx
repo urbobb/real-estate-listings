@@ -28,13 +28,20 @@ interface Listing {
   garage?: number;
   heating?: string;
   listingType?: string;
+  images: Image;
+}
+
+interface Image {
+  id: number;
+  url: string;
+  listingId: number;
 }
 
 export default function List({ params }: { params: { id: string } }) {
   //const res = await fetch(`/listings/${params.id}`);
   const pathname = usePathname();
   console.log("wtf", pathname);
-  const [dataReceivedDB, setDataReceivedDB] = useState<Listing>({});
+  const [dataReceivedDB, setDataReceivedDB] = useState<Listing | null>(null);
   const house = houses[parseInt(params.id, 10)];
   const [imagesUrl, setImagesUrl] = useState<string[]>([]);
 
@@ -56,9 +63,10 @@ export default function List({ params }: { params: { id: string } }) {
 
         if (response.ok) {
           const data = await response.json();
-          setDataReceivedDB(data.data);
-          if (data.data && data.data.images) {
-            const urls = data.data.images.map((image: any) => image.url);
+          setDataReceivedDB(data);
+          console.log("Data", data);
+          if (data && data.images) {
+            const urls = data.images.map((image: any) => image.url);
             setImagesUrl(urls);
           }
         } else {
@@ -88,20 +96,20 @@ export default function List({ params }: { params: { id: string } }) {
                     <div className="flex md:flex-row flex-col gap-5 justify-between">
                       <div className="flex flex-col gap-5">
                         <h1 className="font-bold text-xl">
-                          {dataReceivedDB.title}
+                          {dataReceivedDB?.title}
                         </h1>
                         <div className="flex flex-row gap-5">
                           <p>
                             <i className="fa-solid fa-bed"></i>{" "}
-                            {dataReceivedDB.bedrooms} Beds
+                            {dataReceivedDB?.bedrooms} Beds
                           </p>
                           <p>
                             <i className="fa-solid fa-bath"></i>{" "}
-                            {dataReceivedDB.bathrooms} Baths
+                            {dataReceivedDB?.bathrooms} Baths
                           </p>
                           <p>
                             <i className="fa-solid fa-ruler"></i>{" "}
-                            {dataReceivedDB.area}
+                            {dataReceivedDB?.area}
                             m&#178;
                           </p>
                         </div>
@@ -110,9 +118,12 @@ export default function List({ params }: { params: { id: string } }) {
                       {/* PRICE AND LOCATION */}
                       <div className="">
                         <p className="font-bold text-[1.2rem] mb-2">
-                          {dataReceivedDB.price?.toLocaleString()} €
+                          {dataReceivedDB?.price === null
+                            ? "Preis auf Anfrage"
+                            : dataReceivedDB?.price?.toLocaleString()}{" "}
+                          €
                         </p>
-                        <p>Location: {dataReceivedDB.location}</p>
+                        <p>Location: {dataReceivedDB?.location}</p>
                       </div>
                     </div>
                     {/* DETAILS */}
@@ -124,47 +135,47 @@ export default function List({ params }: { params: { id: string } }) {
                       <div className="grid grid-cols-2 md:gap-y-2 gap-y-4">
                         <ListingDetailItem
                           title={"Property Type"}
-                          content={dataReceivedDB.propertyType}
+                          content={dataReceivedDB?.propertyType}
                           icon={`fa-solid fa-building mr-2`}
                         />
                         <ListingDetailItem
                           title={"Contract"}
-                          content={dataReceivedDB.listingType}
+                          content={dataReceivedDB?.listingType}
                           icon={`fa-solid fa-file-signature mr-2`}
                         />
                         <ListingDetailItem
                           title={"Floors"}
-                          content={dataReceivedDB.floors}
+                          content={dataReceivedDB?.floors}
                           icon={`fa-solid fa-stairs mr-2`}
                         />
                         <ListingDetailItem
                           title={"Building Floors"}
-                          content={dataReceivedDB.buildingFloors}
+                          content={dataReceivedDB?.buildingFloors}
                           icon={`fa-solid fa-building mr-2`}
                         />
                         <ListingDetailItem
                           title={"Elevator"}
-                          content={houses[0].elevator ? "Yes" : "No"}
+                          content={dataReceivedDB?.elevator ? "Yes" : "No"}
                           icon={`fa-solid fa-elevator mr-2`}
                         />
                         <ListingDetailItem
                           title={"Area"}
-                          content={`${dataReceivedDB.area}m²`}
+                          content={`${dataReceivedDB?.area}m²`}
                           icon={`fa-solid fa-elevator mr-2`}
                         />
                         <ListingDetailItem
                           title={"Bedrooms"}
-                          content={dataReceivedDB.bedrooms}
+                          content={dataReceivedDB?.bedrooms}
                           icon={`fa-solid fa-bed mr-2`}
                         />
                         <ListingDetailItem
                           title={"Bathrooms"}
-                          content={dataReceivedDB.bathrooms}
+                          content={dataReceivedDB?.bathrooms}
                           icon={`fa-solid fa-bath mr-2`}
                         />
                         <ListingDetailItem
                           title={"Furnished"}
-                          content={dataReceivedDB.furnished}
+                          content={dataReceivedDB?.furnished}
                           icon={`fa-solid fa-couch mr-2`}
                         />
 
@@ -180,23 +191,23 @@ export default function List({ params }: { params: { id: string } }) {
                             </h2>
                           </div>
                           <p className={`${detailsContentStyle}`}>
-                            {dataReceivedDB.balcony ? "Yes" : "No"}
+                            {dataReceivedDB?.balcony ? "Yes" : "No"}
                           </p>
                         </div>
 
                         <ListingDetailItem
                           title={"Garage"}
-                          content={dataReceivedDB.garage}
+                          content={dataReceivedDB?.garage}
                           icon={`fa-solid fa-car mr-2`}
                         />
                         <ListingDetailItem
                           title={"Heating"}
-                          content={dataReceivedDB.heating}
+                          content={dataReceivedDB?.heating}
                           icon={`fa-solid fa-fire mr-2`}
                         />
                         <ListingDetailItem
                           title={"Energy Class"}
-                          content={dataReceivedDB.energyclass}
+                          content={dataReceivedDB?.energyclass}
                           icon={`fa-solid fa-fire mr-2`}
                         />
                       </div>
@@ -205,7 +216,9 @@ export default function List({ params }: { params: { id: string } }) {
 
                   <div className="flex flex-col gap-5 mt-10 basis-[25%]">
                     <h1>Description:</h1>
-                    <p className="text-justify">{dataReceivedDB.description}</p>
+                    <p className="text-justify">
+                      {dataReceivedDB?.description}
+                    </p>
                   </div>
                 </div>
               </div>
