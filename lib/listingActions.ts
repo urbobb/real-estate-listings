@@ -1,7 +1,7 @@
 "use server";
 import prisma from "@/lib/db";
 import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth/next";
+// import { getServerSession } from "next-auth/next";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { v4 as uuidv4 } from "uuid";
 import { revalidatePath } from "next/cache";
@@ -34,7 +34,7 @@ const s3 = new S3Client({
 });
 
 export async function uploadFileToAWS(buffer: Buffer, uniqueFileName: string) {
-  const session = await getServerSession();
+  //const session = await getServerSession();
 
   // if (!session) {
   //   return { failure: "Not authenticated" };
@@ -125,13 +125,7 @@ export const getListing = async (searchData: SearchData) => {
       const getListings = await prisma.listing.findMany(query);
 
       console.log("Sorted Listings: ", getListings);
-      return NextResponse.json(
-        {
-          message: "Data fetching successfull",
-          data: getListings,
-        },
-        { status: 200 }
-      );
+      return getListings;
     }
   } catch (err) {
     console.log("Error during database operation: ", err);
@@ -159,13 +153,7 @@ export const getListingById = async (idParam: { id: string }) => {
       },
     });
 
-    return NextResponse.json(
-      {
-        message: "Data fetching successfull",
-        data: getListing,
-      },
-      { status: 200 }
-    );
+    return getListing;
   } catch (err) {
     console.log("Error during database operation: ", err);
     return NextResponse.json(
@@ -187,13 +175,7 @@ export const getAllListing = async () => {
       },
     });
 
-    return NextResponse.json(
-      {
-        message: "Data fetching successfull",
-        data: getListings,
-      },
-      { status: 200 }
-    );
+    return getListings;
   } catch (err) {
     console.log("Error during database operation: ", err);
     return NextResponse.json(

@@ -14,12 +14,12 @@ export async function POST(req: NextRequest) {
 
     if (formEntries === "GETALL") {
       console.log("Get it");
-      return await getAllListing();
-      //return NextResponse.json(listings, { status: 200 });
+      const listing = await getAllListing();
+      return NextResponse.json(listing, { status: 200 });
     } else {
       // Fetch listings based on form data
-      return await getListing(formEntries);
-      //return NextResponse.json(listings, { status: 200 });
+      const listing = await getListing(formEntries);
+      return NextResponse.json(listing, { status: 200 });
     }
 
     // Return the listings as a JSON response

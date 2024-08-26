@@ -13,8 +13,9 @@ export async function POST(req: NextRequest) {
     const data = await req.json(); // Parse JSON body
     console.log(data);
     // Fetch listings based on form data
-    return await getListingById(data);
-    //return NextResponse.json(listings, { status: 200 });
+    const listing = await getListingById(data);
+    //console.log("Listing with ID:", listing);
+    return NextResponse.json(listing, { status: 200 });
 
     // Return the listings as a JSON response
   } catch (err) {
