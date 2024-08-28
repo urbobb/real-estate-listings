@@ -117,7 +117,7 @@ export default function Listings() {
 
       if (response.ok) {
         const data = await response.json();
-        setDataReceivedDB(data.data);
+        setDataReceivedDB(data);
       } else {
         const error = await response.json();
         console.error("Data fetching failed", error.message);
