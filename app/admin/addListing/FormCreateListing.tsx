@@ -84,7 +84,7 @@ const FormCreateListing = ({}: Props) => {
         // });
 
         //After the file upload, submit the rest of the form data to your backend
-        const response = await fetch("/api/admin", {
+        const response = await fetch("/api/admin/addListing", {
           method: "POST",
           body: formData,
         });
