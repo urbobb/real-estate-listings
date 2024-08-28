@@ -12,8 +12,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
   try {
     const formEntries = await req.formData(); // Parse JSON body
     console.log("FormEntries", formEntries);
-    return await createListing(formEntries);
-
+    const createdListing = await createListing(formEntries);
+    return NextResponse.json(createdListing, { status: 200 });
     // Return the listings as a JSON response
   } catch (err) {
     console.error("Failed to fetch data", err);
