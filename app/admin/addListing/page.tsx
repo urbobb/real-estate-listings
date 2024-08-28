@@ -1,20 +1,22 @@
+import { auth, signOut } from "@/auth";
 import React from "react";
-import { auth, signIn } from "@/auth";
+import FormCreateListing from "./FormCreateListing";
 import { redirect } from "next/navigation";
+//import { getSignedURL } from "@/lib/listingActions";
 
 type Props = {};
 
-function SignInButton() {
+function SignOutButton() {
   return (
     <form
       action={async () => {
-        "use server"; // for server actions
-        await signIn();
+        "use server";
+        await signOut();
       }}>
       <button
         type="submit"
         className="border border-black p-2 hover:bg-black hover:text-white hover:cursor-pointer transition duration-200">
-        Sign in
+        Sign out
       </button>
     </form>
   );
@@ -24,16 +26,16 @@ export default async function AdminPage({}: Props) {
   const session = await auth();
   const user = session?.user;
 
-  if (user) {
-    redirect("/admin/addListing");
+  if (!user) {
+    redirect("/admin/");
   }
-
   return (
-    <div className="max-h-screen">
-      <div className="relative w-5/6 mx-auto mt-28 min-h-screen">
-        <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
-          {user ? null : <SignInButton />}
+    <div className="min-h-screen">
+      <div className="flex flex-col mt-28">
+        <div className="lg:w-1/2 w-full mx-auto flex justify-end items-center">
+          um auszuloggen {"-->"} <SignOutButton />
         </div>
+        <FormCreateListing />
       </div>
     </div>
   );
