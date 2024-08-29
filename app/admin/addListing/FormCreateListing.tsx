@@ -1,10 +1,12 @@
 "use client";
+import { useToast } from "@/components/ui/use-toast";
 import React, { useState } from "react";
 //import { getSignedURL } from "@/lib/listingActions";
 
 type Props = {};
 
 const FormCreateListing = ({}: Props) => {
+  const { toast } = useToast();
   const [file, setFile] = useState<File[]>([]);
   const [previewUrl, setPreviewUrl] = useState<string[]>([]);
   const listingDetails = [
@@ -24,6 +26,11 @@ const FormCreateListing = ({}: Props) => {
     "Heating",
     "Listing Type",
   ];
+  const inputStyles = `w-full mb-10 min-h-max outline-0 text-[1.5em] border-b-2 
+  border-stone-400 focus:border-stone-200 
+  transition duration-300 bg-transparent`;
+  const listingDetailLabelStyles = `lg:w-32`;
+  const listingDetailInputStyles = `border rounded-md w-[150px] h-[50px] p-2`;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     //const file = e.target.files?.[1] ?? null;
@@ -53,12 +60,6 @@ const FormCreateListing = ({}: Props) => {
       });
     }
   };
-
-  const inputStyles = `w-full mb-10 min-h-max outline-0 text-[1.5em] border-b-2 
-  border-stone-400 focus:border-stone-200 
-  transition duration-300 bg-transparent`;
-  const listingDetailLabelStyles = `lg:w-32`;
-  const listingDetailInputStyles = `border rounded-md w-[150px] h-[50px] p-2`;
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -92,12 +93,17 @@ const FormCreateListing = ({}: Props) => {
         if (response.ok) {
           const data = await response.json();
           console.log("Successfully submited: ", data);
+          toast({ description: "Successfully created Listing." });
         } else {
           const error = await response.json();
           console.error("Submission failed: ", error.message);
         }
       }
     } catch (err) {
+      toast({
+        variant: "destructive",
+        description: "Ann error occured. Please try again.",
+      });
       console.error("Error during submission: ", err);
     }
   };

@@ -24,9 +24,9 @@ function SignOutButton() {
 
 export default async function AdminPage({}: Props) {
   const session = await auth();
-  const user = session?.user;
+  const userId = session?.user?.id;
 
-  if (!user) {
+  if (!userId) {
     redirect("/admin/");
   }
   return (
