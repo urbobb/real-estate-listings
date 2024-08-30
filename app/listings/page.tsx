@@ -65,9 +65,7 @@ export default function Listings() {
   rounded-lg h-10 hover:cursor-pointer hover:text-blue-600 hover:border-blue-600  `;
 
   useEffect(() => {
-    //This useEffect acts as componentDidMount
-    //It will only run once when the component mounts, since the dependency array is empty
-    console.log("Entered");
+    //This useEffect acts as componentDidMount. It will only run once when the component mounts, since the dependency array is empty
 
     async function fetchAllListings() {
       try {
@@ -80,7 +78,6 @@ export default function Listings() {
         if (response.ok) {
           const data = await response.json();
           setDataReceivedDB(data);
-          console.log("Data:", data);
 
           const allImagesUrls = data.map((listing: Listing) =>
             listing.images.map((image) => image.url)
@@ -90,8 +87,6 @@ export default function Listings() {
           const error = await response.json();
           console.error("Data fetching failed", error.message);
         }
-
-        //console.log("Data received for rendering: ", dataReceivedDB);
       } catch (err) {
         console.error("Data fetching failed Step: ", err);
       }
@@ -104,7 +99,6 @@ export default function Listings() {
     e.preventDefault(); // prevents reloading when the form is submitted
     const formData = new FormData(e.currentTarget); // Get form data
     const formEntries = Object.fromEntries(formData);
-    // console.log("Submitted: ", formEntries);
 
     try {
       const response = await fetch("/api/listings", {
@@ -141,9 +135,6 @@ export default function Listings() {
   };
 
   const handleTypeCheckboxChange = async (name: keyof TypeState) => {
-    // giving type to name
-    //console.log(name);
-
     await setTypeState((prevState) => {
       let newState = {
         Sale: false,
@@ -156,12 +147,9 @@ export default function Listings() {
 
       return newState;
     });
-
-    //console.log("TypeState: ", typeState);
   };
 
   const handleCatergoryCheckboxChange = async (name: keyof CatergoryState) => {
-    // giving type to name
     await setCatergoryState((prevState) => {
       let newState = {
         House: false,
@@ -170,7 +158,6 @@ export default function Listings() {
         Land: false,
         [name]: !prevState[name],
       };
-      console.log(`Checked [${name}]: `, newState);
       return newState;
     });
   };

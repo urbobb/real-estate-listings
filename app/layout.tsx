@@ -15,9 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const pathname = usePathname();
-  console.log("Pathname: ", pathname);
   const enableFooter = pathname !== "/listings";
-  console.log("DisableFooter: ", enableFooter);
 
   return (
     <html lang="en" suppressHydrationWarning>

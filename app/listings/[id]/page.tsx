@@ -38,19 +38,15 @@ interface Image {
 }
 
 export default function List({ params }: { params: { id: string } }) {
-  //const res = await fetch(`/listings/${params.id}`);
   const pathname = usePathname();
-  console.log("wtf", pathname);
   const [dataReceivedDB, setDataReceivedDB] = useState<Listing | null>(null);
-  const house = houses[parseInt(params.id, 10)];
   const [imagesUrl, setImagesUrl] = useState<string[]>([]);
 
   const detailsStyle = `flex flex-col`;
   const detailsContentStyle = `text-sm ml-7`;
 
   useEffect(() => {
-    //extract the id from the pathname
-    const id = pathname.split("/").pop(); //// assume the id is the last segment of the path
+    const id = pathname.split("/").pop(); //extract the id from the pathname. assume the id is the last segment of the path
     async function fetchListing() {
       try {
         const response = await fetch(`/api/${pathname}`, {
@@ -64,7 +60,6 @@ export default function List({ params }: { params: { id: string } }) {
         if (response.ok) {
           const data = await response.json();
           setDataReceivedDB(data);
-          console.log("Data", data);
           if (data && data.images) {
             const urls = data.images.map((image: any) => image.url);
             setImagesUrl(urls);

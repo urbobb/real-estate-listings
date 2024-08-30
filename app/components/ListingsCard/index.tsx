@@ -1,7 +1,5 @@
 "use client";
 import React from "react";
-import Image from "next/image";
-import House1 from "@/app/assets/listings/House1.jpg";
 
 type Props = {
   image: string;

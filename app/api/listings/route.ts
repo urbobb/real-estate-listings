@@ -10,10 +10,10 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const formEntries = await req.json(); // Parse JSON body
+    // Parse JSON body
+    const formEntries = await req.json();
 
     if (formEntries === "GETALL") {
-      console.log("Get it");
       const listing = await getAllListing();
       return NextResponse.json(listing, { status: 200 });
     } else {
@@ -21,8 +21,6 @@ export async function POST(req: NextRequest) {
       const listing = await getListing(formEntries);
       return NextResponse.json(listing, { status: 200 });
     }
-
-    // Return the listings as a JSON response
   } catch (err) {
     console.error("Failed to fetch data", err);
     return NextResponse.json(
@@ -32,15 +30,3 @@ export async function POST(req: NextRequest) {
   }
   return new NextResponse();
 }
-
-// export async function GET(req: NextRequest) {
-//   try {
-//     const data = await getListing();
-//     return data;
-//   } catch (err) {
-//     return NextResponse.json(
-//       { error: "Failed to fetch Data" },
-//       { status: 500 }
-//     );
-//   }
-// }
