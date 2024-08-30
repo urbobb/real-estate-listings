@@ -1,5 +1,4 @@
 "use client";
-import { useForm } from "react-hook-form";
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
 
@@ -44,7 +43,6 @@ const Contact = ({ title }: Props) => {
           }, 5000); // hide message after 5 seconds
         }
       );
-
     //Clears the form after sending the email
     e.target.reset();
   };

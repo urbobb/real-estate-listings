@@ -1,7 +1,6 @@
 "use client";
 import { useToast } from "@/components/ui/use-toast";
 import React, { useState } from "react";
-//import { getSignedURL } from "@/lib/listingActions";
 
 type Props = {};
 
@@ -33,7 +32,6 @@ const FormCreateListing = ({}: Props) => {
   const listingDetailInputStyles = `border rounded-md w-[150px] h-[50px] p-2`;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //const file = e.target.files?.[1] ?? null;
     const uploadedFiles = e.target.files ?? null;
 
     if (uploadedFiles) {
@@ -70,20 +68,6 @@ const FormCreateListing = ({}: Props) => {
 
     try {
       if (file) {
-        // const signedURLResult = await getSignedURL();
-        // console.log(signedURLResult);
-
-        // const url = signedURLResult.success.url;
-
-        //upload the files to the signed URL
-        // await fetch(url, {
-        //   method: "POST",
-        //   body: file,
-        //   headers: {
-        //     "Content-Type": file.type,
-        //   },
-        // });
-
         //After the file upload, submit the rest of the form data to your backend
         const response = await fetch("/api/admin/addListing", {
           method: "POST",
@@ -92,7 +76,6 @@ const FormCreateListing = ({}: Props) => {
 
         if (response.ok) {
           const data = await response.json();
-          console.log("Successfully submited: ", data);
           toast({ description: "Successfully created Listing." });
         } else {
           const error = await response.json();

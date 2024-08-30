@@ -60,16 +60,11 @@ const SearchBarListings = ({}: Props) => {
   bg-transparent`;
   const checkBoxLabelStyle = `flex items-center justify-center border w-28 
   rounded-lg h-10 hover:cursor-pointer hover:text-blue-600 hover:border-blue-600  `;
-  // const focusCheckbox = checkBoxState.buy
-  //   ? `focus:bg-blue-100 focus:text-blue-600
-  // focus:border-blue-600`
-  //   : "";
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // prevents reloading when the form is submitted
     const formData = new FormData(e.currentTarget); // Get form data
     const formEntries = Object.fromEntries(formData);
-    // console.log("Submitted: ", formEntries);
 
     try {
       const response = await fetch("/api/listings", {
@@ -106,22 +101,13 @@ const SearchBarListings = ({}: Props) => {
   };
 
   const handleTypeCheckboxChange = async (name: keyof TypeState) => {
-    // giving type to name
-    //console.log(name);
-
     await setTypeState((prevState) => {
       let newState = {
         ...prevState,
         [name]: !prevState[name], // toggle the checkbox state
       };
-
-      // Log the new state of the checkbox
-      //console.log(`Checked [${name}]: `, newState);
-
       return newState;
     });
-
-    //console.log("TypeState: ", typeState);
   };
 
   const handleCatergoryCheckboxChange = async (name: keyof CatergoryState) => {
@@ -134,8 +120,6 @@ const SearchBarListings = ({}: Props) => {
 
       return newState;
     });
-
-    //console.log("Category State: ", catergoryState);
   };
 
   function handlePriceChange(e: string) {
