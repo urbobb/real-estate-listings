@@ -2,7 +2,6 @@ import { auth, signOut } from "@/auth";
 import React from "react";
 import FormCreateListing from "./FormCreateListing";
 import { redirect } from "next/navigation";
-//import { getSignedURL } from "@/lib/listingActions";
 
 type Props = {};
 

@@ -1,7 +1,6 @@
 "use server";
 import prisma from "@/lib/db";
 import { NextResponse } from "next/server";
-// import { getServerSession } from "next-auth/next";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { v4 as uuidv4 } from "uuid";
 import { revalidatePath } from "next/cache";
@@ -60,9 +59,7 @@ export async function uploadFileToAWS(buffer: Buffer, uniqueFileName: string) {
 }
 
 export const getListing = async (searchData: SearchData) => {
-  console.log("Search Data:: ", searchData.formEntries);
   const { formEntries } = searchData;
-  console.log("Listing Type:: ", formEntries);
   try {
     if (searchData) {
       const areaCondtions: any = {};
@@ -113,22 +110,13 @@ export const getListing = async (searchData: SearchData) => {
           ...(formEntries.listingType && {
             listingType: formEntries.listingType,
           }),
-
-          //listingType: formEntries.listingType,
-          //propertyType: formEntries.propertyType,
-          // price: {
-          //   lt: Number(formEntries.price), // Filter based on price less than the provided value
-          // },
-          //area: areaCondtions, // Apply the area condition dynamically
         },
       };
       const getListings = await prisma.listing.findMany(query);
-
-      console.log("Sorted Listings: ", getListings);
       return getListings;
     }
   } catch (err) {
-    console.log("Error during database operation: ", err);
+    console.error("Error during database operation: ", err);
     return NextResponse.json(
       { message: "Error during data fetch", error: err },
       { status: 500 }
@@ -138,12 +126,10 @@ export const getListing = async (searchData: SearchData) => {
 
 export const getListingById = async (idParam: { id: string }) => {
   const id = parseInt(idParam.id, 10);
-
-  console.log("Extracted ID:", id);
   try {
     const getListing = await prisma.listing.findUnique({
       where: {
-        id: id, // get my ID
+        id: id, // get by ID
       },
       include: {
         images: {
@@ -155,7 +141,7 @@ export const getListingById = async (idParam: { id: string }) => {
 
     return getListing;
   } catch (err) {
-    console.log("Error during database operation: ", err);
+    console.error("Error during database operation: ", err);
     return NextResponse.json(
       { message: "Error during data fetch", error: err },
       { status: 500 }
@@ -187,7 +173,6 @@ export const getAllListing = async () => {
 
 export async function createListing(formData: FormData) {
   const dataToCreateListing = formData;
-  console.log("Query: ", dataToCreateListing);
   const data = {
     title: dataToCreateListing.get("Title") as string,
     description: dataToCreateListing.get("Description") as string,
@@ -220,14 +205,10 @@ export async function createListing(formData: FormData) {
       const buffer = Buffer.from(await file.arrayBuffer());
       const uniqueFileName = `${uuidv4()}-${Date.now()}-${file.name}`; // Generate a unique filename
       const fileName = await uploadFileToAWS(buffer, uniqueFileName);
-      console.log("FileName:", fileName);
       uplodedFiles.push(uniqueFileName);
     }
 
     const imageUrls = uplodedFiles;
-    console.log("Data to create listing:", data);
-    console.log("Image URLs:", imageUrls);
-
     const lastListing = await prisma.listing.findFirst({
       orderBy: {
         id: "desc",
@@ -241,6 +222,10 @@ export async function createListing(formData: FormData) {
     });
     const newListingId = lastListing ? lastListing.id + 1 : 1; // Set to 1 if no records exist
     const newImageId = lastImage ? lastImage.id + 1 : 1; // Set to 1 if no records exist
+
+    if (!data.title) {
+      throw new Error("Title is required");
+    }
 
     const createListings = await prisma.listing.create({
       data: {
@@ -272,10 +257,9 @@ export async function createListing(formData: FormData) {
     });
 
     revalidatePath("/");
-
-    console.log("Created listings:", createListings);
+    return createListing;
   } catch (err) {
-    console.log("Error during database operation: ", err);
+    console.error("Error during database operation: ", err);
     return null;
   }
 }
