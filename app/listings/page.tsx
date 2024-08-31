@@ -1,11 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import SearchBarListings from "@/app/components/SearchListings";
 import SearchCheckbox from "@/app/components/SearchCheckbox";
 import ListingsCard from "@/app/components/ListingsCard";
-import { houses } from "@/app/shared/HousesList";
-import { getAllListing, getListing } from "@/lib/listingActions";
-import SearchListings from "@/app/components/SearchListings";
 
 interface Listing {
   id: number;
@@ -38,9 +34,9 @@ type TypeState = {
 
 type CatergoryState = {
   House: boolean;
-  Appartment: boolean;
-  Condo: boolean;
-  Land: boolean;
+  Apartment: boolean;
+  Villa: boolean;
+  Business: boolean;
 };
 
 export default function Listings() {
@@ -50,9 +46,9 @@ export default function Listings() {
   });
   const [catergoryState, setCatergoryState] = useState<CatergoryState>({
     House: false,
-    Appartment: false,
-    Condo: false,
-    Land: false,
+    Apartment: false,
+    Villa: false,
+    Business: false,
   });
   const [priceState, setPriceState] = useState(250000);
   const [dataReceivedDB, setDataReceivedDB] = useState<Listing[]>([]);
@@ -66,7 +62,6 @@ export default function Listings() {
 
   useEffect(() => {
     //This useEffect acts as componentDidMount. It will only run once when the component mounts, since the dependency array is empty
-
     async function fetchAllListings() {
       try {
         const response = await fetch("/api/listings", {
@@ -78,7 +73,6 @@ export default function Listings() {
         if (response.ok) {
           const data = await response.json();
           setDataReceivedDB(data);
-
           const allImagesUrls = data.map((listing: Listing) =>
             listing.images.map((image) => image.url)
           );
@@ -116,8 +110,6 @@ export default function Listings() {
         const error = await response.json();
         console.error("Data fetching failed", error.message);
       }
-
-      //console.log("Data received for rendering: ", dataReceivedDB);
     } catch (err) {
       console.error("Data fetching failed Step: ", err);
     }
@@ -128,9 +120,9 @@ export default function Listings() {
     // });
     // setCatergoryState({
     //   HOUSE: false,
-    //   APPARTMENT: false,
-    //   CONDO: false,
-    //   LAND: false,
+    //   APARTMENT: false,
+    //   Villa: false,
+    //   Business: false,
     // });
   };
 
@@ -153,9 +145,9 @@ export default function Listings() {
     await setCatergoryState((prevState) => {
       let newState = {
         House: false,
-        Appartment: false,
-        Condo: false,
-        Land: false,
+        Apartment: false,
+        Villa: false,
+        Business: false,
         [name]: !prevState[name],
       };
       return newState;
@@ -228,32 +220,32 @@ export default function Listings() {
 
                         <SearchCheckbox
                           name="PropertyType"
-                          labelName="Appartment"
-                          value={"Appartment"}
-                          checked={catergoryState.Appartment}
+                          labelName="Apartment"
+                          value={"Apartment"}
+                          checked={catergoryState.Apartment}
                           handleAction={() =>
-                            handleCatergoryCheckboxChange("Appartment")
+                            handleCatergoryCheckboxChange("Apartment")
                           }
                         />
                       </div>
                       <div className="w-full flex flex-row justify-around gap-2">
                         <SearchCheckbox
                           name="propertyType"
-                          labelName="Condo"
-                          value={"Condo"}
-                          checked={catergoryState.Condo}
+                          labelName="Villa"
+                          value={"Villa"}
+                          checked={catergoryState.Villa}
                           handleAction={() =>
-                            handleCatergoryCheckboxChange("Condo")
+                            handleCatergoryCheckboxChange("Villa")
                           }
                         />
 
                         <SearchCheckbox
                           name="propertyType"
-                          labelName="Land"
-                          value={"LAND"}
-                          checked={catergoryState.Land}
+                          labelName="Business"
+                          value={"Business"}
+                          checked={catergoryState.Business}
                           handleAction={() =>
-                            handleCatergoryCheckboxChange("Land")
+                            handleCatergoryCheckboxChange("Business")
                           }
                         />
                       </div>
@@ -264,12 +256,12 @@ export default function Listings() {
                     <p>City</p>
                     <select className={`${inputStyles}`} name="location">
                       <option value="">All above</option>
-                      <option value="New York">New York</option>
-                      <option value="San Francisco">San Francisco</option>
-                      <option value="Chicago">Chicago</option>
-                      <option value="Austin">Austin</option>
-                      <option value="Los Angeles">Los Angeles</option>
-                      <option value="Seattle">Seattle</option>
+                      <option value="Milan">Milan</option>
+                      <option value="Turin">Turin</option>
+                      <option value="Brescia">Brescia</option>
+                      <option value="Verona">Verona</option>
+                      <option value="Genoa">Genoa</option>
+                      <option value="Venice">Venice</option>
                     </select>
                   </div>
                   {/* <div className="flex flex-row gap-2">

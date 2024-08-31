@@ -111,8 +111,36 @@ export const getListing = async (searchData: SearchData) => {
             listingType: formEntries.listingType,
           }),
         },
+        include: {
+          images: {
+            orderBy: [{ id: "desc" }],
+          },
+        },
       };
-      const getListings = await prisma.listing.findMany(query);
+      const getListings = await prisma.listing.findMany({
+        where: {
+          ...(formEntries.price && {
+            price: priceConditions, // Filter based on price less than the provided value
+          }),
+          ...(formEntries.location && {
+            location: formEntries.location,
+          }),
+          ...(formEntries.propertyType && {
+            propertyType: formEntries.propertyType,
+          }),
+          ...(formEntries.area && {
+            area: areaCondtions,
+          }),
+          ...(formEntries.listingType && {
+            listingType: formEntries.listingType,
+          }),
+        },
+        include: {
+          images: {
+            orderBy: [{ id: "desc" }],
+          },
+        },
+      });
       return getListings;
     }
   } catch (err) {
@@ -134,7 +162,7 @@ export const getListingById = async (idParam: { id: string }) => {
       include: {
         images: {
           where: { listingId: id },
-          orderBy: [{ id: "desc" }], // sort by id in descending order
+          orderBy: [{ id: "desc" }],
         },
       },
     });
@@ -205,7 +233,7 @@ export async function createListing(formData: FormData) {
       const buffer = Buffer.from(await file.arrayBuffer());
       const uniqueFileName = `${uuidv4()}-${Date.now()}-${file.name}`; // Generate a unique filename
       const fileName = await uploadFileToAWS(buffer, uniqueFileName);
-      uplodedFiles.push(uniqueFileName);
+      uplodedFiles.push(fileName);
     }
 
     const imageUrls = uplodedFiles;
