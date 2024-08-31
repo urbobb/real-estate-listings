@@ -14,9 +14,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
     const createdListing = await createListing(formEntries);
     return NextResponse.json(createdListing, { status: 200 });
   } catch (err) {
-    console.error("Failed to fetch data", err);
+    console.error("Failed to Create Listing", err);
     return NextResponse.json(
-      { error: "Failed to fetch Data" },
+      { error: "Failed to Create Listing" },
       { status: 500 }
     );
   }
