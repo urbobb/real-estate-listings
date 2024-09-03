@@ -7,8 +7,8 @@ const Footer = (props: Props) => {
     <footer id="footer" className="bg-[#ffffff] w-full py-8 mb-10 text-sm">
       <div
         className="mx-auto md:w-5/6 w-9/12 flex md:flex-row flex-col justify-between 
-        gap-8  z-40 border-t pt-5">
-        <div className="md:w-full w-5/6 mx-auto md:text-start text-center ">
+        gap-8  z-40 border-t pt-5 text-center">
+        <div className="md:w-full w-5/6 mx-auto md:text-start text-center">
           <p className="">© 2024 Home Finder.</p>
         </div>
         <div className="flex justify-between gap-8 hover:cursor-pointer">
