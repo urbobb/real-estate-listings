@@ -11,26 +11,29 @@ import { useEffect, useRef, useState } from "react";
 interface Images {
   images: string[];
   clicked: boolean;
+  listingType: string | undefined;
 }
 
-export default function ImageGallery({ images, clicked }: Images) {
+export default function ImageGallery({ images, clicked, listingType }: Images) {
   const [bigImage, setBigImage] = useState<string>("");
   const [bigImageClicked, setBigImageClicked] = useState<boolean>(false);
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
-
   let thumbnailImages: string[] = [];
   thumbnailImages = images;
-  const listingType = {
-    sale: "SALE",
-    rent: "RENT",
-    sold: "SOLD",
-  };
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const onClickImageStyle = bigImageClicked
     ? "absolute w-[900px]"
     : " h-full w-full";
+  const tagStyle =
+    listingType === "Sale"
+      ? `bg-green-400`
+      : listingType === "Rent"
+      ? `bg-green-400`
+      : listingType === "Sold"
+      ? `bg-red-500`
+      : "";
 
   useEffect(() => {
     if (!api) {
@@ -80,8 +83,9 @@ export default function ImageGallery({ images, clicked }: Images) {
                     alt="image"
                     className={`${onClickImageStyle} object-cover object-center aspect-square `}
                   />
-                  <span className="absolute left- top-0 rounded-br-lg bg-red-500 px-3 py-1.5 uppercase tracking-wider text-white">
-                    {listingType.sale}
+                  <span
+                    className={`absolute left- top-0 rounded-br-lg ${tagStyle} px-3 py-1.5 uppercase tracking-wider text-white`}>
+                    {listingType}
                   </span>
                 </CarouselItem>
               ))}
