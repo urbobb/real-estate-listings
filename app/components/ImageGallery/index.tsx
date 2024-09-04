@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -6,7 +7,6 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
-import { useEffect, useRef, useState } from "react";
 
 interface Images {
   images: string[];

@@ -135,6 +135,7 @@ export default function Home() {
     <main className="md:mt-10 md:p-24 pt-24 my-auto">
       {/* HOME */}
 
+      {/* PROMPT */}
       <div
         className={`cookie-alert fixed bottom-[15px] right-[15px] w-[320px] m-0 z-[999] opacity-[1] translate-y-0 transition-all ease-out delay-150 rounded-lg overflow-hidden flex `}>
         <div className="lg:h-[200px] lg:w-[400px] h-[150px] w-[300px] flex flex-col justify-center items-center p-3 bg-blue-400">
