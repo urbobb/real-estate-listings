@@ -5,19 +5,24 @@ import ListingsCard from "@/app/components/ListingsCard";
 
 interface Listing {
   id: number;
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   price: number;
   location: string;
-  zipCode: number;
-  propertyType: string;
+  zipCode?: number;
+  propertyType?: string;
   bedrooms: number;
-  bathrooms: number;
+  bathrooms?: number;
   area: number;
-  energyclass: string;
-  listingType: string;
-  createdAt: string;
-  updatedAt: string;
+  energyclass?: string;
+  floors?: number;
+  buildingFloors?: number;
+  elevator?: boolean;
+  furnished?: string;
+  balcony?: boolean;
+  garage?: number;
+  heating?: string;
+  listingType?: string;
   images: Image[];
 }
 
@@ -52,7 +57,6 @@ export default function Listings() {
   });
   const [priceState, setPriceState] = useState(250000);
   const [dataReceivedDB, setDataReceivedDB] = useState<Listing[]>([]);
-  const [imagesUrl, setImagesUrl] = useState<string[]>([]);
 
   const inputStyles = `w-full mb-2 min-h-max outline-0 text-[1.1em] 
   border-b-2 border-stone-400 focus:border-stone-200 transition duration-300
@@ -73,10 +77,6 @@ export default function Listings() {
         if (response.ok) {
           const data = await response.json();
           setDataReceivedDB(data);
-          const allImagesUrls = data.map((listing: Listing) =>
-            listing.images.map((image) => image.url)
-          );
-          setImagesUrl(allImagesUrls);
         } else {
           const error = await response.json();
           console.error("Data fetching failed", error.message);
@@ -113,17 +113,6 @@ export default function Listings() {
     } catch (err) {
       console.error("Data fetching failed Step: ", err);
     }
-
-    // setTypeState({
-    //   FOR_SALE: false,
-    //   FOR_RENT: false,
-    // });
-    // setCatergoryState({
-    //   HOUSE: false,
-    //   APARTMENT: false,
-    //   Villa: false,
-    //   Business: false,
-    // });
   };
 
   const handleTypeCheckboxChange = async (name: keyof TypeState) => {
@@ -318,7 +307,7 @@ export default function Listings() {
             {dataReceivedDB.map((house) => (
               <div className={`flex box-border`} key={house.id}>
                 <ListingsCard
-                  image={house.images[0].url}
+                  images={house.images}
                   location={house.location}
                   area={house.area}
                   bedrooms={house.bedrooms}

@@ -73,7 +73,7 @@ export default function ImageGallery({ images, clicked, listingType }: Images) {
            clicked ? "scale-up-image" : ""
          }`}>
           <Carousel setApi={setApi}>
-            <CarouselContent className="w-full ">
+            <CarouselContent className="">
               {thumbnailImages.map((image: any, idx: any) => (
                 <CarouselItem
                   key={idx}
@@ -81,7 +81,7 @@ export default function ImageGallery({ images, clicked, listingType }: Images) {
                   <img
                     src={`https://homefinderr-images.s3.eu-north-1.amazonaws.com/${image}`}
                     alt="image"
-                    className={`${onClickImageStyle} object-cover object-center aspect-square `}
+                    className={`${onClickImageStyle} object-cover object-center`}
                   />
                   <span
                     className={`absolute left- top-0 rounded-br-lg ${tagStyle} px-3 py-1.5 uppercase tracking-wider text-white`}>

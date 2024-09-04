@@ -107,7 +107,7 @@ const GetListings = ({}: Props) => {
         {dataReceivedDB.map((house) => (
           <div className={`flex box-border`} key={house.id}>
             <ListingsCard
-              image={house.images[0].url}
+              images={house.images}
               location={house.location}
               area={house.area}
               bedrooms={house.bedrooms}

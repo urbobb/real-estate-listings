@@ -285,7 +285,7 @@ const SearchBarListings = ({}: Props) => {
               className={`flex-[0_0_calc(20%_-_1rem)] box-border`}
               key={house.id}>
               <ListingsCard
-                image={house.images[0].url}
+                images={house.images}
                 location={house.location}
                 area={house.area}
                 bedrooms={house.bedrooms}
