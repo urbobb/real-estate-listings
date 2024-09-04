@@ -1,5 +1,6 @@
 "use client";
 import { useToast } from "@/components/ui/use-toast";
+import { revalidatePath } from "next/cache";
 import React, { useState } from "react";
 
 type Props = {};
@@ -8,6 +9,7 @@ const FormCreateListing = ({}: Props) => {
   const { toast } = useToast();
   const [file, setFile] = useState<File[]>([]);
   const [previewUrl, setPreviewUrl] = useState<string[]>([]);
+  let uploadedFiles;
   const listingDetails = [
     "Location",
     "Zip Code",
@@ -32,7 +34,7 @@ const FormCreateListing = ({}: Props) => {
   const listingDetailInputStyles = `border rounded-md w-[150px] h-[50px] p-2`;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const uploadedFiles = e.target.files ?? null;
+    uploadedFiles = e.target.files ?? null;
 
     if (uploadedFiles) {
       const filesArray = Array.from(uploadedFiles);
@@ -77,18 +79,31 @@ const FormCreateListing = ({}: Props) => {
         if (response.ok) {
           const data = await response.json();
           toast({ description: "Successfully created Listing." });
+          revalidatePath("/");
+          window.location.reload();
         } else {
           const error = await response.json();
+          toast({
+            variant: "destructive",
+            description: "An error occured. Please try again.",
+          });
           console.error("Submission failed: ", error.message);
         }
       }
     } catch (err) {
       toast({
         variant: "destructive",
-        description: "Ann error occured. Please try again.",
+        description: "An error occured. Please try again.",
       });
       console.error("Error during submission: ", err);
     }
+  };
+
+  const handleClearClick = () => {
+    // Clear the list
+    setPreviewUrl([]);
+    setFile([]);
+    uploadedFiles = null;
   };
 
   return (
@@ -174,7 +189,7 @@ const FormCreateListing = ({}: Props) => {
           Add
         </button>
       </form>
-      <div className="file-list mt-5 w-full" id="fileList">
+      <div className="file-list mt-5 w-full flex flex-col" id="fileList">
         <ul className="relative grid grid-cols-6 gap-2 h-full">
           {previewUrl.map((item, index) => (
             <img
@@ -185,6 +200,13 @@ const FormCreateListing = ({}: Props) => {
             />
           ))}
         </ul>
+        <div className="flex justify-end">
+          <button
+            onClick={handleClearClick}
+            className="p-3 mb-3 border rounded-md hover:bg-red-500">
+            Clear All
+          </button>
+        </div>
       </div>
     </div>
   );
