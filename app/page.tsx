@@ -351,7 +351,7 @@ export default function Home() {
                 ) => (
                   <div className={`flex justify-center box-border`} key={index}>
                     <ListingsCard
-                      image={house.images[0].url}
+                      images={house.images}
                       location={house.location}
                       area={house.area}
                       bedrooms={house.bedrooms}
