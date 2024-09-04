@@ -52,7 +52,7 @@ const Navbar = (props: Props) => {
           {/* Navbar links */}
           <div className={`${flexBetween} w-full gap-16`}>
             <span
-              className={`inline-flex ${logoHover} logo h-10 px-2.5 min-w-max flex items-center justify-center transition duration-500`}>
+              className={`inline-flex ${logoHover} logo text-black h-10 px-2.5 min-w-max flex items-center justify-center transition duration-500`}>
               <a
                 href="/"
                 className="inline text-lg font-extrabold tracking-widest">

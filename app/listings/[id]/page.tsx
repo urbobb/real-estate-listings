@@ -84,7 +84,11 @@ export default function List({ params }: { params: { id: string } }) {
         <div
           className="grid gap-8 md:grid-cols-1 w-full"
           onClick={handleGalleryClicked}>
-          <ImageGallery images={imagesUrl} clicked={isGalleryClicked} />
+          <ImageGallery
+            images={imagesUrl}
+            clicked={isGalleryClicked}
+            listingType={dataReceivedDB?.listingType}
+          />
         </div>
         {!isGalleryClicked ? (
           <div className="md:w-full w-11/12 mx-auto">
