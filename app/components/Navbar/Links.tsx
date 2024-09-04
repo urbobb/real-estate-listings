@@ -14,8 +14,8 @@ const Links = ({ name, enable }: Props) => {
   return (
     <a
       href={`/${lowerCasePage}`}
-      className={`${enableLink} border-2 hover:border-slate-50 rounded-md p-1.5 md:w-full min-w-max
-          tracking-widest transition duration-500 font-extrabold hover:text-white
+      className={`${enableLink}  hover:border-slate-50 rounded-md p-1.5 md:w-full min-w-max
+          tracking-widest transition duration-500 font-extrabold text-black text-[1rem] hover:text-white
           hover:bg-black flex justify-center items-center`}>
       {name}
     </a>
