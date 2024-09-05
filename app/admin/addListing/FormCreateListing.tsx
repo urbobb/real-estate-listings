@@ -66,7 +66,6 @@ const FormCreateListing = ({}: Props) => {
     const formData = new FormData(e.currentTarget);
     const files = formData.getAll("file");
     const formEntries = Object.fromEntries(formData);
-    console.log(files, file);
 
     try {
       if (file) {
@@ -79,7 +78,7 @@ const FormCreateListing = ({}: Props) => {
         if (response.ok) {
           const data = await response.json();
           toast({ description: "Successfully created Listing." });
-          revalidatePath("/");
+          //revalidatePath("/");
           window.location.reload();
         } else {
           const error = await response.json();
