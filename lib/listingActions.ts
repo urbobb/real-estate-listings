@@ -181,6 +181,9 @@ export const getAllListing = async () => {
   try {
     console.log("All");
     const getListings = await prisma.listing.findMany({
+      orderBy: {
+        id: "asc",
+      },
       include: {
         // include images
         images: {
@@ -191,7 +194,7 @@ export const getAllListing = async () => {
 
     return getListings;
   } catch (err) {
-    console.log("Error during database operation: ", err);
+    console.error("Error during database operation: ", err);
     return NextResponse.json(
       { message: "Error during data fetch", error: err },
       { status: 500 }
@@ -285,9 +288,58 @@ export async function createListing(formData: FormData) {
     });
 
     revalidatePath("/");
-    return createListing;
+    return createListings;
   } catch (err) {
     console.error("Error during database operation: ", err);
     return null;
+  }
+}
+
+export async function updateListing(formData: FormData) {
+  const dataToUpdateListing = formData;
+  const data = {
+    id: dataToUpdateListing.get("id") as string,
+    title: dataToUpdateListing.get("title") as string,
+    listingType: dataToUpdateListing.get("listingType") as string,
+  };
+  console.log("ID: ", data.id);
+  try {
+    const updateListing = await prisma.listing.update({
+      where: {
+        id: parseInt(data.id),
+      },
+      data: {
+        title: data.title,
+        listingType: data.listingType,
+      },
+    });
+
+    return updateListing;
+  } catch (err) {
+    console.error("Failed to update Listing.");
+  }
+}
+
+export async function deleteListingById(idParam: { id: string }) {
+  console.log("idParam", idParam);
+  const id = parseInt(idParam.id, 10);
+  console.log("Parsed id", id);
+
+  try {
+    await prisma.image.deleteMany({
+      where: { listingId: id },
+    });
+
+    const listingtoDelete = await prisma.listing.delete({
+      where: { id: id },
+    });
+
+    return listingtoDelete;
+  } catch (err) {
+    console.error("Error during database operation: ", err);
+    return NextResponse.json(
+      { message: "Error during data fetch", error: err },
+      { status: 500 }
+    );
   }
 }
