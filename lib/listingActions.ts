@@ -181,6 +181,9 @@ export const getAllListing = async () => {
   try {
     console.log("All");
     const getListings = await prisma.listing.findMany({
+      orderBy: {
+        id: "asc",
+      },
       include: {
         // include images
         images: {
@@ -191,7 +194,7 @@ export const getAllListing = async () => {
 
     return getListings;
   } catch (err) {
-    console.log("Error during database operation: ", err);
+    console.error("Error during database operation: ", err);
     return NextResponse.json(
       { message: "Error during data fetch", error: err },
       { status: 500 }
@@ -285,9 +288,76 @@ export async function createListing(formData: FormData) {
     });
 
     revalidatePath("/");
-    return createListing;
+    return createListings;
   } catch (err) {
     console.error("Error during database operation: ", err);
     return null;
+  }
+}
+
+export async function updateListing(formData: FormData) {
+  const dataToUpdateListing = formData;
+  const data = {
+    id: dataToUpdateListing.get("id") as string,
+    title: dataToUpdateListing.get("Title") as string,
+    description: dataToUpdateListing.get("Description") as string,
+    price: parseInt(dataToUpdateListing.get("Price") as string, 10) || 0,
+    location: dataToUpdateListing.get("Location") as string,
+    zipCode: parseInt(dataToUpdateListing.get("Zip Code") as string, 10) || 0,
+    propertyType: dataToUpdateListing.get("Property Type") as string,
+    bedrooms: parseInt(dataToUpdateListing.get("Bedrooms") as string, 10) || 0,
+    bathrooms:
+      parseInt(dataToUpdateListing.get("Bathrooms") as string, 10) || 0,
+    area: parseInt(dataToUpdateListing.get("Area") as string, 10) || 0,
+    energyclass: dataToUpdateListing.get("Energy Class") as string,
+    floors: parseInt(dataToUpdateListing.get("Floors") as string, 10) || 0,
+    buildingFloors:
+      parseInt(dataToUpdateListing.get("Building Floors") as string, 10) || 0,
+    elevator: dataToUpdateListing.get("Elevator") === "Yes" ? true : false,
+    furnished: dataToUpdateListing.get("Furnished") as string,
+    balcony: dataToUpdateListing.get("Balcony") === "Yes" ? true : false,
+    garage: parseInt(dataToUpdateListing.get("Garage") as string, 10) || 0,
+    heating: dataToUpdateListing.get("Heating") as string,
+    listingType: dataToUpdateListing.get("Listing Type") as string,
+  };
+  console.log("ID: ", data.id);
+  try {
+    const updateListing = await prisma.listing.update({
+      where: {
+        id: parseInt(data.id),
+      },
+      data: {
+        title: data.title,
+        listingType: data.listingType,
+      },
+    });
+
+    return updateListing;
+  } catch (err) {
+    console.error("Failed to update Listing.");
+  }
+}
+
+export async function deleteListingById(idParam: { id: string }) {
+  console.log("idParam", idParam);
+  const id = parseInt(idParam.id, 10);
+  console.log("Parsed id", id);
+
+  try {
+    await prisma.image.deleteMany({
+      where: { listingId: id },
+    });
+
+    const listingtoDelete = await prisma.listing.delete({
+      where: { id: id },
+    });
+
+    return listingtoDelete;
+  } catch (err) {
+    console.error("Error during database operation: ", err);
+    return NextResponse.json(
+      { message: "Error during data fetch", error: err },
+      { status: 500 }
+    );
   }
 }
