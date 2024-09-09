@@ -217,8 +217,11 @@ export default function Home() {
                       border-b-2 border-stone-400 focus:border-stone-200 
                       transition duration-300 bg-transparent">
                     <option value="All above">All above</option>
-                    <option value="New York">New York</option>
-                    <option value="Miami">Miami</option>
+                    <option value="Milan">Milan</option>
+                    <option value="Turin">Turin</option>
+                    <option value="Genoa">Genoa</option>
+                    <option value="Verona">Verona</option>
+                    <option value="Venice">Venice</option>
                   </select>
                 </div>
                 <button
