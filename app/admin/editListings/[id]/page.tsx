@@ -109,8 +109,7 @@ export default function EditListing({ params }: { params: { id: string } }) {
         if (response.ok) {
           const data = await response.json();
           setDataReceivedDB(data);
-          console.log(data);
-          toast({ description: "Successfully deleted Listing." });
+          toast({ description: "Successfully fetched Listing." });
           if (data && data.images) {
             const urls = data.images.map((image: any) => image.url);
             setImagesUrl(urls);
@@ -124,7 +123,7 @@ export default function EditListing({ params }: { params: { id: string } }) {
           console.error("Data fetching failed", err.message);
         }
       } catch (err) {
-        console.error("Data fetching failed Step: ", err);
+        console.error("Data fetching failed: ", err);
       }
     }
     fetchListing();
@@ -144,11 +143,25 @@ export default function EditListing({ params }: { params: { id: string } }) {
         });
 
         if (response.ok) {
+          const data = await response.json();
+          toast({ description: "Successfully updated Listing." });
+          //revalidatePath("/");
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
         } else {
-          const error = response.json();
-          console.error("Fetching Failed:", error);
+          const error = await response.json();
+          toast({
+            variant: "destructive",
+            description: "An error occured. Please try again.",
+          });
         }
-      } catch (err) {}
+      } catch (err) {
+        toast({
+          variant: "destructive",
+          description: "An error occured. Please try again.",
+        });
+      }
     }
     updateListing();
   };
@@ -386,6 +399,7 @@ export default function EditListing({ params }: { params: { id: string } }) {
                         type="text"
                         value={values.id}
                         name={"id"}
+                        onChange={() => {}}
                         className="text-justify"
                       />
                     </div>

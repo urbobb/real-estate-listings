@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getListingById, updateListing } from "@/lib/listingActions";
 
-export async function PUT(req: NextRequest) {
+export async function PUT(req: NextRequest, res: NextResponse) {
   console.log("PUTTTTTTTTTTT");
   if (req.method !== "PUT") {
     return NextResponse.json(
@@ -12,9 +12,8 @@ export async function PUT(req: NextRequest) {
 
   try {
     // Parse JSON body
-    const formEntries = await req.formData();
-    console.log("data", formEntries);
-    const updatedListing = await updateListing(formEntries);
+    const formData = await req.formData(); // Parse JSON body
+    const updatedListing = await updateListing(formData);
     return NextResponse.json(updatedListing, { status: 200 });
   } catch (err) {
     console.error("Failed to fetch data", err);
