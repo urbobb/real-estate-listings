@@ -299,28 +299,28 @@ export async function updateListing(formData: FormData) {
   const dataToUpdateListing = formData;
   const data = {
     id: dataToUpdateListing.get("id") as string,
-    title: dataToUpdateListing.get("Title") as string,
-    description: dataToUpdateListing.get("Description") as string,
-    price: parseInt(dataToUpdateListing.get("Price") as string, 10) || 0,
-    location: dataToUpdateListing.get("Location") as string,
-    zipCode: parseInt(dataToUpdateListing.get("Zip Code") as string, 10) || 0,
-    propertyType: dataToUpdateListing.get("Property Type") as string,
-    bedrooms: parseInt(dataToUpdateListing.get("Bedrooms") as string, 10) || 0,
+    title: dataToUpdateListing.get("title") as string,
+    description: dataToUpdateListing.get("description") as string,
+    price: parseInt(dataToUpdateListing.get("price") as string, 10) || 0,
+    location: dataToUpdateListing.get("location") as string,
+    zipCode: parseInt(dataToUpdateListing.get("zipCode") as string, 10) || 0,
+    propertyType: dataToUpdateListing.get("propertyType") as string,
+    bedrooms: parseInt(dataToUpdateListing.get("bedrooms") as string, 10) || 0,
     bathrooms:
-      parseInt(dataToUpdateListing.get("Bathrooms") as string, 10) || 0,
-    area: parseInt(dataToUpdateListing.get("Area") as string, 10) || 0,
-    energyclass: dataToUpdateListing.get("Energy Class") as string,
-    floors: parseInt(dataToUpdateListing.get("Floors") as string, 10) || 0,
+      parseInt(dataToUpdateListing.get("bathrooms") as string, 10) || 0,
+    area: parseInt(dataToUpdateListing.get("area") as string, 10) || 0,
+    energyclass: dataToUpdateListing.get("energyclass") as string,
+    floors: parseInt(dataToUpdateListing.get("floors") as string, 10) || 0,
     buildingFloors:
-      parseInt(dataToUpdateListing.get("Building Floors") as string, 10) || 0,
-    elevator: dataToUpdateListing.get("Elevator") === "Yes" ? true : false,
-    furnished: dataToUpdateListing.get("Furnished") as string,
-    balcony: dataToUpdateListing.get("Balcony") === "Yes" ? true : false,
-    garage: parseInt(dataToUpdateListing.get("Garage") as string, 10) || 0,
-    heating: dataToUpdateListing.get("Heating") as string,
-    listingType: dataToUpdateListing.get("Listing Type") as string,
+      parseInt(dataToUpdateListing.get("buildingFloors") as string, 10) || 0,
+    elevator: dataToUpdateListing.get("elevator") === "Yes" ? true : false,
+    furnished: dataToUpdateListing.get("furnished") as string,
+    balcony: dataToUpdateListing.get("balcony") === "Yes" ? true : false,
+    garage: parseInt(dataToUpdateListing.get("garage") as string, 10) || 0,
+    heating: dataToUpdateListing.get("heating") as string,
+    listingType: dataToUpdateListing.get("listingType") as string,
   };
-  console.log("ID: ", data.id);
+
   try {
     const updateListing = await prisma.listing.update({
       where: {
@@ -328,10 +328,25 @@ export async function updateListing(formData: FormData) {
       },
       data: {
         title: data.title,
+        description: data.description,
+        price: data.price,
+        location: data.location,
+        zipCode: data.zipCode,
+        propertyType: data.propertyType,
+        bedrooms: data.bedrooms,
+        bathrooms: data.bathrooms,
+        area: data.area,
+        energyclass: data.energyclass,
+        floors: data.floors,
+        buildingFloors: data.buildingFloors,
+        elevator: data.elevator,
+        furnished: data.furnished,
+        balcony: data.balcony,
+        garage: data.garage,
+        heating: data.heating,
         listingType: data.listingType,
       },
     });
-
     return updateListing;
   } catch (err) {
     console.error("Failed to update Listing.");
@@ -339,9 +354,7 @@ export async function updateListing(formData: FormData) {
 }
 
 export async function deleteListingById(idParam: { id: string }) {
-  console.log("idParam", idParam);
   const id = parseInt(idParam.id, 10);
-  console.log("Parsed id", id);
 
   try {
     await prisma.image.deleteMany({
