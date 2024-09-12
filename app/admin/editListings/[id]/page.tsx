@@ -1,11 +1,5 @@
 "use client";
-import React, {
-  ChangeEvent,
-  ReactEventHandler,
-  useEffect,
-  useState,
-} from "react";
-import ContactInfo from "@/app/components/ContactInfo";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import ImageGallery from "@/app/components/ImageGallery";
 import balcony from "@/app/assets/balcony.png";
 import Image from "next/image";
@@ -207,7 +201,6 @@ export default function EditListing({ params }: { params: { id: string } }) {
                             onChange={handleInputChange}
                             className="font-bold text-xl p-2 w-auto max-auto-fit"
                           />
-
                           <div className="flex flex-row gap-5">
                             <p>
                               <i className="fa-solid fa-bed"></i>
@@ -312,13 +305,21 @@ export default function EditListing({ params }: { params: { id: string } }) {
                             onChange={handleInputChange}
                             icon={`fa-solid fa-elevator mr-2`}
                           />
-                          <ListingDetailItem
-                            title={"Area"}
-                            name={"area"}
-                            content={`${values.area}m²`}
-                            onChange={handleInputChange}
-                            icon={`fa-solid fa-elevator mr-2`}
-                          />
+
+                          <div className={`${detailsStyle}`}>
+                            <h2 className="font-semibold md:text-base text-[0.9rem]">
+                              <i className="fa-solid fa-ruler mr-2"></i>
+                              Area in m&#178;
+                            </h2>
+                            <input
+                              type="text"
+                              name="area"
+                              className={`${detailsContentStyle}`}
+                              value={values.area}
+                              onChange={handleInputChange}
+                            />
+                          </div>
+
                           <ListingDetailItem
                             title={"Bedrooms"}
                             name={"bedrooms"}
