@@ -6,6 +6,7 @@ import balcony from "@/app/assets/balcony.png";
 import Image from "next/image";
 import ListingDetailItem from "@/app/components/ListingDetailItem";
 import { usePathname } from "next/navigation";
+import { toast } from "@/components/ui/use-toast";
 
 interface Listing {
   id?: number;
@@ -74,6 +75,32 @@ export default function List({ params }: { params: { id: string } }) {
     }
     fetchListing();
   }, [pathname]);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const formEntries = Object.fromEntries(formData);
+    console.log("formData", formEntries);
+
+    async function sendEmail() {
+      try {
+        const response = await fetch(`/api/send`, {
+          method: "POST",
+          body: formData,
+        });
+
+        if (response.ok) {
+          toast({ description: "Successfully sent message." });
+        } else {
+          const error = await response.json();
+          console.error("Data fetching failed", error.message);
+        }
+      } catch (error) {
+        console.log("Couldn't send email", error);
+      }
+    }
+    sendEmail();
+  };
 
   const handleGalleryClicked = () => {};
 
@@ -228,7 +255,7 @@ export default function List({ params }: { params: { id: string } }) {
                 </div>
               </div>
               <div className="relative flex justify-center h-full border rounded-lg md:mt-0 mt-10">
-                <ContactInfo />
+                <ContactInfo id={dataReceivedDB?.id} onSubmit={handleSubmit} />
               </div>
             </div>
           </div>
