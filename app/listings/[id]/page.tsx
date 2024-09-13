@@ -76,7 +76,7 @@ export default function List({ params }: { params: { id: string } }) {
     fetchListing();
   }, [pathname]);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleEmailSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const formEntries = Object.fromEntries(formData);
@@ -90,7 +90,13 @@ export default function List({ params }: { params: { id: string } }) {
         });
 
         if (response.ok) {
-          toast({ description: "Successfully sent message." });
+          toast({
+            variant: "success",
+            description: "Successfully sent message.",
+          });
+          setInterval(() => {
+            window.location.reload();
+          }, 1500);
         } else {
           const error = await response.json();
           console.error("Data fetching failed", error.message);
@@ -255,7 +261,10 @@ export default function List({ params }: { params: { id: string } }) {
                 </div>
               </div>
               <div className="relative flex justify-center h-full border rounded-lg md:mt-0 mt-10">
-                <ContactInfo id={dataReceivedDB?.id} onSubmit={handleSubmit} />
+                <ContactInfo
+                  id={dataReceivedDB?.id}
+                  onSubmit={handleEmailSubmit}
+                />
               </div>
             </div>
           </div>
