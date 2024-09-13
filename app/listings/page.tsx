@@ -2,35 +2,7 @@
 import React, { useEffect, useState } from "react";
 import SearchCheckbox from "@/app/components/SearchCheckbox";
 import ListingsCard from "@/app/components/ListingsCard";
-
-interface Listing {
-  id: number;
-  title?: string;
-  description?: string;
-  price: number;
-  location: string;
-  zipCode?: number;
-  propertyType?: string;
-  bedrooms: number;
-  bathrooms?: number;
-  area: number;
-  energyclass?: string;
-  floors?: number;
-  buildingFloors?: number;
-  elevator?: boolean;
-  furnished?: string;
-  balcony?: boolean;
-  garage?: number;
-  heating?: string;
-  listingType?: string;
-  images: Image[];
-}
-
-interface Image {
-  id: number;
-  url: string;
-  listingId: number;
-}
+import { Listing } from "@/lib/types";
 
 type TypeState = {
   Sale: boolean;

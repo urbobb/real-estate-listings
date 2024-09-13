@@ -7,34 +7,10 @@ import { PresentationControls } from "@react-three/drei";
 import useMediaQuery from "@/app/hooks/userMediaQuery";
 import dynamic from "next/dynamic";
 import ListingsCard from "@/app/components/ListingsCard";
-import { houses } from "@/app/shared/HousesList";
 import Contact from "./components/Contact";
 import IconAboutUs from "@/public/Icon_AboutUs.png";
 import GoogleMapComponent from "./components/GoogleMapComponent";
-
-interface Listing {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  location: string;
-  zipCode: number;
-  propertyType: string;
-  bedrooms: number;
-  bathrooms: number;
-  area: number;
-  energyclass: string;
-  listingType: string;
-  createdAt: string;
-  updatedAt: string;
-  images: Image[];
-}
-
-interface Image {
-  id: number;
-  url: string;
-  listingId: number;
-}
+import { Listing } from "@/lib/types";
 
 interface AutoRotatingGroupProps {
   children: React.ReactNode;
@@ -131,6 +107,8 @@ export default function Home() {
     document.querySelector(".cookie-alert")?.classList.add("hide");
   }
 
+  const handleSearchSubmit = () => {};
+
   return (
     <main className="md:mt-10 md:p-24 pt-24 my-auto">
       {/* HOME */}
@@ -197,7 +175,7 @@ export default function Home() {
 
         <div className="w-full leftSlide ">
           {/* SEARCH LISTINGS */}
-          <form action="">
+          <form onSubmit={handleSearchSubmit} action={"/listings"}>
             <div
               className="sponsor md:w-11/12 w-5/6 mx-auto py-5 
               h-[150px]">
@@ -206,13 +184,14 @@ export default function Home() {
               </div>
               <div
                 className="md:w-1/3 w-full pl-2 flex justify-between gap-3
-
-                border border-black pointer-events-none opacity-30">
+                border border-black ">
                 <div className="flex justify-start items-center w-full">
                   <label className="basis-1/6" htmlFor="city">
                     City:
                   </label>
                   <select
+                    name="cities"
+                    id="cities"
                     className="basis-auto w-full min-h-max outline-0 md:text-[1.2em] text-[1em]
                       border-b-2 border-stone-400 focus:border-stone-200 
                       transition duration-300 bg-transparent">

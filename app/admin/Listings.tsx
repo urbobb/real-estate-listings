@@ -1,31 +1,8 @@
 "use client";
 import { toast } from "@/components/ui/use-toast";
+import { Listing } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-
-interface Listing {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  location: string;
-  zipCode: number;
-  propertyType: string;
-  bedrooms: number;
-  bathrooms: number;
-  area: number;
-  energyclass: string;
-  listingType: string;
-  createdAt: string;
-  updatedAt: string;
-  images: Image[];
-}
-
-interface Image {
-  id: number;
-  url: string;
-  listingId: number;
-}
 
 const Listings = () => {
   const router = useRouter();

@@ -6,39 +6,11 @@ import Image from "next/image";
 import ListingDetailItem from "./ListingDetailitem";
 import { usePathname } from "next/navigation";
 import { toast } from "@/components/ui/use-toast";
-
-interface Listing {
-  id?: number;
-  title?: string;
-  description?: string;
-  price?: number;
-  location?: string;
-  zipCode?: number;
-  propertyType?: string;
-  bedrooms?: number;
-  bathrooms?: number;
-  area?: number;
-  energyclass?: string;
-  floors?: number;
-  buildingFloors?: number;
-  elevator?: boolean;
-  furnished?: string;
-  balcony?: boolean;
-  garage?: number;
-  heating?: string;
-  listingType?: string;
-  images: Image;
-}
-
-interface Image {
-  id: number;
-  url: string;
-  listingId: number;
-}
+import { ListingId } from "@/lib/types";
 
 export default function EditListing({ params }: { params: { id: string } }) {
   const pathname = usePathname();
-  const [dataReceivedDB, setDataReceivedDB] = useState<Listing | null>(null);
+  const [dataReceivedDB, setDataReceivedDB] = useState<ListingId | null>(null);
   const [imagesUrl, setImagesUrl] = useState<string[]>([]);
   const [isGalleryClicked, setIsGalleryClicked] = useState<boolean>(false);
   const [values, setValues] = useState({
