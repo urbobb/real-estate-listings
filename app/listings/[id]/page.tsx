@@ -7,39 +7,11 @@ import Image from "next/image";
 import ListingDetailItem from "@/app/components/ListingDetailItem";
 import { usePathname } from "next/navigation";
 import { toast } from "@/components/ui/use-toast";
-
-interface Listing {
-  id?: number;
-  title?: string;
-  description?: string;
-  price?: number;
-  location?: string;
-  zipCode?: number;
-  propertyType?: string;
-  bedrooms?: number;
-  bathrooms?: number;
-  area?: number;
-  energyclass?: string;
-  floors?: number;
-  buildingFloors?: number;
-  elevator?: boolean;
-  furnished?: string;
-  balcony?: boolean;
-  garage?: number;
-  heating?: string;
-  listingType?: string;
-  images: Image;
-}
-
-interface Image {
-  id: number;
-  url: string;
-  listingId: number;
-}
+import { ListingId } from "@/lib/types";
 
 export default function List({ params }: { params: { id: string } }) {
   const pathname = usePathname();
-  const [dataReceivedDB, setDataReceivedDB] = useState<Listing | null>(null);
+  const [dataReceivedDB, setDataReceivedDB] = useState<ListingId | null>(null);
   const [imagesUrl, setImagesUrl] = useState<string[]>([]);
   const [isGalleryClicked, setIsGalleryClicked] = useState<boolean>(false);
 
@@ -76,7 +48,7 @@ export default function List({ params }: { params: { id: string } }) {
     fetchListing();
   }, [pathname]);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleEmailSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const formEntries = Object.fromEntries(formData);
@@ -90,7 +62,13 @@ export default function List({ params }: { params: { id: string } }) {
         });
 
         if (response.ok) {
-          toast({ description: "Successfully sent message." });
+          toast({
+            variant: "success",
+            description: "Successfully sent message.",
+          });
+          setInterval(() => {
+            window.location.reload();
+          }, 1500);
         } else {
           const error = await response.json();
           console.error("Data fetching failed", error.message);
@@ -255,7 +233,10 @@ export default function List({ params }: { params: { id: string } }) {
                 </div>
               </div>
               <div className="relative flex justify-center h-full border rounded-lg md:mt-0 mt-10">
-                <ContactInfo id={dataReceivedDB?.id} onSubmit={handleSubmit} />
+                <ContactInfo
+                  id={dataReceivedDB?.id}
+                  onSubmit={handleEmailSubmit}
+                />
               </div>
             </div>
           </div>

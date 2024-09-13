@@ -18,5 +18,6 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
     <p>Phone number: {phone}</p>
     <p>Message: {message}</p>
     <p>ID: {id}</p>
+    <a href={`https://home-finderr.vercel.app/listings/${id}`}>Link</a>
   </div>
 );

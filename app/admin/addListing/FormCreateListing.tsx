@@ -1,6 +1,5 @@
 "use client";
 import { useToast } from "@/components/ui/use-toast";
-import { revalidatePath } from "next/cache";
 import React, { useState } from "react";
 
 type Props = {};
@@ -64,8 +63,6 @@ const FormCreateListing = ({}: Props) => {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const files = formData.getAll("file");
-    const formEntries = Object.fromEntries(formData);
 
     try {
       if (file) {
