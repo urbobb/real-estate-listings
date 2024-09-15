@@ -71,7 +71,7 @@ function SearchWrapper() {
       try {
         const response = await fetch("/api/listings", {
           method: "POST",
-          body: JSON.stringify(url !== null ? url : "GETALL"),
+          body: JSON.stringify(url !== "" ? url : "GETALL"),
           headers: { "Content-Type": "application/json" },
         });
 
