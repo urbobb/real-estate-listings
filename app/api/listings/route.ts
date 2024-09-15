@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
   try {
     // Parse JSON body
     const formEntries = await req.json();
-
+    console.log("formEntries", formEntries);
     if (formEntries === "GETALL") {
       const listing = await getAllListing();
       return NextResponse.json(listing, { status: 200 });

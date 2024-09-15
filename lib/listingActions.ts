@@ -5,23 +5,18 @@ import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { v4 as uuidv4 } from "uuid";
 import { revalidatePath } from "next/cache";
 
-interface FormEntries {
-  id?: number;
-  title?: string;
-  description?: string;
-  price: number;
-  location?: string;
-  zipCode?: number;
-  propertyType?: string;
-  bedrooms?: number;
-  bathrooms?: number;
-  area?: number;
-  energyclass?: string;
-  listingType?: string;
+interface SearchData {
+  params: SearchParams;
 }
 
-interface SearchData {
-  formEntries: FormEntries;
+interface SearchParams {
+  minPrice?: number | null;
+  maxPrice?: number | null;
+  location?: string;
+  propertyType?: string;
+  minArea?: number | null;
+  maxArea?: number | null;
+  listingType?: string;
 }
 
 const s3 = new S3Client({
@@ -58,81 +53,51 @@ export async function uploadFileToAWS(buffer: Buffer, uniqueFileName: string) {
   //return { success: { url: signedURL } };
 }
 
-export const getListing = async (searchData: SearchData) => {
-  const { formEntries } = searchData;
+export const getListing = async (searchData: any) => {
+  const { params } = searchData;
+
+  console.log("formEntries DB:", params);
+
   try {
     if (searchData) {
-      const areaCondtions: any = {};
-      const priceConditions: any = {};
-      const area = formEntries.area;
-      const price = formEntries.price;
-
-      if (area !== undefined) {
-        //Determine the area condition based on the formEntries.area value
-        if (area <= 60) {
-          areaCondtions.lte = 60; // less than 60
-        } else if (area === 70) {
-          areaCondtions.gte = 60;
-          areaCondtions.lte = 71; // Between 60 and 70
-        } else if (area === 80) {
-          areaCondtions.gte = 70;
-          areaCondtions.lte = 81; // Between 70 and 80
-        } else if (area.toString() === "<90") {
-          areaCondtions.gte = 80;
-          areaCondtions.lte = 91; // Between 80 and 90
-        } else if (area.toString() === ">90") {
-          areaCondtions.gte = 90;
-        }
+      let areaCondtions: any = {};
+      let priceConditions: any = {};
+      const minPrice = (parseInt(params?.minPrice) as number) || null;
+      const maxPrice = (parseInt(params?.maxPrice) as number) || null;
+      const minArea = (parseInt(params?.minArea) as number) || null;
+      const maxArea = (parseInt(params?.maxArea) as number) || null;
+      if (minArea === null && maxArea === null) {
+        areaCondtions = {};
+      } else if (minArea === null && maxArea !== null) {
+        areaCondtions.lte = maxArea;
+      } else if (minArea !== null && maxArea === null) {
+        areaCondtions.gte = minArea;
+      } else {
+        areaCondtions.gte = minArea;
+        areaCondtions.lte = maxArea;
       }
-
-      if (price !== undefined) {
-        if (price < 1000000) {
-          priceConditions.lte = 1000000;
-        } else if (price >= 1000000) {
-          priceConditions.gte = 100000;
-        }
+      if (minPrice === null && maxPrice === null) {
+        priceConditions = {};
+      } else if (minPrice === null && maxPrice !== null) {
+        priceConditions.lte = maxPrice;
+      } else if (minPrice !== null && maxPrice === null) {
+        priceConditions.gte = minPrice;
+      } else {
+        priceConditions.gte = minPrice;
+        priceConditions.lte = maxPrice;
       }
-
-      const query = {
-        where: {
-          ...(formEntries.price && {
-            price: priceConditions, // Filter based on price less than the provided value
-          }),
-          ...(formEntries.location && {
-            location: formEntries.location,
-          }),
-          ...(formEntries.propertyType && {
-            propertyType: formEntries.propertyType,
-          }),
-          ...(formEntries.area && {
-            area: areaCondtions,
-          }),
-          ...(formEntries.listingType && {
-            listingType: formEntries.listingType,
-          }),
-        },
-        include: {
-          images: {
-            orderBy: [{ id: "desc" }],
-          },
-        },
-      };
       const getListings = await prisma.listing.findMany({
         where: {
-          ...(formEntries.price && {
-            price: priceConditions, // Filter based on price less than the provided value
+          price: priceConditions, // Filter based on price less than the provided value
+          ...(params?.location && {
+            location: params?.location,
           }),
-          ...(formEntries.location && {
-            location: formEntries.location,
+          ...(params?.propertyType && {
+            propertyType: params?.propertyType,
           }),
-          ...(formEntries.propertyType && {
-            propertyType: formEntries.propertyType,
-          }),
-          ...(formEntries.area && {
-            area: areaCondtions,
-          }),
-          ...(formEntries.listingType && {
-            listingType: formEntries.listingType,
+          area: areaCondtions,
+          ...(params?.listingType && {
+            listingType: params?.listingType,
           }),
         },
         include: {
