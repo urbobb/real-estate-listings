@@ -52,7 +52,7 @@ const useParseSearchParams = (): SearchParamsObject => {
   return parsedParams;
 };
 
-export default function Listings() {
+function SearchWrapper() {
   const [dataReceivedDB, setDataReceivedDB] = useState<Listing[]>([]);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -127,50 +127,58 @@ export default function Listings() {
   };
 
   return (
-    <div className="relative md:min-h-screen md:w-screen w-full mx-auto pt-20">
-      <div className="flex md:flex-row flex-col md:w-screen w-full md:min-h-screen  ">
-        {/* SEARCHBAR */}
-        <div
-          className="flex md:min-h-screen justify-center items-center
+    <>
+      {/* SEARCHBAR */}
+      <div
+        className="flex md:min-h-screen justify-center items-center
           w-full md:w-[400px] bg-[#fcf9fd]">
-          {" "}
-          {/*bg-[#FEFCFF]*/}
-          <div
-            className="relative md:fixed md:top-0 flex flex-col justify-center items-center min-h-max 
+        {" "}
+        {/*bg-[#FEFCFF]*/}
+        <div
+          className="relative md:fixed md:top-0 flex flex-col justify-center items-center min-h-max 
             md:w-auto w-11/12 mx-auto md:pt-28">
-            {/* TITLE */}
-            <div className="flex md:justify-start justify-center md:mb-5 mb-2 sm:mx-5 md:mt-0 mt-5">
-              <h1 className="md:text-[1.3rem] text-[1.5rem] md:font-extrabold font-semibold tracking-[10px]">
-                Search
-              </h1>
-            </div>
+          {/* TITLE */}
+          <div className="flex md:justify-start justify-center md:mb-5 mb-2 sm:mx-5 md:mt-0 mt-5">
+            <h1 className="md:text-[1.3rem] text-[1.5rem] md:font-extrabold font-semibold tracking-[10px]">
+              Search
+            </h1>
+          </div>
 
-            {/* FORM */}
-            <div className="md:w-auto w-full mx-auto mt-5">
-              <Suspense>
-                <SearchListings onSearch={handleSearch} />
-              </Suspense>
-            </div>
+          {/* FORM */}
+          <div className="md:w-auto w-full mx-auto mt-5">
+            <SearchListings onSearch={handleSearch} />
           </div>
         </div>
+      </div>
 
-        {/* Houses */}
-        <div className="w-full mx-auto flex justify-center pt-20 ">
-          <div className="flex justify-center md:items-start items-center flex-row flex-wrap gap-y-5 gap-x-28">
-            {dataReceivedDB.map((house) => (
-              <div className={`flex box-border`} key={house.id}>
-                <ListingsCard
-                  images={house.images}
-                  location={house.location}
-                  area={house.area}
-                  bedrooms={house.bedrooms}
-                  price={house.price}
-                  id={house.id}
-                />
-              </div>
-            ))}
-          </div>
+      {/* Houses */}
+      <div className="w-full mx-auto flex justify-center pt-20 ">
+        <div className="flex justify-center md:items-start items-center flex-row flex-wrap gap-y-5 gap-x-28">
+          {dataReceivedDB.map((house) => (
+            <div className={`flex box-border`} key={house.id}>
+              <ListingsCard
+                images={house.images}
+                location={house.location}
+                area={house.area}
+                bedrooms={house.bedrooms}
+                price={house.price}
+                id={house.id}
+              />
+            </div>
+          ))}
         </div>
+      </div>
+    </>
+  );
+}
+
+export default function Listings() {
+  return (
+    <div className="relative md:min-h-screen md:w-screen w-full mx-auto pt-20">
+      <div className="flex md:flex-row flex-col md:w-screen w-full md:min-h-screen">
+        <Suspense fallback={<div>Loading...</div>}>
+          <SearchWrapper />
+        </Suspense>
       </div>
     </div>
   );
