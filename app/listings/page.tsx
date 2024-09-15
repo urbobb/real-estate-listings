@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import ListingsCard from "@/app/components/ListingsCard";
 import { Listing } from "@/lib/types";
 import SearchListings from "../components/SearchListings";
@@ -147,7 +147,9 @@ export default function Listings() {
 
             {/* FORM */}
             <div className="md:w-auto w-full mx-auto mt-5">
-              <SearchListings onSearch={handleSearch} />
+              <Suspense>
+                <SearchListings onSearch={handleSearch} />
+              </Suspense>
             </div>
           </div>
         </div>
