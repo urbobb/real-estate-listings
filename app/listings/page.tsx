@@ -63,15 +63,17 @@ function SearchWrapper() {
   useEffect(() => {
     //This useEffect acts as componentDidMount. It will only run once when the component mounts, since the dependency array is empty
     async function fetchAllListings() {
-      if (url !== null) {
-        console.log(url);
+      if (url !== "") {
+        console.log("Location", typeof url);
       }
       const entries = Object.entries(url);
+      const params = parsedParams;
+      console.log("Location", params);
 
       try {
         const response = await fetch("/api/listings", {
           method: "POST",
-          body: JSON.stringify(url !== "" ? url : "GETALL"),
+          body: JSON.stringify(url === "" ? "GETALL" : { params }),
           headers: { "Content-Type": "application/json" },
         });
 
@@ -88,7 +90,7 @@ function SearchWrapper() {
     }
 
     fetchAllListings();
-  }, []);
+  }, [url]);
 
   const handleSearch = async (params: SearchParams) => {
     // Create a new URLSearchParams object
