@@ -11,6 +11,8 @@ import Contact from "./components/Contact";
 import IconAboutUs from "@/public/Icon_AboutUs.png";
 import GoogleMapComponent from "./components/GoogleMapComponent";
 import { Listing } from "@/lib/types";
+import CitySearch from "./components/CitySearch";
+import SearchComponent from "./components/SearchListings";
 
 interface AutoRotatingGroupProps {
   children: React.ReactNode;
@@ -109,10 +111,14 @@ export default function Home() {
 
   const handleSearchSubmit = () => {};
 
+  const handleSearch = (params: any) => {
+    // This function is not needed on the home page as the component will handle navigation
+    console.log("Search params:", params);
+  };
+
   return (
     <main className="md:mt-10 md:p-24 pt-24 my-auto">
       {/* HOME */}
-
       {/* PROMPT */}
       <div
         className={`cookie-alert fixed bottom-[15px] right-[15px] w-[320px] m-0 z-[999] opacity-[1] translate-y-0 transition-all ease-out delay-150 rounded-lg overflow-hidden flex `}>
@@ -174,43 +180,8 @@ export default function Home() {
         </div>
 
         <div className="w-full leftSlide ">
-          {/* SEARCH LISTINGS */}
-          <form onSubmit={handleSearchSubmit} action={"/listings"}>
-            <div
-              className="sponsor md:w-11/12 w-5/6 mx-auto py-5 
-              h-[150px]">
-              <div className="pl-2 mb-3">
-                <h1 className="text-2xl font-bold">Search</h1>
-              </div>
-              <div
-                className="md:w-1/3 w-full pl-2 flex justify-between gap-3
-                border border-black ">
-                <div className="flex justify-start items-center w-full">
-                  <label className="basis-1/6" htmlFor="city">
-                    City:
-                  </label>
-                  <select
-                    name="cities"
-                    id="cities"
-                    className="basis-auto w-full min-h-max outline-0 md:text-[1.2em] text-[1em]
-                      border-b-2 border-stone-400 focus:border-stone-200 
-                      transition duration-300 bg-transparent">
-                    <option value="All above">All above</option>
-                    <option value="Milan">Milan</option>
-                    <option value="Turin">Turin</option>
-                    <option value="Genoa">Genoa</option>
-                    <option value="Verona">Verona</option>
-                    <option value="Venice">Venice</option>
-                  </select>
-                </div>
-                <button
-                  className="rounded-full border-2 border-slate-50 
-                  px-3 py-2 transition duration-500 hover:text-black hover:bg-white">
-                  <i className="fa-solid fa-magnifying-glass"></i>
-                </button>
-              </div>
-            </div>
-          </form>
+          {/* SEARCH LISTINGS BY CITY */}
+          <CitySearch />
         </div>
       </section>
 
