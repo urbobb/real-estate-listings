@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 const CitySearch: React.FC = () => {
   const router = useRouter();
-  const [selectedCity, setSelectedCity] = useState("");
+  const [selectedCity, setSelectedCity] = useState("all-above");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -35,11 +35,15 @@ const CitySearch: React.FC = () => {
               className="basis-auto w-full min-h-max outline-0 md:text-[1.2em] text-[1em]
                       border-b-2 border-stone-400 focus:border-stone-200 
                       transition duration-300 bg-transparent">
-              <option value="All above">All above</option>
+              <option value="all-above">All above</option>
               <option value="Milan">Milan</option>
-              <option value="Turin">Turin</option>
-              <option value="Genoa">Genoa</option>
+              <option value="Como">Como</option>
+              <option value="Bologna">Bologna</option>
               <option value="Verona">Verona</option>
+              <option value="Turin">Turin</option>
+              <option value="Brescia">Brescia</option>
+              <option value="Asti">Asti</option>
+              <option value="Genoa">Genoa</option>
               <option value="Venice">Venice</option>
             </select>
           </div>
