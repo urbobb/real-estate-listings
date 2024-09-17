@@ -90,7 +90,7 @@ export const getListing = async (searchData: any) => {
         where: {
           price: priceConditions, // Filter based on price less than the provided value
           ...(params?.location && {
-            location: params?.location,
+            location: params?.location === "all-above" ? {} : params?.location,
           }),
           ...(params?.propertyType && {
             propertyType: params?.propertyType,
