@@ -49,3 +49,13 @@ interface Image {
   url: string;
   listingId: number;
 }
+
+export interface SearchParams {
+  listingType: string;
+  propertyType: string;
+  location: string;
+  minPrice: number | null;
+  maxPrice: number | null;
+  minArea: number | null;
+  maxArea: number | null;
+}
