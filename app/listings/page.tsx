@@ -4,6 +4,7 @@ import ListingsCard from "@/app/components/ListingsCard";
 import { Listing } from "@/lib/types";
 import SearchListings from "../components/SearchListings";
 import { useRouter, useSearchParams } from "next/navigation";
+import { toast } from "@/components/ui/use-toast";
 
 interface SearchParams {
   listingType: string;
@@ -64,21 +65,31 @@ function SearchWrapper() {
     //This useEffect acts as componentDidMount. It will only run once when the component mounts, since the dependency array is empty
     async function fetchAllListings() {
       if (url !== "") {
-        console.log("Location", typeof url);
+        console.log("Location", url);
       }
-      const entries = Object.entries(url);
       const params = parsedParams;
-      console.log("Location", params);
+      console.log("Location", params.location);
 
       try {
         const response = await fetch("/api/listings", {
           method: "POST",
-          body: JSON.stringify(url === "" ? "GETALL" : { params }),
+          body: JSON.stringify({ params }),
           headers: { "Content-Type": "application/json" },
         });
 
         if (response.ok) {
           const data = await response.json();
+          if (Array.isArray(data) && data.length === 0) {
+            toast({
+              variant: "destructive",
+              description: "No Listing found.",
+            });
+          } else {
+            toast({
+              variant: "success",
+              description: `${data.length} Listing found.`,
+            });
+          }
           setDataReceivedDB(data);
         } else {
           const error = await response.json();
@@ -134,7 +145,6 @@ function SearchWrapper() {
       <div
         className="flex md:min-h-screen justify-center items-center
           w-full md:w-[400px] bg-[#fcf9fd]">
-        {" "}
         {/*bg-[#FEFCFF]*/}
         <div
           className="relative md:fixed md:top-0 flex flex-col justify-center items-center min-h-max 
