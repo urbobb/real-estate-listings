@@ -2,7 +2,6 @@
 import React, { Suspense, useEffect, useState } from "react";
 import ListingsCard from "@/app/components/ListingsCard";
 import { Listing } from "@/lib/types";
-import SearchListings from "../components/SearchListings";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "@/components/ui/use-toast";
 import ClientSearchBar from "./ClientSearchBar";
@@ -145,10 +144,10 @@ function SearchWrapper() {
       {/* SEARCHBAR */}
       <div
         className="flex md:min-h-screen justify-center items-center
-          w-full md:w-[400px] bg-[#fcf9fd] pb-5">
+          w-full md:w-[400px] bg-[#fcf9fd] pb-5 drop-shadow-md">
         {/*bg-[#FEFCFF]*/}
         <div
-          className="relative md:fixed md:top-0 flex flex-col justify-center items-center min-h-max 
+          className="relative md:fixed md:top-0 flex flex-col justify-center items-center min-h-max
             md:w-auto w-11/12 mx-auto md:pt-28">
           {/* TITLE */}
           <ClientSearchBar onSearch={handleSearch} />
@@ -157,7 +156,7 @@ function SearchWrapper() {
 
       {/* Houses */}
       <div className="w-full mx-auto flex justify-center pt-20 ">
-        <div className="flex justify-center md:items-start items-center flex-row flex-wrap gap-y-5 gap-x-28">
+        <div className="flex justify-center md:items-start items-center flex-row flex-wrap gap-y-5 gap-x-24">
           {dataReceivedDB.map((house) => (
             <div className={`flex box-border`} key={house.id}>
               <ListingsCard
