@@ -36,7 +36,7 @@ const ListingsCard = ({
 
   //console.log(thumbnailImages);
   return (
-    <div className=" bg-[#ffffff] rounded overflow-hidden mb-5 drop-shadow w-[19rem] sm:w-[22rem] md:w-[24rem] ">
+    <div className=" bg-[#ffffff] rounded overflow-hidden mb-5 drop-shadow w-full mx-5 sm:w-[26rem] ">
       <a href={`/listings/${id}`} target="_blank" className="w-full">
         <Carousel className="">
           <CarouselContent className="h-[200px]">

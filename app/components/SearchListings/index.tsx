@@ -163,10 +163,12 @@ const SearchComponent: React.FC<SearchComponentProps> = ({
       method="POST"
       onSubmit={handleSubmit}
       className="flex flex-col gap-5 md:w-[250px] w-9/12 mx-auto">
-      <div className="flex md:gap-10 gap-2 flex-col md:mb-10 mb-5">
+      <div className="flex md:gap-10 gap-6 flex-col md:mb-10 mb-5">
         {/* TYPE */}
         <div className="flex flex-col items-start gap-2">
-          <p>Type</p>
+          <p>
+            <i className="fa-solid fa-building w-5"></i> Property Type
+          </p>
           <div className="w-full flex flex-row justify-around items-center ">
             <SearchCheckbox
               name="listingType"
@@ -185,7 +187,9 @@ const SearchComponent: React.FC<SearchComponentProps> = ({
           </div>
         </div>
         <div className="flex flex-col md:justify-center gap-2">
-          <p>Category</p>
+          <p>
+            <i className="fa-solid fa-layer-group w-5"></i> Category
+          </p>
           <div className="flex flex-col gap-2">
             <div className="w-full flex flex-row justify-around gap-2">
               <SearchCheckbox
@@ -225,7 +229,9 @@ const SearchComponent: React.FC<SearchComponentProps> = ({
         </div>
         {/* PLACE */}
         <div className="flex flex-row gap-2">
-          <p>City</p>
+          <p className="min-w-fit">
+            <i className="fa-solid fa-map-location w-5"></i> City
+          </p>
           <select className={`${inputStyles}`} name="location">
             <option value="">All above</option>
             <option value="Milan">Milan</option>
@@ -244,10 +250,12 @@ const SearchComponent: React.FC<SearchComponentProps> = ({
                     <input type="text" className={`${inputStyles}`} />
                   </div> */}
 
-        <div className="flex flex-col md:gap-10 gap-2">
-          <div className="flex flex-col gap-2">
-            <label htmlFor="">Price</label>
-            <div className="flex flex-row gap-2">
+        <div className="flex flex-col md:gap-10 gap-5">
+          <div className="flex flex-col gap-5 ">
+            <label htmlFor="">
+              <i className="fa-solid fa-money-bill-1 fa-lg mr-2 w-5"></i>Price
+            </label>
+            <div className="flex flex-row gap-2 justify-around">
               <input
                 type="number"
                 name="minPrice"
@@ -271,11 +279,12 @@ const SearchComponent: React.FC<SearchComponentProps> = ({
             </div>
           </div>
 
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-5">
             <label htmlFor="">
+              <i className="fa-solid fa-ruler fa-lg mr-2 w-5"></i>
               Area in m<sup>2</sup>
             </label>
-            <div className="flex flex-row gap-2">
+            <div className="flex flex-row gap-2 justify-around">
               <input
                 type="number"
                 name="minArea"
