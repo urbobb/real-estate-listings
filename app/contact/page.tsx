@@ -60,7 +60,7 @@ export default function AboutUs() {
                 </div>
               </div>
               {/* */}
-              <div className="w-full h-full">
+              <div className="w-full md:h-full min-h-[250px]">
                 <GoogleMapComponent />
               </div>
             </div>
