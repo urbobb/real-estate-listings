@@ -19,9 +19,9 @@ const ClientSearchBar = ({ onSearch }: Props) => {
 
   return (
     <>
-      <div className="flex md:justify-start justify-center md:mb-5 mb-2 sm:mx-5 md:mt-0 mt-5 border w-full bg-gray-400 rounded-lg">
-        <h1 className="md:text-[1.3rem] text-[1.6rem] md:font-extrabold tracking-[10px]">
-          <i className="fa-solid fa-list fa-xs"></i>Filter
+      <div className="flex justify-center md:mb-5 mb-2 sm:mx-5 md:mt-0 mt-5 border w-full bg-gray-400 rounded-lg">
+        <h1 className="md:text-[1.6rem] text-[1.6rem]  tracking-[10px]">
+          <i className="fa-solid fa-list fa-2xs"></i>Filter
         </h1>
       </div>
       {/* FORM */}
