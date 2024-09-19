@@ -58,7 +58,7 @@ export default async function AdminPage({}: Props) {
           You are not authorized to view this page
         </p>
         <div className="text-center">
-          <p className="mb-5">Sign in with admin accound</p>
+          <p className="mb-5">Sign in with an admin account</p>
 
           <SignOutButton />
         </div>
