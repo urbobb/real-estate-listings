@@ -296,7 +296,7 @@ export default function Home() {
             ref={scrollContainerRef}
             className="houseList mb-10 w-full md:min-h-max mx-auto overflow-x-auto overflow-y-hidden 
                       scroll-smooth ">
-            <div className=" md:h-5/6 sm:gap-[2%] gap-10 flex md:flex-row flex-col min-w-max mx-auto">
+            <div className=" md:h-5/6 sm:gap-[2%] gap-10 flex md:flex-row flex-col ">
               {dataReceivedDB.slice(0, 3).map(
                 (
                   house,
