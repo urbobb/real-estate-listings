@@ -11,7 +11,7 @@ type TypeState = {
 
 export default function AboutUs() {
   return (
-    <div className="md:min-h-screen w-full mx-auto md:mt-0 mt-24 md:py-10 pt-5 pb-10 items-center justify-center border-b">
+    <div className="md:min-h-screen w-full mx-auto md:mt-0 mt-24 md:py-10 pt-5 pb-10 items-center justify-center">
       {/* MAIN HEADER AND ANIMATION */}
       <div className="md:flex mx-auto md:w-5/6 w-9/12 min-h-screen ">
         {/* INTRODUCTIONS */}
