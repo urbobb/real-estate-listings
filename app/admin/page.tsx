@@ -59,7 +59,6 @@ export default async function AdminPage({}: Props) {
         </p>
         <div className="text-center">
           <p className="mb-5">Sign in with an admin account</p>
-
           <SignOutButton />
         </div>
       </main>
