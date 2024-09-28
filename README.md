@@ -32,19 +32,19 @@ You can view a live demo of the application [here](#) (link to your deployed app
 ## Technologies Used
 
 - **Frontend**: 
-  - HTML, CSS (Bootstrap), JavaScript (React.js)
+  - HTML, CSS (Tailwind), TypeScript (React.js)
   
 - **Backend**: 
-  - Node.js, Express.js
+  - Node.js
   
 - **Database**: 
-  - MongoDB
+  - Postgress
   
 - **Authentication**: 
-  - JWT (JSON Web Token)
+  - NextAuth
   
 - **Deployment**: 
-  - Heroku / Vercel / Netlify
+  - Vercel
 
 ## Installation
 
