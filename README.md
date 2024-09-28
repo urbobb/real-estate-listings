@@ -27,7 +27,7 @@ A web application for browsing and managing real estate property listings. Users
 
 You can view a live demo of the application [here](#) (link to your deployed app).
 
-![App Screenshot](https://via.placeholder.com/800x400.png?text=Real+Estate+Listings+Screenshot)
+![App Screenshot](![image](https://github.com/user-attachments/assets/702ff8d5-f7bc-4995-a502-ddf0ab93ec6c))
 
 ## Technologies Used
 
