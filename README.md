@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Real Estate Listings
 
-## Getting Started
+A web application for browsing and managing real estate property listings. Users can search, filter, and view detailed information about various properties, including pricing, images, and location.
 
-First, run the development server:
+## Table of Contents
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- [Features](#features)
+- [Demo](#demo)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Usage](#usage)
+- [API Endpoints](#api-endpoints)
+- [Contributing](#contributing)
+- [License](#license)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Search properties by location, price range, and property type (e.g., apartment, house, commercial).
+- Filter listings by features like number of bedrooms, bathrooms, and amenities.
+- View property details including images, pricing, and descriptions.
+- Users can bookmark favorite listings.
+- Admin panel for managing property listings, users, and transactions.
+- Google Maps integration to show property locations.
+- Responsive design for mobile and desktop views.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Demo
 
-## Learn More
+You can view a live demo of the application [here](#) (link to your deployed app).
 
-To learn more about Next.js, take a look at the following resources:
+![App Screenshot](https://via.placeholder.com/800x400.png?text=Real+Estate+Listings+Screenshot)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Technologies Used
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- **Frontend**: 
+  - HTML, CSS (Bootstrap), JavaScript (React.js)
+  
+- **Backend**: 
+  - Node.js, Express.js
+  
+- **Database**: 
+  - MongoDB
+  
+- **Authentication**: 
+  - JWT (JSON Web Token)
+  
+- **Deployment**: 
+  - Heroku / Vercel / Netlify
 
-## Deploy on Vercel
+## Installation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Clone the repository:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+   ```bash
+   git clone https://github.com/yourusername/real-estate-listings.git
