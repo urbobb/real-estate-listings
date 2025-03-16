@@ -36,7 +36,7 @@ You can view a live demo of the application [here](#) (link to your deployed app
 - **Database**: 
   - Postgress
   
-- **Authentication**: 
+- **Authentication**: admin
   - NextAuth
   
 - **Deployment**: 
